@@ -1,0 +1,234 @@
+			owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+character = script
+local function createHand(handType,what,arm)
+	local hand = Instance.new("Part")
+	hand.Parent = character
+	hand.CFrame = owner.Character.HumanoidRootPart.CFrame
+	hand.Size = Vector3.new(0.7, 0.7, 1.5)
+	hand.Transparency = 0
+	hand.Material = Enum.Material.SmoothPlastic
+local bv = Instance.new("BodyVelocity",hand)
+bv.Velocity = Vector3.new()
+bv.MaxForce = Vector3.new(1,1,1) * math.huge
+	hand.Name = handType
+hand:SetNetworkOwner(owner)
+local App = game:GetService("Players"):GetCharacterAppearanceAsync(owner.UserId)
+local col
+if arm == "left" then
+col = App["Body Colors"].LeftArmColor
+else
+col = App["Body Colors"].RightArmColor
+end
+hand.BrickColor = col
+	return hand
+end
+local App = game:GetService("Players"):GetCharacterAppearanceAsync(owner.UserId)
+local col = App["Body Colors"].HeadColor
+	local hed = owner.Character.Head:Clone()
+	hed.Parent = character
+hed.Size = Vector3.new(0.85,0.85,0.85)
+for i,v in pairs(hed:GetDescendants()) do
+if v:IsA("Part") then
+local weld = Instance.new("Weld",hed)
+weld.Part0 = v
+weld.Part1 = hed
+v:SetNetworkOwner(owner)
+end
+end
+	hed.CFrame = owner.Character.HumanoidRootPart.CFrame
+	hed.Transparency = 0
+	hed.Material = Enum.Material.SmoothPlastic
+	hed.CanCollide = false
+local bv = Instance.new("BodyVelocity",hed)
+bv.Velocity = Vector3.new()
+bv.MaxForce = Vector3.new(1,1,1) * math.huge
+hed:SetNetworkOwner(owner)
+local leftHand = createHand("rightHand",owner.Character["Right Arm"])
+local rightHand = createHand("leftHand",owner.Character["Left Arm"])
+local object = Instance.new("ObjectValue", owner.PlayerGui)
+object.Value = leftHand
+object.Name = "hand"
+local object2 = Instance.new("ObjectValue", owner.PlayerGui)
+object2.Value = rightHand
+object2.Name = "hand2"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = hed
+object3.Name = "hedl"
+e = Instance.new("RemoteEvent",hed)
+e2 = Instance.new("RemoteEvent",leftHand)
+local part = nil
+local part2 = nil
+e.OnServerEvent:Connect(function(_,Data,pa)
+		if Data == "Left" then
+			if pa ~= part then
+				part = pa
+				local weld = Instance.new('WeldConstraint', part)
+				weld.Part0 = part
+				weld.Part1 = leftHand
+				weld.Name = "GrabWeld"
+		elseif part ~= nil and pa == nil then
+				if part:FindFirstChild('GrabWeld') then
+					part:FindFirstChild('GrabWeld'):Destroy()
+			end
+			part = nil
+		end
+ end
+		if Data == "Right" then
+			if pa2 ~= part2 then
+				part2 = pa
+				local weld = Instance.new('WeldConstraint', part2)
+				weld.Part0 = part2
+				weld.Part1 = rightHand
+				weld.Name = "GrabWeld"
+		elseif part2 ~= nil and pa == nil then
+				if part2:FindFirstChild('GrabWeld') then
+					part2:FindFirstChild('GrabWeld'):Destroy()
+				end
+			part2 = nil
+		end
+end
+end)
+e2.OnServerEvent:Connect(function(_,part,cf)
+part.CFrame = cf
+end)
+wait()
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+if v ~= owner.Character.Humanoid then
+if v ~= owner.Character then
+v.Parent = nil
+end
+end
+end)
+end
+       local screengui2 = Instance.new("SurfaceGui", owner.PlayerGui)
+        screengui2.Name = "Hud"
+screengui2.Adornee = leftHand
+screengui2.Face = Enum.NormalId.Right
+        screengui2.AlwaysOnTop = true
+local scrollingFrame = Instance.new("ScrollingFrame",screengui2)
+scrollingFrame.BackgroundTransparency = 0.35
+scrollingFrame.BackgroundColor3 = Color3.fromRGB(85,85,85)
+scrollingFrame.BorderColor3 = Color3.fromRGB(3, 252, 236)
+scrollingFrame.BorderSizePixel = 5
+scrollingFrame.Size = UDim2.new(1.125, 0, 1.125, 0)
+scrollingFrame.CanvasSize = UDim2.new(1, 0, 20, 0)
+scrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+scrollingFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+scrollingFrame.BottomImage = "rbxassetid://5130457560"
+scrollingFrame.MidImage = "rbxassetid://5130456020"
+scrollingFrame.ScrollBarThickness = 8
+scrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.None
+scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+scrollingFrame.TopImage = "rbxassetid://5130456922"
+scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+scrollingFrame.ScrollingEnabled = true
+local lastpos = UDim2.new(0,0,0.0625,0)
+game:GetService("Players").PlayerAdded:Connect(function(player)
+player.Chatted:Connect(function(msg)
+if msg:sub(1,2) ~= "/e" then
+        local tl = Instance.new("TextBox", scrollingFrame)
+tl.Text = tostring(player.Name)..": "..game:GetService("Chat"):FilterStringForBroadcast(msg, owner)
+        tl.Size = UDim2.new(1, 0, 0.0625, 0)
+        tl.Position = lastpos + UDim2.new(0,0,0.065,0)
+	tl.TextWrapped = true
+tl.TextColor3 = Color3.fromRGB(3, 252, 236)
+tl.TextSize = 35
+tl.TextXAlignment = "Left"
+tl.BackgroundTransparency = 1
+tl.TextYAlignment = "Top"
+local _, count = msg:gsub("\n", "")
+lastpos = tl.Position + UDim2.new(0,0,(count * 0.065),0)
+end
+end)
+end)
+for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+v.Chatted:Connect(function(msg)
+if msg:sub(1,2) ~= "/e" then
+        local tl = Instance.new("TextBox", scrollingFrame)
+tl.Text = tostring(v.Name)..": "..game:GetService("Chat"):FilterStringForBroadcast(msg, owner)
+        tl.Size = UDim2.new(1, 0, 0.0625, 0)
+        tl.Position = lastpos + UDim2.new(0,0,0.065,0)
+	tl.TextWrapped = true
+tl.TextColor3 = Color3.fromRGB(3, 252, 236)
+tl.TextSize = 35
+tl.TextEditable = false
+tl.TextXAlignment = "Left"
+tl.BackgroundTransparency = 1
+tl.TextYAlignment = "Top"
+local _, count = msg:gsub("\n", "")
+lastpos = tl.Position + UDim2.new(0,0,(count * 0.065),0)
+end
+end)
+end
+NLS([[
+local leftHand = owner.PlayerGui.hand.Value
+local rightHand = owner.PlayerGui.hand2.Value
+local hed = owner.PlayerGui.hedl.Value
+e = hed:FindFirstChildWhichIsA("RemoteEvent")
+e2 = leftHand:FindFirstChildWhichIsA("RemoteEvent")
+local inputService = game:GetService("UserInputService")
+local UserInputService = game:GetService("UserInputService")
+camera = workspace.CurrentCamera
+camera.CameraType = "Scriptable"
+local vrService = game:GetService("VRService")
+hed.Transparency = 1
+inputService.InputChanged:Connect(function(input, processed)
+		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
+local _,y,_ = hed.CFrame:ToEulerAnglesXYZ()
+		camera.CFrame = camera.CFrame+CFrame.Angles(0,y,0).LookVector*(MoveDir.Z * 0.75)+CFrame.Angles(0,y,0).rightVector*(MoveDir.X * 0.75)
+end
+		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
+camera.CFrame = camera.CFrame * CFrame.Angles(0,math.rad(-MoveDir.X * 3),0)
+end
+end)
+vrService.UserCFrameChanged:Connect(function(part, move)
+	if part == Enum.UserCFrame.LeftHand then
+		e2:FireServer(leftHand,camera.CFrame * move)
+	elseif part == Enum.UserCFrame.RightHand then
+		e2:FireServer(rightHand,camera.CFrame * move)
+	elseif part == Enum.UserCFrame.Head then
+		e2:FireServer(hed,camera.CFrame * move)
+	end
+end)
+l = false
+r = false
+game:GetService("RunService").Stepped:Connect(function()
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,0,-5), params)
+if result then
+if (camera.CFrame.Position - result.Position).Magnitude <= 4.85 then
+local cf = CFrame.new(result.Position):Inverse() * camera.CFrame
+camera.CFrame = cf
+end
+else
+camera.CFrame = camera.CFrame * CFrame.new(0,-0.125,0)
+end
+	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL2) then
+for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.25, params)) do
+if v.Anchored == false and not l then
+l = true
+e:FireServer("Left",v)
+elseif v.Anchored == false and l then
+l = false
+e:FireServer("Left",nil)
+end
+end
+end
+	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2) then
+for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.25, params)) do
+if v.Anchored == false and not r then
+r = true
+e:FireServer("Right",v)
+elseif v.Anchored == false and r then
+r = false
+e:FireServer("Right",nil)
+end
+end
+end
+end)
+]],owner.PlayerGui)
