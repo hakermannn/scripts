@@ -6,6 +6,7 @@ local function createHand(handType,what,arm)
 	hand.CFrame = owner.Character.HumanoidRootPart.CFrame
 	hand.Size = Vector3.new(0.7, 0.7, 1.5)
 	hand.Transparency = 0
+	hand.CanCollide = false
 	hand.Material = Enum.Material.SmoothPlastic
 local bv = Instance.new("BodyVelocity",hand)
 bv.Velocity = Vector3.new()
@@ -99,6 +100,7 @@ e.OnServerEvent:Connect(function(_,Data)
 	end)
 e2.OnServerEvent:Connect(function(_,part,cf)
 part.CFrame = cf
+part:SetNetworkOwner(owner)
 if part:FindFirstChildWhichIsA("BodyGyro") then
 part:FindFirstChildWhichIsA("BodyGyro").CFrame = cf
 end
