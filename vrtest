@@ -206,7 +206,7 @@ local cf = CFrame.new(result.Position):Inverse() * camera.CFrame
 camera.CFrame = cf
 end
 else
-camera.CFrame = camera.CFrame * CFrame.new(0,-0.125,0)
+camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
 	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL2) then
 for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.25, params)) do
