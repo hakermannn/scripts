@@ -202,30 +202,30 @@ game:GetService("RunService").Stepped:Connect(function()
 local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5,0), params)
 if result then
 if (camera.CFrame.Position - result.Position).Magnitude <= 4.85 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5,0)
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5.1,0)
 end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
-	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL2) then
+	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) then
 for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.25, params)) do
 if v.Anchored == false and not l then
 l = true
 e:FireServer("Left",v)
 end
 end
-elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL2) and l then
+elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) and l then
 l = false
 e:FireServer("Left",nil)
 end
-	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2) then
+	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) then
 for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.25, params)) do
 if v.Anchored == false and not r then
 r = true
 e:FireServer("Right",v)
 end
 end
-elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2) and r then
+elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) and r then
 r = false
 e:FireServer("Right",nil)
 end
