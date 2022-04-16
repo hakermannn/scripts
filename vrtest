@@ -213,22 +213,22 @@ for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 
 if v.Anchored == false and not l then
 l = true
 e:FireServer("Left",v)
-elseif v.Anchored == false and l then
+end
+end
+else
 l = false
 e:FireServer("Left",nil)
-end
-end
 end
 	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2) then
 for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.25, params)) do
 if v.Anchored == false and not r then
 r = true
 e:FireServer("Right",v)
-elseif v.Anchored == false and r then
+end
+end
+else
 r = false
 e:FireServer("Right",nil)
-end
-end
 end
 end)
 ]],owner.PlayerGui)
