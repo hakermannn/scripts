@@ -74,7 +74,7 @@ e.OnServerEvent:Connect(function(_,Data,pa)
 		end
  end
 		if Data == "Right" then
-			if pa2 ~= part2 then
+			if pa ~= part2 then
 				part2 = pa
 				local weld = Instance.new('WeldConstraint', part2)
 				weld.Part0 = part2
@@ -202,8 +202,7 @@ game:GetService("RunService").Stepped:Connect(function()
 local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5,0), params)
 if result then
 if (camera.CFrame.Position - result.Position).Magnitude <= 4.85 then
-local cf = CFrame.new(result.Position):Inverse() * camera.CFrame
-camera.CFrame = cf
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5,0)
 end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
