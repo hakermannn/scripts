@@ -176,7 +176,7 @@ inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
 local _,y,_ = hed.CFrame:ToEulerAnglesXYZ()
-		camera.CFrame = camera.CFrame+CFrame.Angles(0,y,0).LookVector*(MoveDir.Z * 0.75)+CFrame.Angles(0,y,0).rightVector*(MoveDir.X * 0.75)
+		camera.CFrame = CFrame.new(camera.CFrame.Position)+CFrame.Angles(0,y,0).LookVector*(MoveDir.Z * 0.75)+CFrame.Angles(0,y,0).rightVector*(MoveDir.X * 0.75)
 end
 		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -200,7 +200,7 @@ game:GetService("RunService").Stepped:Connect(function()
 	params.FilterType = Enum.RaycastFilterType.Blacklist
 local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-4,0), params)
 if result then
-if (camera.CFrame.Position - result.Position).Magnitude <= 3.85 then
+if (camera.CFrame.Position - result.Position).Magnitude <= 3.5 then
 camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,4,0)
 end
 else
@@ -229,4 +229,7 @@ r = false
 e:FireServer("Right",nil)
 end
 end)
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCore("VRLaserPointerMode", 0)
+StarterGui:SetCore("VREnableControllerModels", false)
 ]],owner.PlayerGui)
