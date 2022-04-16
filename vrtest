@@ -199,7 +199,7 @@ game:GetService("RunService").Stepped:Connect(function()
 	local params = RaycastParams.new()
 	params.FilterDescendantsInstances = {rayblacklist}
 	params.FilterType = Enum.RaycastFilterType.Blacklist
-local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,0,-5), params)
+local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5,0), params)
 if result then
 if (camera.CFrame.Position - result.Position).Magnitude <= 4.85 then
 local cf = CFrame.new(result.Position):Inverse() * camera.CFrame
@@ -215,7 +215,7 @@ l = true
 e:FireServer("Left",v)
 end
 end
-else
+elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL2) and l then
 l = false
 e:FireServer("Left",nil)
 end
@@ -226,7 +226,7 @@ r = true
 e:FireServer("Right",v)
 end
 end
-else
+elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2) and r then
 r = false
 e:FireServer("Right",nil)
 end
