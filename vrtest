@@ -56,8 +56,8 @@ object3.Value = hed
 object3.Name = "hedl"
 e = Instance.new("RemoteEvent",hed)
 e2 = Instance.new("RemoteEvent",leftHand)
-local part = nil
-local part2 = nil
+local LastPartBeingHeldLeft = nil
+local LastPartBeingHeldRight = nil
 e.OnServerEvent:Connect(function(_,Data)
 		if Data.InputData.PartBeingGrabbedLeft then
 			if Data.InputData.PartBeingGrabbedLeft ~= LastPartBeingHeldLeft then
@@ -180,8 +180,8 @@ hed.Transparency = 1
 inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
-local _,y,_ = hed.CFrame:ToEulerAnglesXYZ()
-		camera.CFrame = CFrame.new(camera.CFrame.Position)* CFrame.Angles(0,y,0) * CFrame.new(MoveDir.X * 0.75,0,MoveDir.Z * 0.75)
+local x,y,z = hed.CFrame:ToEulerAnglesXYZ()
+		camera.CFrame = camera.CFrame+CFrame.Angles(x,y,z).rightVector* (MoveDir.X * 0.75)+CFrame.Angles(x,y,z).lookVector*(MoveDir.Z * 0.75)
 end
 		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -213,7 +213,7 @@ end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
-		if UserInputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
+		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
 			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * -250)
 			if GrabRayL then
 				if (GrabRayL.Position - leftHand.Position).Magnitude <= 2.5 and not GrabbingL and GrabRayL.Instance.Anchored == false then
@@ -226,7 +226,7 @@ end
 			GrabbingL = nil
 		end
  
-		if UserInputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR1) then
+		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR1) then
 			local GrabRayR = workspace:Raycast(rightHand.Position, rightHand.CFrame.lookVector * -250)
 			if GrabRayR then
 				if (GrabRayR.Position - rightHand.Position).Magnitude <= 2.5 and not GrabbingR and GrabRayR.Instance.Anchored == false then
