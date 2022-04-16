@@ -168,7 +168,6 @@ local hed = owner.PlayerGui.hedl.Value
 e = hed:FindFirstChildWhichIsA("RemoteEvent")
 e2 = leftHand:FindFirstChildWhichIsA("RemoteEvent")
 local inputService = game:GetService("UserInputService")
-local UserInputService = game:GetService("UserInputService")
 camera = workspace.CurrentCamera
 camera.CameraType = "Scriptable"
 local vrService = game:GetService("VRService")
@@ -199,33 +198,33 @@ game:GetService("RunService").Stepped:Connect(function()
 	local params = RaycastParams.new()
 	params.FilterDescendantsInstances = {rayblacklist}
 	params.FilterType = Enum.RaycastFilterType.Blacklist
-local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5,0), params)
+local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-4,0), params)
 if result then
-if (camera.CFrame.Position - result.Position).Magnitude <= 4.85 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5.1,0)
+if (camera.CFrame.Position - result.Position).Magnitude <= 3.85 then
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,3.95,0)
 end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
-	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) then
+	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) then
 for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.25, params)) do
 if v.Anchored == false and not l then
 l = true
 e:FireServer("Left",v)
 end
 end
-elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) and l then
+elseif not inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) and l then
 l = false
 e:FireServer("Left",nil)
 end
-	if UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) then
+	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) then
 for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.25, params)) do
 if v.Anchored == false and not r then
 r = true
 e:FireServer("Right",v)
 end
 end
-elseif not UserInputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) and r then
+elseif not inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) and r then
 r = false
 e:FireServer("Right",nil)
 end
