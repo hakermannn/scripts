@@ -201,13 +201,13 @@ game:GetService("RunService").Stepped:Connect(function()
 local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-4,0), params)
 if result then
 if (camera.CFrame.Position - result.Position).Magnitude <= 3.85 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,3.95,0)
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,4,0)
 end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
 	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) then
-for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.25, params)) do
+for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.5, params)) do
 if v.Anchored == false and not l then
 l = true
 e:FireServer("Left",v)
@@ -218,7 +218,7 @@ l = false
 e:FireServer("Left",nil)
 end
 	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) then
-for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.25, params)) do
+for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.5, params)) do
 if v.Anchored == false and not r then
 r = true
 e:FireServer("Right",v)
