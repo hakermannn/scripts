@@ -180,8 +180,7 @@ hed.Transparency = 1
 inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
-local x,y,z = hed.CFrame:ToEulerAnglesXYZ()
-		camera.CFrame = camera.CFrame+CFrame.Angles(x,y,z).rightVector* (MoveDir.X * 0.75)+CFrame.Angles(x,y,z).lookVector*(MoveDir.Z * 0.75)
+		camera.CFrame = camera.CFrame+hed.CFrame.rightVector* (MoveDir.X * 0.75)+hed.CFrame.lookVector*(MoveDir.Z * 0.75)
 end
 		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -208,7 +207,7 @@ game:GetService("RunService").Stepped:Connect(function()
 local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-4,0), params)
 if result then
 if (camera.CFrame.Position - result.Position).Magnitude <= 3.5 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,4,0)
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,4,0) * CFrame.Angles(camera.CFrame:ToEulerAnglesXYZ())
 end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
