@@ -58,36 +58,41 @@ e = Instance.new("RemoteEvent",hed)
 e2 = Instance.new("RemoteEvent",leftHand)
 local part = nil
 local part2 = nil
-e.OnServerEvent:Connect(function(_,Data,pa)
-		if Data == "Left" then
-			if pa ~= part then
-				part = pa
-				local weld = Instance.new('WeldConstraint', part)
-				weld.Part0 = part
+e.OnServerEvent:Connect(function(_,Data)
+		if Data.InputData.PartBeingGrabbedLeft then
+			if Data.InputData.PartBeingGrabbedLeft ~= LastPartBeingHeldLeft then
+				LastPartBeingHeldLeft = Data.InputData.PartBeingGrabbedLeft
+				local weld = Instance.new('WeldConstraint', LastPartBeingHeldLeft)
+				weld.Part0 = LastPartBeingHeldLeft
 				weld.Part1 = leftHand
 				weld.Name = "GrabWeld"
-		elseif part ~= nil and pa == nil then
-				if part:FindFirstChild('GrabWeld') then
-					part:FindFirstChild('GrabWeld'):Destroy()
 			end
-			part = nil
+		else
+			if LastPartBeingHeldLeft then
+				if LastPartBeingHeldLeft:FindFirstChild('GrabWeld') then
+					LastPartBeingHeldLeft:FindFirstChild('GrabWeld'):Destroy()
+				end
+			end
+			LastPartBeingHeldLeft = nil
 		end
- end
-		if Data == "Right" then
-			if pa ~= part2 then
-				part2 = pa
-				local weld = Instance.new('WeldConstraint', part2)
-				weld.Part0 = part2
+ 
+		if Data.InputData.PartBeingGrabbedRight then
+			if Data.InputData.PartBeingGrabbedRight ~= LastPartBeingHeldRight then
+				LastPartBeingHeldRight = Data.InputData.PartBeingGrabbedRight
+				local weld = Instance.new('WeldConstraint', LastPartBeingHeldRight)
+				weld.Part0 = LastPartBeingHeldRight
 				weld.Part1 = rightHand
 				weld.Name = "GrabWeld"
-		elseif part2 ~= nil and pa == nil then
-				if part2:FindFirstChild('GrabWeld') then
-					part2:FindFirstChild('GrabWeld'):Destroy()
+			end
+		else
+			if LastPartBeingHeldRight then
+				if LastPartBeingHeldRight:FindFirstChild('GrabWeld') then
+					LastPartBeingHeldRight:FindFirstChild('GrabWeld'):Destroy()
 				end
-			part2 = nil
+			end
+			LastPartBeingHeldRight = nil
 		end
-end
-end)
+	end)
 e2.OnServerEvent:Connect(function(_,part,cf)
 part.CFrame = cf
 end)
@@ -176,7 +181,7 @@ inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
 local _,y,_ = hed.CFrame:ToEulerAnglesXYZ()
-		camera.CFrame = CFrame.new(camera.CFrame.Position)+CFrame.Angles(0,y,0).LookVector*(MoveDir.Z * 0.75)+CFrame.Angles(0,y,0).rightVector*(MoveDir.X * 0.75)
+		camera.CFrame = CFrame.new(camera.CFrame.Position)* CFrame.Angles(0,y,0) * CFrame.new(MoveDir.X * 0.75,0,MoveDir.Z * 0.75)
 end
 		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -192,8 +197,10 @@ vrService.UserCFrameChanged:Connect(function(part, move)
 		e2:FireServer(hed,camera.CFrame * move)
 	end
 end)
-l = false
-r = false
+local GrabbingL = nil
+local GrabbingR = nil
+ 
+local Gamepad = Enum.UserInputType.Gamepad1
 game:GetService("RunService").Stepped:Connect(function()
 	local params = RaycastParams.new()
 	params.FilterDescendantsInstances = {rayblacklist}
@@ -206,28 +213,39 @@ end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
-	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) then
-for _, v in pairs(workspace:GetPartBoundsInBox(leftHand.CFrame, leftHand.Size * 1.5, params)) do
-if v.Anchored == false and not l then
-l = true
-e:FireServer("Left",v)
-end
-end
-elseif not inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonL1) and l then
-l = false
-e:FireServer("Left",nil)
-end
-	if inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) then
-for _, v in pairs(workspace:GetPartBoundsInBox(rightHand.CFrame, rightHand.Size * 1.5, params)) do
-if v.Anchored == false and not r then
-r = true
-e:FireServer("Right",v)
-end
-end
-elseif not inputService:IsGamepadButtonDown(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR1) and r then
-r = false
-e:FireServer("Right",nil)
-end
+		if UserInputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
+			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * -250)
+			if GrabRayL then
+				if (GrabRayL.Position - leftHand.Position).Magnitude <= 2.5 and not GrabbingL and GrabRayL.Instance.Anchored == false then
+					GrabbingL = GrabRayL.Instance
+				end
+			else
+				GrabbingL = nil
+			end
+		else
+			GrabbingL = nil
+		end
+ 
+		if UserInputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR1) then
+			local GrabRayR = workspace:Raycast(rightHand.Position, rightHand.CFrame.lookVector * -250)
+			if GrabRayR then
+				if (GrabRayR.Position - rightHand.Position).Magnitude <= 2.5 and not GrabbingR and GrabRayR.Instance.Anchored == false then
+					GrabbingR = GrabRayR.Instance
+				end
+			else
+				GrabbingR = nil
+			end
+		else
+			GrabbingR = nil
+		end
+			Data = {
+		InputData = {
+				["PartBeingGrabbedLeft"] = GrabbingL;
+				["PartBeingGrabbedRight"] = GrabbingR;
+			}
+			}
+			e:FireServer(Data)
+
 end)
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("VRLaserPointerMode", 0)
