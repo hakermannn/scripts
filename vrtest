@@ -71,15 +71,29 @@ e.OnServerEvent:Connect(function(_,Data)
 		if Data.InputData.PartBeingGrabbedLeft then
 			if Data.InputData.PartBeingGrabbedLeft ~= LastPartBeingHeldLeft then
 				LastPartBeingHeldLeft = Data.InputData.PartBeingGrabbedLeft
-				local weld = Instance.new('WeldConstraint', LastPartBeingHeldLeft)
-				weld.Part0 = LastPartBeingHeldLeft
-				weld.Part1 = leftHand
-				weld.Name = "GrabWeld"
+  local attachment0 = Instance.new("Attachment",LastPartBeingHeldLeft)
+                local attachment1 = Instance.new("Attachment",leftHand)
+		attachment1.WorldCFrame = leftHand.CFrame
+                local alignposition = Instance.new("AlignPosition",LastPartBeingHeldLeft)
+                alignposition.Attachment0 = attachment0
+                alignposition.Attachment1 = attachment1
+alignposition.RigidityEnabled = true
+alignposition.Name = "Grab"
+                local alignrot = Instance.new("AlignOrientation",LastPartBeingHeldLeft)
+		alignrot.Attachment0 = attachment0
+		alignrot.Attachment1 = attachment1
+		alignrot.RigidityEnabled = true
+alignrot.Name = "Grab2"
 			end
 		else
 			if LastPartBeingHeldLeft then
-				if LastPartBeingHeldLeft:FindFirstChild('GrabWeld') then
-					LastPartBeingHeldLeft:FindFirstChild('GrabWeld'):Destroy()
+				if LastPartBeingHeldLeft:FindFirstChild("Grab") then
+					LastPartBeingHeldLeft:FindFirstChild("Grab").Attachment0:Destroy()
+					LastPartBeingHeldLeft:FindFirstChild("Grab").Attachment1:Destroy()
+					LastPartBeingHeldLeft:FindFirstChild("Grab"):Destroy()
+				end
+				if LastPartBeingHeldLeft:FindFirstChild("Grab2") then
+					LastPartBeingHeldLeft:FindFirstChild("Grab2"):Destroy()
 				end
 			end
 			LastPartBeingHeldLeft = nil
@@ -88,15 +102,29 @@ e.OnServerEvent:Connect(function(_,Data)
 		if Data.InputData.PartBeingGrabbedRight then
 			if Data.InputData.PartBeingGrabbedRight ~= LastPartBeingHeldRight then
 				LastPartBeingHeldRight = Data.InputData.PartBeingGrabbedRight
-				local weld = Instance.new('WeldConstraint', LastPartBeingHeldRight)
-				weld.Part0 = LastPartBeingHeldRight
-				weld.Part1 = rightHand
-				weld.Name = "GrabWeld"
+  local attachment0 = Instance.new("Attachment",LastPartBeingHeldRight)
+                local attachment1 = Instance.new("Attachment",rightHand)
+		attachment0.WorldCFrame = rightHand.CFrame
+                local alignposition = Instance.new("AlignPosition",LastPartBeingHeldRight)
+                alignposition.Attachment0 = attachment0
+                alignposition.Attachment1 = attachment1
+alignposition.RigidityEnabled = true
+alignposition.Name = "Grab"
+                local alignrot = Instance.new("AlignOrientation",LastPartBeingHeldRight)
+		alignrot.Attachment0 = attachment0
+		alignrot.Attachment1 = attachment1
+		alignrot.RigidityEnabled = true
+alignrot.Name = "Grab2"
 			end
 		else
 			if LastPartBeingHeldRight then
-				if LastPartBeingHeldRight:FindFirstChild('GrabWeld') then
-					LastPartBeingHeldRight:FindFirstChild('GrabWeld'):Destroy()
+				if LastPartBeingHeldRight:FindFirstChild("Grab") then
+					LastPartBeingHeldRight:FindFirstChild("Grab").Attachment0:Destroy()
+					LastPartBeingHeldRight:FindFirstChild("Grab").Attachment1:Destroy()
+					LastPartBeingHeldRight:FindFirstChild("Grab"):Destroy()
+				end
+				if LastPartBeingHeldRight:FindFirstChild("Grab2") then
+					LastPartBeingHeldRight:FindFirstChild("Grab2"):Destroy()
 				end
 			end
 			LastPartBeingHeldRight = nil
