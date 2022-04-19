@@ -254,7 +254,7 @@ end
 		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL2) then
 			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * 250)
 			if GrabRayL then
-				if (GrabRayL.Position - leftHand.Position).Magnitude <= 2 and not GrabbingL and GrabRayL.Instance.Anchored == false then
+				if (GrabRayL.Position - leftHand.Position).Magnitude <= 2.5 and not GrabbingL and GrabRayL.Instance.Anchored == false then
 					GrabbingL = GrabRayL.Instance
 				end
 			else
@@ -267,7 +267,7 @@ end
 		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR2) then
 			local GrabRayR = workspace:Raycast(rightHand.Position, rightHand.CFrame.lookVector * 250)
 			if GrabRayR then
-				if (GrabRayR.Position - rightHand.Position).Magnitude <= 2 and not GrabbingR and GrabRayR.Instance.Anchored == false then
+				if (GrabRayR.Position - rightHand.Position).Magnitude <= 2.5 and not GrabbingR and GrabRayR.Instance.Anchored == false then
 					GrabbingR = GrabRayR.Instance
 				end
 			else
