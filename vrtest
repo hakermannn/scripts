@@ -39,8 +39,6 @@ hed.Size = Vector3.new(0.85,0.85,0.85)
 for i,v in pairs(owner.Character.Humanoid:GetAccessories()) do
 if v.AccessoryType == Enum.AccessoryType.Hair or v.AccessoryType == Enum.AccessoryType.Hat or v.AccessoryType == Enum.AccessoryType.Face then
 local s = v.Handle:Clone()
-local val = Instance.new("CFrameValue",s)
-val.Value = s.CFrame
 s.Parent = hed
 if s:FindFirstChildWhichIsA("SpecialMesh") then
 s:FindFirstChildWhichIsA("SpecialMesh").Scale = s:FindFirstChildWhichIsA("SpecialMesh").Scale * 0.85
@@ -52,7 +50,7 @@ if v:IsA("Part") then
 local weld = Instance.new("Weld",hed)
 weld.Part0 = v
 weld.Part1 = hed
-weld.C0 = v:FindFirstChildWhichIsA("CFrameValue").Value:Inverse() * owner.Character.Head.CFrame
+weld.C0 = (v.CFrame:Inverse() * owner.Character.Head.CFrame) * 0.85
 v:SetNetworkOwner(owner)
 end
 end
