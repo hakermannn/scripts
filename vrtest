@@ -36,6 +36,11 @@ bg.D = 1250
 bg.MaxTorque = Vector3.new(40000000, 40000000, 40000000)
 bg.P = 100000
 hed.Size = Vector3.new(0.85,0.85,0.85)
+for i,v in pairs(owner.Character:GetDescendants()) do
+if v:IsA("Accessory") then
+print(v.AccessoryType)
+end
+end
 for i,v in pairs(hed:GetDescendants()) do
 if v:IsA("Part") then
 local weld = Instance.new("Weld",hed)
@@ -135,7 +140,7 @@ e2.OnServerEvent:Connect(function(_,part,cf)
 part.CFrame = cf
 part:FindFirstChildWhichIsA("BodyGyro").CFrame = cf
 end)
-
+wait()
 for i,v in pairs(owner.Character:GetDescendants()) do
 pcall(function()
 if v ~= owner.Character.Humanoid then
