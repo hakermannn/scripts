@@ -130,11 +130,6 @@ alignrot.Name = "Grab2"
 			LastPartBeingHeldRight = nil
 		end
 	end)
-e2.OnServerEvent:Connect(function(_,part,cf)
-part.CFrame = cf
-part:FindFirstChildWhichIsA("BodyGyro").CFrame = cf
-end
-end)
 wait()
 for i,v in pairs(owner.Character:GetDescendants()) do
 pcall(function()
@@ -145,6 +140,10 @@ end
 end
 end)
 end
+e2.OnServerEvent:Connect(function(_,part,cf)
+part.CFrame = cf
+part:FindFirstChildWhichIsA("BodyGyro").CFrame = cf
+end)
        local screengui2 = Instance.new("SurfaceGui", owner.PlayerGui)
         screengui2.Name = "Hud"
 screengui2.Adornee = leftHand
