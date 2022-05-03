@@ -53,7 +53,7 @@ local weld = Instance.new("Weld",hed)
 weld.Part0 = v
 weld.Part1 = hed
 if v:FindFirstChildWhichIsA("CFrameValue") then
-weld.C0 = v:FindFirstChildWhichIsA("CFrameValue").Value
+weld.C0 = v:FindFirstChildWhichIsA("CFrameValue").Value* 0.85
 end
 v:SetNetworkOwner(owner)
 end
