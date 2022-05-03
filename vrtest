@@ -130,7 +130,6 @@ alignrot.Name = "Grab2"
 			LastPartBeingHeldRight = nil
 		end
 	end)
-end)
 e2.OnServerEvent:Connect(function(_,part,cf)
 part.CFrame = cf
 part:FindFirstChildWhichIsA("BodyGyro").CFrame = cf
@@ -143,6 +142,7 @@ v.Parent = nil
 end
 end
 end)
+end
        local screengui2 = Instance.new("SurfaceGui", owner.PlayerGui)
         screengui2.Name = "Hud"
 screengui2.Adornee = leftHand
