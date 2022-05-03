@@ -42,6 +42,9 @@ local s = v.Handle:Clone()
 local val = Instance.new("CFrameValue",s)
 val.Value = v.AttachmentPoint
 s.Parent = hed
+if s:FindFirstChildWhichIsA("SpecialMesh") then
+s:FindFirstChildWhichIsA("SpecialMesh").Scale = s:FindFirstChildWhichIsA("SpecialMesh").Scale * 0.85
+end
 end
 end
 for i,v in pairs(hed:GetDescendants()) do
