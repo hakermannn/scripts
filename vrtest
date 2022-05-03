@@ -50,7 +50,7 @@ if v:IsA("Part") then
 local weld = Instance.new("Weld",hed)
 weld.Part0 = v
 weld.Part1 = hed
-weld.C0 = CFrame.new((v.CFrame:Inverse() * owner.Character.Head.CFrame).Position)
+weld.C0 = CFrame.new((v.CFrame:Inverse() * owner.Character.Head.CFrame).Position * 1.2)
 v:SetNetworkOwner(owner)
 end
 end
