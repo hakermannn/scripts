@@ -6,7 +6,6 @@ local function createHand(handType,what,arm)
 	hand.CFrame = owner.Character.HumanoidRootPart.CFrame
 	hand.Size = Vector3.new(0.7, 0.7, 1.5)
 	hand.Transparency = 0
-	hand.CanCollide = false
 	hand.Material = Enum.Material.SmoothPlastic
 local bv = Instance.new("BodyVelocity",hand)
 bv.Velocity = Vector3.new()
@@ -155,6 +154,7 @@ end
 end
 end)
 end
+workspace.currentcamera.HeadScale = 1.25
        local screengui2 = Instance.new("SurfaceGui", owner.PlayerGui)
         screengui2.Name = "Hud"
 screengui2.Adornee = leftHand
@@ -226,6 +226,11 @@ camera = workspace.CurrentCamera
 camera.CameraType = "Scriptable"
 local vrService = game:GetService("VRService")
 hed.Transparency = 1
+for i,v in pairs(hed:GetDescendants()) do
+if v:IsA("Part") then
+v.Transparency = 1
+end
+end
 inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -261,7 +266,7 @@ end
 else
 camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
 end
-		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL2) then
+		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
 			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * 250)
 			if GrabRayL then
 				if (GrabRayL.Position - leftHand.Position).Magnitude <= 2.5 and not GrabbingL and GrabRayL.Instance.Anchored == false then
@@ -274,7 +279,7 @@ end
 			GrabbingL = nil
 		end
  
-		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR2) then
+		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonR1) then
 			local GrabRayR = workspace:Raycast(rightHand.Position, rightHand.CFrame.lookVector * 250)
 			if GrabRayR then
 				if (GrabRayR.Position - rightHand.Position).Magnitude <= 2.5 and not GrabbingR and GrabRayR.Instance.Anchored == false then
