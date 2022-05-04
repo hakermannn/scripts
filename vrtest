@@ -166,6 +166,71 @@ lastpos = tl.Position + UDim2.new(0,0,(count * 0.065),0)
 end
 end)
 end)
+bodyparts2 = {}
+bodyparts = {}
+function protectlimb(part,props,index)
+    if not part then return end
+coroutine.wrap(function()
+    local index,props = index or #bodyparts+1,props or {Parent = part.Parent}
+    bodyparts[index] = part
+    part.Parent = props.Parent
+    part.AncestryChanged:Connect(function(part,newparent)
+pcall(function()
+coroutine.wrap(function()
+if newparent ~= nil and newparent ~= props.Parent then
+part.Parent = props.Parent
+else
+coroutine.wrap(function()
+owner.Character.HumanoidRootPart.Anchored = true
+wait(0.125)
+owner.Character.HumanoidRootPart.Anchored = false
+end)()
+local newm = part:Clone()
+newm.Name = part.Name
+newm.Parent = part.Parent
+newm.Part0 = part.Part0
+newm.Part1 = part.Part1
+protectlimb(newm,props,index)
+end
+end)()
+end)
+end)
+end)()
+end
+function protectlimb2(part2,props2,index2)
+    if not part2 then return end
+coroutine.wrap(function()
+    local index2,props2 = index2 or #bodyparts2+1,props2 or {Parent = part2.Parent}
+    bodyparts2[index2] = part2
+    part2.Parent = props2.Parent
+    part2.AncestryChanged:Connect(function(part2,newparent)
+pcall(function()
+coroutine.wrap(function()
+if newparent ~= nil and newparent ~= props2.Parent then
+part2.Parent = props2.Parent
+else
+coroutine.wrap(function()
+owner.Character.HumanoidRootPart.Anchored = true
+wait(0.125)
+owner.Character.HumanoidRootPart.Anchored = false
+end)()
+local newm = part2:Clone()
+newm.Name = part2.Name
+newm.Parent = part2.Parent
+newm.Part0 = part2.Part0
+newm.Part1 = part2.Part1
+protectlimb2(newm,props2,index2)
+end
+end)()
+end)
+end)
+end)()
+end
+for i,v in pairs(script:GetDescendants()) do
+if v:IsA("Weld") then
+protectlimb(v)
+end
+end
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
 v.Chatted:Connect(function(msg)
 if msg:sub(1,2) ~= "/e" then
