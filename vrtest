@@ -214,7 +214,7 @@ end
 end)
 vrService.UserCFrameChanged:Connect(function(part, move)
 	if part == Enum.UserCFrame.LeftHand then
-		e2:FireServer(leftHand,camera.CFrame * CFrame.new(move.Positon * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
+		e2:FireServer(leftHand,camera.CFrame * CFrame.new(move.Position * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	elseif part == Enum.UserCFrame.RightHand then
 		e2:FireServer(rightHand,camera.CFrame * CFrame.new(move.Position * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	elseif part == Enum.UserCFrame.Head then
