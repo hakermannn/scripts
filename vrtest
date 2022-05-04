@@ -230,7 +230,7 @@ if v:IsA("Part") then
 v.Transparency = 1
 end
 end
-workspace.CurrentCamera.HeadScale = 1.25
+workspace.CurrentCamera.HeadScale = 2
 inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
@@ -252,19 +252,19 @@ vrService.UserCFrameChanged:Connect(function(part, move)
 end)
 local GrabbingL = nil
 local GrabbingR = nil
- 
+ rayblacklist = {hed,leftHand,rightHand}
 local Gamepad = Enum.UserInputType.Gamepad1
 game:GetService("RunService").Stepped:Connect(function()
 	local params = RaycastParams.new()
 	params.FilterDescendantsInstances = {rayblacklist}
 	params.FilterType = Enum.RaycastFilterType.Blacklist
-local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-4,0), params)
+local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5.5,0), params)
 if result then
-if (camera.CFrame.Position - result.Position).Magnitude <= 3.5 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,4,0) * CFrame.Angles(camera.CFrame:ToEulerAnglesXYZ())
+if (camera.CFrame.Position - result.Position).Magnitude <= 4.5 then
+camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5,0) * CFrame.Angles(camera.CFrame:ToEulerAnglesXYZ())
 end
 else
-camera.CFrame = camera.CFrame * CFrame.new(0,-0.5,0)
+camera.CFrame = camera.CFrame * CFrame.new(0,-0.25,0)
 end
 		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
 			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * 250)
