@@ -154,7 +154,6 @@ end
 end
 end)
 end
-workspace.currentcamera.HeadScale = 1.25
        local screengui2 = Instance.new("SurfaceGui", owner.PlayerGui)
         screengui2.Name = "Hud"
 screengui2.Adornee = leftHand
@@ -231,6 +230,7 @@ if v:IsA("Part") then
 v.Transparency = 1
 end
 end
+workspace.CurrentCamera.HeadScale = 1.25
 inputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
 		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
