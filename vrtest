@@ -89,10 +89,10 @@ wel.Name = "Grab2"
 			if LastPartBeingHeldLeft then
 				if LastPartBeingHeldLeft:FindFirstChild("Grab2") then
 					LastPartBeingHeldLeft:FindFirstChild("Grab2"):Destroy()
+					end
 			end
 			LastPartBeingHeldLeft = nil
 		end
- 
 		if Data.InputData.PartBeingGrabbedRight then
 			if Data.InputData.PartBeingGrabbedRight ~= LastPartBeingHeldRight then
 				LastPartBeingHeldRight = Data.InputData.PartBeingGrabbedRight
