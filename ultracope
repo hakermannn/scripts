@@ -1,0 +1,1388 @@
+local camcf = CFrame.new()
+local seated = false
+local active = false
+owner.Character.Humanoid.AutoJumpEnabled = false
+local sound = Instance.new("Sound")
+sound.PlayOnRemove = true
+local tweenservice = game:GetService("TweenService")
+local active = false
+owner.Character.Humanoid:RemoveAccessories()
+local m = Instance.new("SpecialMesh",owner.Character["Right Arm"])
+m.MeshId = "rbxassetid://8549146366"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local m2 = Instance.new("SpecialMesh",owner.Character["Left Arm"])
+m2.MeshId = "rbxassetid://8549147351"
+m2.TextureId = "rbxassetid://8550010558"
+m2.Scale = Vector3.new(0.025,0.025,0.025)
+local m = Instance.new("SpecialMesh",owner.Character["Left Leg"])
+m.MeshId = "rbxassetid://8549147750"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local m = Instance.new("SpecialMesh",owner.Character["Right Leg"])
+m.MeshId = "rbxassetid://8549148238"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local m = Instance.new("SpecialMesh",owner.Character.Torso)
+m.MeshId = "rbxassetid://8549145426"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local m = Instance.new("SpecialMesh",owner.Character.Head)
+m.MeshId = "rbxassetid://8549146882"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+owner.Character.Humanoid.HipHeight = 0.25
+local weld = Instance.new("Weld",owner.Character.Torso)
+weld.Part0 = owner.Character["Left Leg"]
+weld.Part1 = weld.Parent
+weld.C1 = CFrame.new(-0.35,-1.375,0)
+weld.C0 = CFrame.new(0,1.375,0)
+local weld2 = Instance.new("Weld",owner.Character.Torso)
+weld2.Part0 = owner.Character["Right Leg"]
+weld2.Part1 = weld.Parent
+weld2.C1 = CFrame.new(0.35,-1.375,0)
+weld2.C0 = CFrame.new(0,1.375,0)
+local weld3 = Instance.new("Weld",owner.Character.Torso)
+weld3.Part0 = owner.Character["Right Arm"]
+weld3.Part1 = weld.Parent
+weld3.C1 = CFrame.new(0.85,0.95,-0.15)
+weld3.C0 = CFrame.new(0,1.5,0)
+local toolwel = Instance.new("Weld",owner.Character.Torso)
+toolwel.Part0 = owner.Character["Right Arm"]
+toolwel.Part1 = weld.Parent
+toolwel.C1 = CFrame.new(0.85,0.95,-0.15)
+toolwel.C0 = CFrame.new(0,1.5,0)
+toolwel.Enabled = false
+local weld4 = Instance.new("Weld",owner.Character.Torso)
+weld4.Part0 = owner.Character["Left Arm"]
+weld4.Part1 = weld.Parent
+weld4.C1 = CFrame.new(-0.85,0.95,-0.15)
+weld4.C0 = CFrame.new(0,1.5,0)
+local p2 = Instance.new("Part",owner.Character)
+p2.Size = Vector3.new(0.01,0.01,0.01)
+p2.CanCollide = false
+p2.Transparency = 1
+p2.CanQuery = false
+p2.CanTouch = false
+local p3 = Instance.new("Part",owner.Character)
+p3.Size = Vector3.new(0.01,0.01,0.01)
+p3.CanCollide = false
+p3.Transparency = 1
+p3.CanQuery = false
+p3.CanTouch = false
+local weld5 = Instance.new("Weld",p3)
+weld5.Part0 = owner.Character.Head
+weld5.Part1 = weld5.Parent
+weld5.C0 = CFrame.new(0,-0.125,0.25) * CFrame.Angles(math.rad(-10),0,0)
+weld5.C1 = CFrame.new(0,-0.125,0)
+local p2wel = Instance.new("Weld",owner.Character.Torso)
+p2wel.Part0 = p3
+p2wel.Part1 = p2wel.Parent
+p2wel.C1 = CFrame.new(0,1,-0.25)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.5,0)
+local info = TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+power = tweenservice:Create(weld5, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-90),0,0)
+local info = TweenInfo.new(0.125, Enum.EasingStyle.Linear)
+toolequip = tweenservice:Create(toolwel, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(-0.35,-1,-0.5) * CFrame.Angles(math.rad(75),0,0)
+sitt = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(0.35,-1,-0.5) * CFrame.Angles(math.rad(75),0,0)
+sitt2 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.325,0.075) * CFrame.Angles(math.rad(2),0,0)
+local info = TweenInfo.new(2, Enum.EasingStyle.Linear)
+idle = tweenservice:Create(weld, info, goal) 
+idle2 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.375,0)
+idle7 = tweenservice:Create(weld, info, goal) 
+idle8 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(-0.35,-1,-0.5) * CFrame.Angles(math.rad(75),0,0)
+sit = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(0.35,-1,-0.5) * CFrame.Angles(math.rad(75),0,0)
+sit2 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(-0.35,-1,-0.5) * CFrame.Angles(math.rad(73),0,0)
+sit3 = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(0.35,-1,-0.5) * CFrame.Angles(math.rad(73),0,0)
+sit4 = tweenservice:Create(weld2, info, goal)
+local info = TweenInfo.new(0.25, Enum.EasingStyle.Linear)
+local goal = {}
+goal.C1 = CFrame.new(-0.35,-1.375,0)
+up = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C1 = CFrame.new(0.35,-1.375,0)
+up2 = tweenservice:Create(weld2, info, goal) 
+local info = TweenInfo.new(2, Enum.EasingStyle.Linear)
+local goal = {}
+goal.C0 = CFrame.new(0,1.55,0) * CFrame.Angles(0,0,math.rad(-2))
+idle3 = tweenservice:Create(weld3, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0)
+idle9 = tweenservice:Create(weld3, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.55,0) * CFrame.Angles(0,0,math.rad(2))
+idle4 = tweenservice:Create(weld4, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0)
+idle10 = tweenservice:Create(weld4, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,-0.525,0) * CFrame.Angles(math.rad(2),0,0)
+idle6 = tweenservice:Create(weld5, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,-0.5,0)
+idle12 = tweenservice:Create(weld5, info, goal) 
+owner.Character.Humanoid:RemoveAccessories()
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+v.TextureId = "rbxassetid://9857490640"
+end)
+end
+local wel = Instance.new("Weld",owner.Character.Torso)
+wel.Part0 = owner.Character.HumanoidRootPart
+wel.Part1 = wel.Parent
+local goal = {}
+goal.C1 = CFrame.new(0,0.05,0)
+idle5 = tweenservice:Create(wel, info, goal)
+goal.C1 = CFrame.new(0,0,0)
+idle11 = tweenservice:Create(wel, info, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,1.325,0.075) * CFrame.Angles(math.rad(5),0,0)
+local info = TweenInfo.new(0.25, Enum.EasingStyle.Linear)
+fall = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.325,-0.075) * CFrame.Angles(math.rad(-5),0,0)
+fall2 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(15),0,math.rad(-60))
+fall3 = tweenservice:Create(weld3, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-15),0,math.rad(-65))
+fall5 = tweenservice:Create(weld3, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(15),0,math.rad(60))
+fall4 = tweenservice:Create(weld4, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-15),0,math.rad(65))
+fall6 = tweenservice:Create(weld4, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.325,0) * CFrame.Angles(math.rad(-5),0,0)
+fall7 = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.325,0) * CFrame.Angles(math.rad(5),0,0)
+fall8 = tweenservice:Create(weld2, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0)
+return1 = tweenservice:Create(weld4, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0)
+return2 = tweenservice:Create(weld3, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.375,0)
+return3 = tweenservice:Create(weld, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.375,0)
+return4 = tweenservice:Create(weld2, info, goal) 
+local info = TweenInfo.new(.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out, 0, false, 0)
+local info2 = TweenInfo.new(.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out, 0, false, 0)
+local savedBaseCFrame = weld.C0
+local savedBaseCFrame2 = weld2.C0
+local savedBaseCFrame3 = weld3.C0
+local savedBaseCFrame4 = weld4.C0
+local goal = {}
+local goal2 = {}
+goal.C0 = savedBaseCFrame * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+goal2.C0 = savedBaseCFrame2 * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+local goal3 = {}
+local goal4 = {}
+goal3.C0 = savedBaseCFrame3 * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+goal4.C0 = savedBaseCFrame4 * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
+tween = tweenservice:Create(weld, info, goal)
+tween2 = tweenservice:Create(weld, info, goal)
+tween3 = tweenservice:Create(weld, info, goal)
+tween4 = tweenservice:Create(weld, info, goal)
+local moving = false
+local stopped = false
+local bric = "168786259"
+local cobbl = "7326201967"
+local corrode = "379482691"
+local metl = "481216891"
+local fabric = "151760062"
+local gran = "134464013"
+local grass = "379482039"
+local ic = "19326880"
+local marbl = "7574082366"
+local pebbl = "180239547"
+local sand = "265653329"
+local wood = "481218268"
+local groundeded = true
+owner.Character["Left Arm"].Size += Vector3.new(0.65,1.5,0.65)
+owner.Character["Right Arm"].Size += Vector3.new(0.65,1.5,0.65)
+owner.Character["Left Leg"].Size += Vector3.new(0.65,1.5,0.65)
+owner.Character["Right Leg"].Size += Vector3.new(0.65,1.5,0.65)
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local punchwel = Instance.new("Weld",owner.Character.Torso)
+punchwel.Part0 = owner.Character["Left Arm"]
+punchwel.Part1 = punchwel.Parent
+punchwel.C1 = CFrame.new(-0.85,0.95,-0.15) * CFrame.Angles(0,math.rad(180),0)
+punchwel.C0 = CFrame.new(0,1.5,0)
+punchwel.Enabled = false
+if owner.Character:FindFirstChild("Health") then
+owner.Character:FindFirstChild("Health"):Destroy()
+end
+e = Instance.new("RemoteEvent",owner.Character)
+local rayblacklist = {}
+local p = Instance.new("SpawnLocation")
+p.Enabled = false
+p.Transparency = 1
+p.Size = Vector3.new(0.25,0.25,0.25)
+p.Name = "bloodyhujijahuyugtfvfyh"
+local attachment0 = Instance.new("Attachment",p)
+local attachment1 = Instance.new("Attachment",p)
+attachment1.CFrame = CFrame.new(0,0.125,0)
+attachment0.CFrame = CFrame.new(0,-0.125,0)
+local trail = Instance.new("Trail",p)
+trail.Attachment0 = attachment0
+trail.Attachment1 = attachment1
+trail.Lifetime = .5
+trail.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)}
+trail.WidthScale = NumberSequence.new{NumberSequenceKeypoint.new(0, 1),NumberSequenceKeypoint.new(1, 0)}
+trail.MaxLength = 0
+trail.MinLength = 0.1
+trail.LightEmission = 0
+trail.LightInfluence = 1
+trail.TextureLength = 1
+trail.TextureMode = "Stretch"
+trail.Color = ColorSequence.new(Color3.fromRGB(85, 0, 0))
+local min = -15
+local max = 15
+function splat(whatpart,times)
+for i = 1,(2 * times) do
+wait()
+coroutine.wrap(function()
+local b = p:Clone()
+b.Parent = script
+b.Position = whatpart.Position
+b.Velocity = Vector3.new(Random.new():NextNumber(min,max),Random.new():NextNumber(min,max) + 30,Random.new():NextNumber(min,max))
+table.insert(rayblacklist,b)
+b.Touched:Connect(function(what)
+if not (what:FindFirstAncestorWhichIsA("Model") and what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid")) and not table.find(rayblacklist,what) and what.CanCollide then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist,whatpart:FindFirstAncestorWhichIsA("Model"):GetDescendants()}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = workspace:Raycast(b.Position,b.Velocity + Vector3.new(0,-3,0), params)
+if result then
+    local bloodpartfloor = Instance.new("SpawnLocation", workspace)
+bloodpartfloor.Enabled = false
+bloodpartfloor.CanCollide = false
+bloodpartfloor.Anchored = true
+table.insert(rayblacklist,bloodpartfloor)
+                            bloodpartfloor.Size = Vector3.new(0.05,0.005,0.005)
+                            bloodpartfloor.CanCollide = false
+                            bloodpartfloor.Material = "Glass"
+                            bloodpartfloor.Transparency = 0
+local s = Instance.new("SpecialMesh",bloodpartfloor)
+s.MeshType = "Sphere"
+b:Destroy()
+bloodpartfloor.Position = result.Position
+local whathit = result.Instance
+		local currentRightVector = whathit.CFrame.RightVector
+		local upVector = result.Normal
+		local newFacialVector = currentRightVector:Cross(upVector)
+                            bloodpartfloor.CFrame = CFrame.fromMatrix(bloodpartfloor.Position, currentRightVector, upVector, newFacialVector) * CFrame.Angles(0,0,math.rad(90))
+                                bloodpartfloor.BrickColor = BrickColor.new("Maroon")
+game:GetService("Debris"):AddItem(bloodpartfloor,25)
+local random = Random.new():NextNumber(0.25,3)
+local tweenService = game:GetService("TweenService")
+local timeToFade = random/3
+local object = bloodpartfloor
+local tweenInfo = TweenInfo.new(timeToFade)
+local goal = {}
+goal.Size = Vector3.new(math.clamp(random,0.75,3)/5,random,random)
+goal.Transparency = 0.2
+local groww = tweenService:Create(object, tweenInfo, goal)
+groww:Play()
+end
+end
+end)
+end)()
+end
+end
+local punch = Instance.new("Sound")
+punch.PlayOnRemove = true
+local punchtab = {"3932504231","4306980885","3932506625","3932506183"}
+punch.Volume = 1
+local candamage = false
+local punc = false
+e.OnServerEvent:Connect(function(_,cf)
+if not punc then
+punc = true
+punchwel.Enabled = true
+m2.MeshId = "rbxassetid://9924080097"
+m2.TextureId = "rbxassetid://8550010558"
+m2.Scale = Vector3.new(0.055,0.055,0.055)
+weld4.Enabled = false
+local tweenservice = game:GetService("TweenService")
+local g = {}
+local l = owner.Character.Torso.CFrame:toObjectSpace(cf).lookVector.unit
+g.C0 = CFrame.new(-0.125,0.75,0.25) * CFrame.Angles(math.rad(90) + l.y,math.rad(10),0)
+local i = TweenInfo.new(0.125, Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
+t = tweenservice:Create(punchwel, i, g) 
+t:Play()
+t.Completed:Wait()
+candamage = true
+local g = {}
+g.C0 = CFrame.new(-0.125,1.5,0.0625) * CFrame.Angles(math.rad(70) + l.y,math.rad(12),math.rad(20))
+local i = TweenInfo.new(0.125, Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
+t = tweenservice:Create(punchwel, i, g) 
+t:Play()
+t.Completed:Wait()
+local g = {}
+g.C0 = CFrame.new(-0.125,0.5,0.125) * CFrame.Angles(math.rad(100) + l.y,math.rad(10),0)
+local i = TweenInfo.new(0.25, Enum.EasingStyle.Circular,Enum.EasingDirection.Out)
+t = tweenservice:Create(punchwel, i, g) 
+t:Play()
+t.Completed:Wait()
+wait(0.0625)
+candamage = false
+local g = {}
+g.C0 = CFrame.new(0,1.5,0)
+local i = TweenInfo.new(0.125, Enum.EasingStyle.Quart,Enum.EasingDirection.Out)
+t = tweenservice:Create(punchwel, i, g) 
+t:Play()
+t.Completed:Wait()
+punchwel.Enabled = false
+weld4.Enabled = true
+punc = false
+m2.MeshId = "rbxassetid://8549147351"
+m2.Scale = Vector3.new(0.025,0.025,0.025)
+end
+end)
+owner.Character.Humanoid.Touched:Connect(function(what,limb)
+if limb == owner.Character["Left Arm"] and (what:FindFirstAncestorWhichIsA("Model") and what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid") and what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health ~= 0) and candamage then
+candamage = false
+punch.Parent = owner.Character.Head
+punch.SoundId = "rbxassetid://"..punchtab[math.random(1,4)]
+punch.Parent = nil
+local he = what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health
+what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health -= math.random(10,15)
+coroutine.wrap(function()
+for h = 1, 20 do
+if (owner.Character.Head.Position - what.Position).Magnitude <= 14 then
+wait(0.085)
+owner.Character.Humanoid.Health += (he - what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health)/10
+end
+end
+end)()
+splat(what,math.random(2,3))
+end
+end)
+coroutine.wrap(function()
+while true do
+task.wait()
+if owner.Character.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+moving = true
+local c = owner.Character.HumanoidRootPart.CFrame:VectorToObjectSpace(owner.Character.Humanoid.MoveDirection)
+wel.C0 = wel.C0:Lerp(CFrame.Angles(math.rad(-c.Z) * -5, math.rad(-c.X) * 20, math.rad(-c.X) * 10), 0.1)
+else
+wel.C0 = wel.C0:Lerp(CFrame.Angles(0,0,0), 0.1)
+if moving then
+moving = false
+tween:Cancel()
+tween2:Cancel()
+goal2.C0 = savedBaseCFrame2
+info2 = TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween2 = tweenservice:Create(weld2, info2, goal2) 
+goal.C0 = savedBaseCFrame
+info = TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween = tweenservice:Create(weld, info, goal) 
+tween3:Cancel()
+tween4:Cancel()
+goal3.C0 = savedBaseCFrame3
+info3 = TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween3 = tweenservice:Create(weld3, info3, goal3) 
+goal4.C0 = savedBaseCFrame4
+info4 = TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween4 = tweenservice:Create(weld4, info4, goal4) 
+task.wait()
+tween:Play()
+tween2:Play()
+tween3:Play()
+tween4:Play()
+end
+end
+end
+end)()
+owner.Character.ChildAdded:Connect(function(what)
+if what:IsA("Tool") then
+toolwel.C0 = weld3.C0
+toolequip:Play()
+toolwel.Enabled = true
+weld3.Enabled = false
+end
+end)
+owner.Character.ChildRemoved:Connect(function(what)
+if what:IsA("Tool") then
+weld3.C0 = toolwel.C0
+toolwel.Enabled = false
+weld3.Enabled = true
+end
+end)
+local grounded = true
+coroutine.wrap(function()
+while true do
+task.wait()
+if owner.Character.Humanoid.FloorMaterial == Enum.Material.Air and not owner.Character.Humanoid.Sit then
+grounded = false
+groundeded = false
+fall:Play()
+fall2:Play()
+fall3:Play()
+fall4:Play()
+fall4.Completed:Wait()
+fall5:Play()
+fall6:Play()
+fall7:Play()
+fall8:Play()
+fall8.Completed:Wait()
+end
+end
+end)()
+local land = Instance.new("Sound",owner.Character.Head)
+land.Volume = 0.25
+land.SoundId = "rbxassetid://6870001600"
+coroutine.wrap(function()
+while task.wait() do
+if owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+fall5:Cancel()
+fall6:Cancel()
+fall7:Cancel()
+fall8:Cancel()
+fall4:Cancel()
+fall3:Cancel()
+fall2:Cancel()
+fall:Cancel()
+if not grounded then
+land:Play()
+end
+if not grounded then
+grounded = true
+return1:Play()
+return2:Play()
+return3:Play()
+return4:Play()
+return4.Completed:Wait()
+groundeded = true
+end
+end
+end
+end)()
+coroutine.wrap(function()
+while true do
+task.wait()
+if not moving and active and groundeded then
+if not owner.Character.Humanoid.Sit then
+sit:Cancel()
+sit2:Cancel()
+sit3:Cancel()
+sit4:Cancel()
+up:Play()
+up2:Play()
+end
+if not owner.Character.Humanoid.Sit then
+seated = false
+idle:Play()
+idle2:Play()
+else
+if not seated then
+seated = true
+sitt:Play()
+sitt2:Play()
+else
+sit:Play()
+sit2:Play()
+end
+end
+idle3:Play()
+idle4:Play()
+idle5:Play()
+idle6:Play()
+idle6.Completed:Wait()
+if not moving and groundeded then
+if not owner.Character.Humanoid.Sit then
+sit:Cancel()
+sit2:Cancel()
+sit3:Cancel()
+sit4:Cancel()
+up:Play()
+up2:Play()
+end
+if not owner.Character.Humanoid.Sit then
+idle7:Play()
+idle8:Play()
+else
+sit3:Play()
+sit4:Play()
+end
+idle9:Play()
+idle10:Play()
+idle11:Play()
+idle12:Play()
+idle12.Completed:Wait()
+end
+end
+end
+end)()
+count = 0
+coroutine.wrap(function()
+while true do
+if moving then
+count += 1
+if count == 1 then
+idle2:Cancel()
+idle4:Cancel()
+idle:Cancel()
+idle3:Cancel()
+idle5:Cancel()
+idle6:Cancel()
+idle7:Cancel()
+idle8:Cancel()
+idle9:Cancel()
+idle10:Cancel()
+idle11:Cancel()
+idle12:Cancel()
+goal2.C0 = savedBaseCFrame2 * CFrame.new(0,0.15,0.25) * CFrame.Angles(math.rad(-25), math.rad(0), 0)
+info2 = TweenInfo.new(2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Circular, Enum.EasingDirection.In, 0, false, 0)
+tween2 = tweenservice:Create(weld2, info2, goal2) --Loading the second keyframe.
+goal4.C0 = savedBaseCFrame4 * CFrame.new(-0.0625,0.15,0.25) * CFrame.Angles(math.rad(-40), math.rad(15), math.rad(-5))
+info4 = TweenInfo.new(2.66666666667/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In, 0, false, 0)
+tween4 = tweenservice:Create(weld4, info4, goal4) --Loading the second keyframe.
+tween4:Play()
+tween2:Play()
+tween2.Completed:Wait()
+tween2:Cancel()
+if moving then
+goal2.C0 = savedBaseCFrame2 * CFrame.new(0,-0.0625,-0.125) * CFrame.Angles(math.rad(20), math.rad(0), 0)
+info2 = TweenInfo.new(2.66666666667/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+tween2 = tweenservice:Create(weld2, info2, goal2) --Loading the second keyframe.
+goal4.C0 = savedBaseCFrame4 * CFrame.new(-0.0625,0.075,-0.0975) * CFrame.Angles(math.rad(30), math.rad(10), math.rad(5))
+info4 = TweenInfo.new(3.2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0)
+tween4 = tweenservice:Create(weld4, info4, goal4) --Loading the second keyframe.
+tween2:Play()
+tween4:Play()
+tween2.Completed:Wait()
+tween2:Cancel()
+if moving then
+goal2.C0 = savedBaseCFrame2 * CFrame.new(0,-0.125,0.25) * CFrame.Angles(math.rad(-15), math.rad(0), 0)
+info2 = TweenInfo.new(5.3333333/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween2 = tweenservice:Create(weld2, info2, goal2) --Loading the second keyframe.
+goal4.C0 = savedBaseCFrame4 * CFrame.new(0,-0.075,0.0975) * CFrame.Angles(math.rad(-30), math.rad(12.5), math.rad(-5))
+info4 = TweenInfo.new(3.2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, false, 0)
+tween4 = tweenservice:Create(weld4, info4, goal4) --Loading the second keyframe.
+local part = owner.Character.Humanoid.FloorMaterial
+		if part == Enum.Material.Grass or part == Enum.Material.Mud then
+sound.SoundId = "rbxassetid://"..grass
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Cobblestone or part == Enum.Material.Concrete or part == Enum.Material.Slate or part == Enum.Material.Plastic or part == Enum.Material.SmoothPlastic or part == Enum.Material.Rock or part == Enum.Material.Sandstone or part == Enum.Material.Basalt or part == Enum.Material.CrackedLava or part == Enum.Material.Neon then
+sound.Volume = 0.025 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..cobbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.WoodPlanks or part == Enum.Material.Wood then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..wood
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Ice or part == Enum.Material.Glacier or part == Enum.Material.Snow then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..ic
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Metal or part == Enum.Material.CorrodedMetal or part == Enum.Material.Foil or part == Enum.Material.Glass then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..corrode
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.DiamondPlate then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..metl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Fabric then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..fabric
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Granite then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..gran
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Marble then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..marbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Pebble then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..pebbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Sand then
+sound.Volume = 0.0625 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..sand
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+end
+tween4:Play()
+tween2:Play()
+end
+end
+elseif count == 2 then
+count = 0
+idle2:Cancel()
+idle4:Cancel()
+idle:Cancel()
+idle3:Cancel()
+idle5:Cancel()
+idle6:Cancel()
+idle7:Cancel()
+idle8:Cancel()
+idle9:Cancel()
+idle10:Cancel()
+idle11:Cancel()
+idle12:Cancel()
+goal.C0 = savedBaseCFrame * CFrame.new(0,0.15,0.25) * CFrame.Angles(math.rad(-25), math.rad(0), 0)
+info = TweenInfo.new(2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Circular, Enum.EasingDirection.In, 0, false, 0)
+tween = tweenservice:Create(weld, info, goal) --Loading the second keyframe.
+goal3.C0 = savedBaseCFrame3 * CFrame.new(0.0625,0.15,0.25) * CFrame.Angles(math.rad(-40), math.rad(-15), math.rad(5))
+info3 = TweenInfo.new(2.66666666667/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In, 0, false, 0)
+tween3 = tweenservice:Create(weld3, info3, goal3) --Loading the second keyframe.
+tween3:Play()
+tween:Play()
+tween.Completed:Wait()
+tween:Cancel()
+if moving then
+goal.C0 = savedBaseCFrame * CFrame.new(0,-0.0625,-0.125) * CFrame.Angles(math.rad(20), math.rad(0), 0)
+info = TweenInfo.new(2.66666666667/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+tween = tweenservice:Create(weld, info, goal) --Loading the second keyframe.
+goal3.C0 = savedBaseCFrame3 * CFrame.new(0.0625,0.075,-0.0975)  * CFrame.Angles(math.rad(30), math.rad(-10), math.rad(-5))
+info3 = TweenInfo.new(3.2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0)
+tween3 = tweenservice:Create(weld3, info3, goal3) --Loading the second keyframe.
+tween3:Play()
+tween:Play()
+tween.Completed:Wait()
+tween:Cancel()
+if moving then
+goal.C0 = savedBaseCFrame * CFrame.new(0,-0.125,0.25) * CFrame.Angles(math.rad(-15), math.rad(0), 0)
+info = TweenInfo.new(5.3333333/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut, 0, false, 0)
+tween = tweenservice:Create(weld, info, goal) --Loading the second keyframe.
+goal3.C0 = savedBaseCFrame3 * CFrame.new(0,-0.075,0.0975)  * CFrame.Angles(math.rad(-30), math.rad(-12.5), math.rad(5))
+info3 = TweenInfo.new(3.2/owner.Character.Humanoid.WalkSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, 0, false, 0)
+tween3 = tweenservice:Create(weld3, info3, goal3) --Loading the second keyframe.
+tween3:Play()
+tween:Play()
+local part = owner.Character.Humanoid.FloorMaterial
+		if part == Enum.Material.Grass or part == Enum.Material.Mud then
+sound.SoundId = "rbxassetid://"..grass
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Cobblestone or part == Enum.Material.Concrete or part == Enum.Material.Slate or part == Enum.Material.Plastic or part == Enum.Material.SmoothPlastic or part == Enum.Material.Rock or part == Enum.Material.Sandstone or part == Enum.Material.Basalt or part == Enum.Material.CrackedLava or part == Enum.Material.Neon then
+sound.Volume = 0.025 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..cobbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.WoodPlanks or part == Enum.Material.Wood then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..wood
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Ice or part == Enum.Material.Glacier or part == Enum.Material.Snow then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..ic
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Metal or part == Enum.Material.CorrodedMetal or part == Enum.Material.Foil or part == Enum.Material.Glass then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..corrode
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.DiamondPlate then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..metl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Fabric then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..fabric
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Granite then
+sound.Volume = 0.0225 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..gran
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Marble then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..marbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Pebble then
+sound.Volume = 0.03125 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..pebbl
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+elseif part == Enum.Material.Sand then
+sound.Volume = 0.0625 * owner.Character.Humanoid.WalkSpeed
+sound.SoundId = "rbxassetid://"..sand
+sound.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+sound.Parent = owner.Character.Head
+sound.Parent = nil
+end
+end
+end
+end
+else
+task.wait()
+end
+end
+end)()
+local hud = Instance.new("Sound")
+hud.Volume = 3
+hud.SoundId = "rbxassetid://3848738002"
+hud.PlayOnRemove = true
+owner.Character.Humanoid.WalkSpeed = 0
+owner.Character.Humanoid.JumpPower = 0
+local gui = Instance.new("ScreenGui",owner.PlayerGui)
+local opening = Instance.new("Frame",gui)
+opening.AnchorPoint = Vector2.new(0.5, 0.5)
+opening.Position = UDim2.new(0.5, 0, 0.5, 0)
+opening.BackgroundColor3 = Color3.fromRGB(5,5,5)
+opening.Size = UDim2.new(1,0,1,0)
+local dash = Instance.new("Sound",owner.Character.Head)
+dash.Volume = 1
+dash.SoundId = "rbxassetid://6870001262"
+local o = Instance.new("ObjectValue",owner.PlayerGui)
+o.Name = "Dash"
+o.Value = dash
+local revolverwel = Instance.new("Weld",p2)
+revolverwel.Part0 = owner.Character["Right Arm"]
+revolverwel.Part1 = revolverwel.Parent
+revolverwel.C1 = CFrame.new(0,0,0.15)
+revolverwel.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
+revolverwel.Enabled = false
+local tool = Instance.new("Tool",owner.Backpack)
+tool.Name = "Marksman"
+tool.Grip = CFrame.new(0,0.2,-1.1) * CFrame.Angles(math.rad(160),0,0)
+local par = Instance.new("Part",tool)
+par.Name = "Handle"
+par.Size = Vector3.new(0.3,1.1,2.4)
+local muzzle = Instance.new("Part")
+muzzle.CanCollide = false
+muzzle.Size = Vector3.new(0.1,0.1,0.1)
+muzzle.Transparency = 1
+muzzle.Anchored = true
+muzzle.CanQuery = false
+muzzle.CanTouch = false
+local m = Instance.new("SpecialMesh",par)
+m.MeshId = "rbxassetid://7371059530"
+m.TextureId = "rbxassetid://9901256500"
+m.Scale = Vector3.new(-0.075,-0.075,-0.075)
+local tweenservice = game:GetService("TweenService")
+local info = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.In)
+local goal = {}
+goal.C0 = CFrame.new(0,1.55,0) * CFrame.Angles(math.rad(-69),0,0)
+revolveridle = tweenservice:Create(revolverwel, info, goal) 
+local info = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
+revolveridle2 = tweenservice:Create(revolverwel, info, goal) 
+local info = TweenInfo.new(0.125, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-75),0,0)
+goal.C1 = CFrame.new(0,0,0.3)
+shoot = tweenservice:Create(revolverwel, info, goal) 
+local goal = {}
+goal.Grip = CFrame.new(0,0.3,-1) * CFrame.Angles(math.rad(150),0,0)
+shoot2 = tweenservice:Create(tool, info, goal) 
+local info = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+local goal = {}
+goal.Grip = CFrame.new(0,0.2,-1.1) * CFrame.Angles(math.rad(160),0,0)
+shoot3 = tweenservice:Create(tool, info, goal) 
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
+goal.C1 = CFrame.new(0,0,0.15)
+shoot4 = tweenservice:Create(revolverwel, info, goal) 
+local shot = Instance.new("Sound",par)
+shot.Volume = 1
+shot.SoundId = "rbxassetid://6828928602"
+local pe = Instance.new("ParticleEmitter",muzzle)
+pe.Texture = "rbxassetid://13191594"
+pe.Enabled = false
+pe.Speed = NumberRange.new(2,2.5)
+pe.Shape = "Disc"
+pe.ShapeStyle = "Surface"
+pe.ShapeInOut = "Outward"
+pe.LightEmission = 0.2
+pe.LightInfluence = 0.5
+pe.Transparency = NumberSequence.new(0.5,0.5)
+pe.Size = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.0625)}
+pe.Lifetime = NumberRange.new(0.125, 0.25)
+pe.Rate = 500
+pe.Drag = 2
+pe.LockedToPart = true
+pe.RotSpeed = NumberRange.new(-300,300)
+pe.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+pe.SpreadAngle = Vector2.new(-50, 50)
+pe.EmissionDirection = Enum.NormalId.Back
+tool.Equipped:Connect(function()
+revolverwel.Enabled = true
+toolwel.Enabled = false
+weld3.Enabled = false
+end)
+tool.Unequipped:Connect(function()
+revolverwel.Enabled = false
+toolwel.Enabled = false
+weld3.Enabled = true
+end)
+rayblacklist = {}
+for i,v in pairs(owner:GetDescendants()) do
+table.insert(rayblacklist,v)
+end
+local pwel = Instance.new("Weld",owner.Character.Torso)
+pwel.Part0 = p2
+pwel.Part1 = pwel.Parent
+pwel.C1 = CFrame.new(0.85,0.95,0)
+local e2 = Instance.new("RemoteEvent",owner.Character)
+e2.Name = "the"
+e2.OnServerEvent:Connect(function(_,cf)
+if active then
+camcf = cf
+        local lookvector = owner.Character.Torso.CFrame:toObjectSpace(cf).lookVector.unit
+pwel.C0 = CFrame.Angles(-lookvector.y,0,0) * CFrame.Angles(0,lookvector.x,0)
+p2wel.C0 = CFrame.Angles(-lookvector.y,0,0) * CFrame.Angles(0,lookvector.x,0)
+end
+end)
+local firing = false
+tool.Activated:Connect(function()
+if not firing then
+shot:Play()
+local m = muzzle:Clone()
+m.Parent = script
+m.CFrame = par.CFrame * CFrame.new(0,-0.35,0.9)
+m.Position = m.Position + owner.Character.Torso.Velocity * owner:GetNetworkPing()
+m:FindFirstChildWhichIsA("ParticleEmitter"):Emit(20)
+game:GetService("Debris"):AddItem(m,0.25)
+  local attachment0 = Instance.new("Attachment")
+                attachment0.Parent = m
+attachment0.CFrame = CFrame.new(0,0,0.25)
+                local attachment1 = Instance.new("Attachment")
+                attachment1.Parent = m
+local beam = Instance.new("Beam",m)
+beam.Attachment0 = attachment0
+beam.Attachment1 = attachment1
+beam.CurveSize0 = 0
+beam.CurveSize1 = 0
+beam.FaceCamera = true
+beam.Segments = 10
+beam.Width0 = 0.125
+beam.Width1 = 0.125 
+beam.Texture = "rbxassetid://13191594"
+beam.TextureLength = 1
+beam.LightEmission = 0.2
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.5)}
+beam.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+	local params = RaycastParams.new()
+local rayblacklist = {}
+for i,v in pairs(owner.Character:GetDescendants()) do
+table.insert(rayblacklist,v)
+end
+	params.FilterDescendantsInstances = {rayblacklist}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = game.Workspace:Raycast(owner.Character.Head.Position + owner.Character.Torso.Velocity * owner:GetNetworkPing(), camcf.lookVector * 200,params)
+if result then
+local hit = muzzle:Clone()
+hit.Parent = script
+attachment1.WorldPosition = result.Position
+		local currentRightVector = result.Instance.CFrame.RightVector
+		local upVector = result.Normal
+		local newFacialVector = currentRightVector:Cross(upVector)
+hit.Position = result.Position + CFrame.new(m.Position,hit.Position).lookVector * -0.25
+local _,y,_ = m.CFrame:ToWorldSpace():ToEulerAnglesXYZ()
+                            hit.CFrame = CFrame.fromMatrix(hit.Position, currentRightVector, upVector, newFacialVector) * CFrame.Angles(0,y,0)  * CFrame.Angles(math.rad(-90),0,0)
+hit:FindFirstChildWhichIsA("ParticleEmitter"):Emit(20)
+game:GetService("Debris"):AddItem(hit,0.25)
+if result.Instance:FindFirstAncestorWhichIsA("Model") and result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid") then
+local he = result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health
+result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health -= math.random(20,30)
+coroutine.wrap(function()
+for h = 1, 20 do
+if (owner.Character.Head.Position - result.Instance.Position).Magnitude <= 14 then
+wait(0.085)
+owner.Character.Humanoid.Health += (he - result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health)/10
+end
+end
+end)()
+splat(result.Instance,math.random(2,3))
+end
+else
+attachment1.WorldCFrame = owner.Character.Head.CFrame * CFrame.new(0,0,-200)
+end
+firing = true
+revolveridle:Cancel()
+revolveridle2:Cancel()
+wait(0.0625)
+shoot:Play()
+shoot2:Play()
+shoot2.Completed:Wait()
+shoot3:Play()
+shoot4:Play()
+shoot4.Completed:Wait()
+firing = false
+end
+end)
+revolveridle2.Completed:Connect(function()
+revolveridle:Play()
+end)
+revolveridle.Completed:Connect(function()
+revolveridle2:Play()
+end)
+NLS([[
+e = owner.Character:FindFirstChildWhichIsA("RemoteEvent")
+mouse = owner:GetMouse()
+e2 = owner.Character:WaitForChild("the")
+mouse.KeyDown:Connect(function(key)
+key = key:lower()
+if key == "f" then
+e:FireServer(workspace.CurrentCamera.CFrame)
+end
+end)
+dash = owner.PlayerGui.Dash.Value
+mouse = owner:GetMouse()
+dashed = false
+owner.Character.Humanoid.CameraOffset = Vector3.new(0,0,-0.5)
+game:GetService("RunService").RenderStepped:Connect(function()
+for i,v in pairs(owner.Character:GetDescendants()) do
+if v:IsA("Part") and v.Name ~= "Head" and v.Name ~= "HumanoidRootPart" then
+v.LocalTransparencyModifier = 0
+v.Transparency = 0
+end
+end
+end)
+local db = false
+local bv = nil
+local v = owner.Character.Torso.Velocity
+local lastmove = owner.Character.Humanoid.MoveDirection
+game:GetService("RunService").RenderStepped:Connect(function()
+v = owner.Character.Torso.Velocity
+if owner.Character.Humanoid.FloorMaterial == Enum.Material.Air and not owner.Character.Humanoid.Sit then
+if v ~= Vector3.new(0,0,0) and not db and bv == nil then
+db = true
+bv = Instance.new("BodyVelocity",owner.Character.Torso)
+bv.MaxForce = Vector3.new(math.huge,0,math.huge)
+bv.Velocity = v
+end
+elseif owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air or owner.Character.Humanoid.Sit then
+if not dashed and bv ~= nil then
+bv:Destroy()
+bv = nil
+db = false
+end
+end
+end)
+mouse.KeyDown:Connect(function(key)
+key = key:lower()
+if key:byte() == 48 then
+if not dashed and owner.Character.Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+dashed = true
+dash:Play()
+owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+local health = owner.Character.Humanoid.Health
+local s 
+s = owner.Character.Humanoid.HealthChanged:Connect(function()
+owner.Character.Humanoid.Health = health
+print("iframes")
+end)
+if bv == nil then
+bv = Instance.new("BodyVelocity",owner.Character.Torso)
+end
+bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+bv.Velocity = CFrame.new(owner.Character.Torso.Position,owner.Character.Torso.Position + owner.Character.Humanoid.MoveDirection).lookVector * (owner.Character.Humanoid.WalkSpeed + 30)
+wait(0.4)
+s:Disconnect()
+owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
+bv.MaxForce = Vector3.new(math.huge,0,math.huge)
+wait(0.4)
+if owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+ bv:Destroy()
+bv = nil
+wait(0.4)
+dashed = false
+else
+repeat
+task.wait()
+until owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air
+ bv:Destroy()
+bv = nil
+wait(0.4)
+dashed = false
+end
+end
+end
+end)
+local gui = Instance.new("ScreenGui",owner.PlayerGui)
+local opening = Instance.new("Frame",gui)
+opening.AnchorPoint = Vector2.new(0.5, 0.5)
+opening.Position = UDim2.new(0.5, 0, 0.5, 0)
+opening.BackgroundColor3 = Color3.fromRGB(200,5,5)
+opening.Size = UDim2.new(0.0025,0,0.005,0)
+gui.Enabled = false
+workspace.CurrentCamera.Changed:Connect(function()
+e2:FireServer(workspace.CurrentCamera.CFrame)
+if (owner.Character.Head.CFrame.Position - workspace.CurrentCamera.CFrame.Position).Magnitude <= 1 then
+game:GetService("UserInputService").MouseDeltaSensitivity = 0.75
+game:GetService("UserInputService").MouseIconEnabled = false
+gui.Enabled = true
+else
+game:GetService("UserInputService").MouseIconEnabled = true
+game:GetService("UserInputService").MouseDeltaSensitivity = 1
+gui.Enabled = false
+end
+end)
+]],owner.Character)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+tb.TextEditable = false
+    tb.TextStrokeTransparency = 0
+tb.TextColor3 = Color3.new(200/255, 200/255, 200/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.125, 0.1)
+tb.Position = UDim2.new(0.125, 0, 0.1, 0)
+tb.Text = "MODEL NAME: V1"
+tb.Parent = gui
+game:GetService("Debris"):AddItem(tb,8)
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+wait(1)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(200/255, 200/255, 200/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.125, 0.15)
+tb.Position = UDim2.new(0.125, 0, 0.15, 0)
+tb.Text = "STATUS: OPERATIONAL"
+tb.Parent = gui
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+game:GetService("Debris"):AddItem(tb,6)
+wait(1)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(200/255, 200/255, 200/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.125, 0.2)
+tb.Position = UDim2.new(0.125, 0, 0.2, 0)
+tb.Text = "BOOTING UP"
+tb.Parent = gui
+game:GetService("Debris"):AddItem(tb,4)
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+wait(1)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(255/255, 20/255, 20/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.45)
+tb.Position = UDim2.new(0.5, 0, 0.45, 0)
+tb.Text = "MANKIND IS DEAD."
+tb.Parent = gui
+hud.Pitch = 0.5
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+wait(0.5)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(255/255, 20/255, 20/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.5)
+tb.Position = UDim2.new(0.5, 0, 0.5, 0)
+tb.Text = "BLOOD IS FUEL."
+tb.Parent = gui
+hud.Pitch = 0.5
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+wait(0.5)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(255/255, 20/255, 20/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.55)
+tb.Position = UDim2.new(0.5, 0, 0.55, 0)
+tb.Text = "HELL IS FULL."
+tb.Parent = gui
+hud.Pitch = 0.5
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+wait(2)
+hud.Pitch = 1
+for i,v in pairs(gui:GetDescendants()) do
+if not v:IsA("TextBox") then
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.In)
+local goal = {}
+goal.Transparency = 1
+local tween = tweenService:Create(v, tweenInfo, goal)
+tween:Play()
+else
+coroutine.wrap(function()
+wait(1)
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(2,Enum.EasingStyle.Quint,Enum.EasingDirection.In)
+local goal = {}
+goal.TextTransparency = 1
+goal.TextStrokeTransparency = 1
+local tween = tweenService:Create(v, tweenInfo, goal)
+tween:Play()
+end)()
+end
+end
+game:GetService("Debris"):AddItem(gui,7)
+wait(1)
+power:Play()
+power.Completed:Wait()
+owner.Character.Humanoid.WalkSpeed = 24
+owner.Character.Humanoid.JumpPower = 65
+active = true
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+v.TextureId = "rbxassetid://8550010558"
+end)
+end
+local jump = Instance.new("Sound",owner.Character.Head)
+jump.Volume = 1
+jump.SoundId = "rbxassetid://6870001835"
+local jumpdb = false
+owner.Character.Humanoid.Jumping:Connect(function(yes)
+if not jumpdb and yes then
+jump:Play()
+jumpdb = true
+wait(0.1)
+jumpdb = false
+end
+end)
+local recentdamage = 16
+local music = Instance.new("Sound",owner.Character.Head)
+music.SoundId = "rbxassetid://8581546179"
+music.Volume = 0
+music.Looped = true
+local curhealth = owner.Character.Humanoid.Health
+owner.Character.Humanoid.HealthChanged:Connect(function(health)
+if recentdamage == 16 and curhealth > health then
+owner.Character.Humanoid.WalkSpeed = 35
+curhealth = health
+coroutine.wrap(function()
+for i = 1,10 do
+music.Volume += 0.05
+wait(0.05)
+end
+end)()
+music:Play()
+coroutine.wrap(function()
+repeat
+recentdamage  -= 1
+wait(1)
+until recentdamage  == 0
+coroutine.wrap(function()
+for i = 1,10 do
+music.Volume -= 0.05
+wait(0.05)
+end
+music:Stop()
+end)()
+recentdamage  = 16
+owner.Character.Humanoid.WalkSpeed = 24
+end)()
+elseif curhealth > health then
+curhealth = health
+recentdamage = 15
+elseif curhealth < health then
+curhealth = health
+end
+end)
+owner.Character.Humanoid.Died:Connect(function()
+local gui = Instance.new("ScreenGui",owner.PlayerGui)
+game:GetService("Debris"):AddItem(gui,game:GetService("Players").RespawnTime)
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(230/255, 215/255, 5/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.45)
+tb.Position = UDim2.new(0.5, 0, 0.45, 0)
+tb.Text = "WARNING!"
+tb.Parent = gui
+    local tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 1
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(255/255, 20/255, 20/255)
+    tb.TextSize = 25
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(0.125,0,0.125,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.5)
+tb.Position = UDim2.new(0.5, 0, 0.5, 0)
+tb.Text = "CRITICAL DAMAGE COMMENCING SHUTDOWN"
+tb.Parent = gui
+hud.Volume = 3
+hud.SoundId = "rbxassetid://3848738002"
+hud.PlayOnRemove = true
+local opening = Instance.new("Frame",gui)
+opening.AnchorPoint = Vector2.new(0.5, 2)
+opening.Position = UDim2.new(0.5, 0, 2, 0)
+opening.BackgroundColor3 = Color3.fromRGB(5,5,5)
+opening.Size = UDim2.new(1,0,0.55,0)
+local opening2 = Instance.new("Frame",gui)
+opening2.AnchorPoint = Vector2.new(0.5, -1)
+opening2.Position = UDim2.new(0.5, 0, -1, 0)
+opening2.BackgroundColor3 = Color3.fromRGB(5,5,5)
+opening2.Size = UDim2.new(1,0,0.55,0)
+for i = 1, 6 do
+wait(0.4)
+hud.Pitch = 0.5 + (i * 0.0325) 
+hud.Parent = owner.PlayerGui
+hud.Parent = nil
+end
+local tweenService = game:GetService("TweenService")
+local timeToFade = 0.5
+local object = bloodpartfloor
+local tweenInfo = TweenInfo.new(timeToFade)
+local goal = {}
+goal.AnchorPoint = Vector2.new(0.5, 0)
+goal.Position = UDim2.new(0.5, 0, 0, 0)
+local grow = tweenService:Create(opening2, tweenInfo, goal)
+grow:Play()
+local goal2 = {}
+goal2.AnchorPoint = Vector2.new(0.5, 1)
+goal2.Position = UDim2.new(0.5, 0, 1, 0)
+local grow = tweenService:Create(opening, tweenInfo, goal2)
+grow:Play()
+end)
+local timer = 6
+local lasttext = nil
+local tb = nil
+owner.Chatted:Connect(function(msg)
+if timer == 6 then
+   local billboard = Instance.new("BillboardGui", owner.Character.Head)
+    billboard.Adornee = owner.Character.Head
+    billboard.Size = UDim2.new(6,0,1.5,0)
+billboard.ExtentsOffset = Vector3.new(0,2.5,0)
+coroutine.wrap(function()
+hud.Pitch = 1
+hud.Parent = owner.Character.Head
+hud.Parent = nil
+wait(0.1)
+hud.Pitch = 0.9
+hud.Parent = owner.Character.Head
+hud.Parent = nil
+end)()
+    local frame = Instance.new("ImageLabel",billboard)
+      frame.BackgroundTransparency = 1
+        frame.Image = "http://www.roblox.com/asset/?id=9862119590"
+        frame.Size = UDim2.new(1,0,1,0)
+tb = Instance.new("TextBox")
+    tb.BackgroundTransparency = 0.999
+    tb.TextStrokeTransparency = 0
+tb.TextEditable = false
+tb.TextColor3 = Color3.new(255/255, 20/255, 20/255)
+    tb.Font = "Arcade"
+tb.Size = UDim2.new(1,0,1,0)
+tb.AnchorPoint = Vector2.new(0.5, 0.5)
+tb.Position = UDim2.new(0.5, 0, 0.5, 0)
+tb.Text = msg
+tb.TextWrapped = true
+tb.TextScaled = true
+tb.MultiLine = true
+tb.TextXAlignment = "Center"
+tb.TextYAlignment = "Center"
+tb.Parent = billboard
+lasttext = msg
+coroutine.wrap(function()
+repeat
+timer -= 1
+wait(1)
+until timer == 0
+billboard:Destroy()
+timer = 6
+end)()
+else
+timer = 5
+tb.Text = lasttext.." "..msg
+lasttext = lasttext.." "..msg
+coroutine.wrap(function()
+hud.Pitch = 1
+hud.Parent = owner.Character.Head
+hud.Parent = nil
+wait(0.1)
+hud.Pitch = 0.9
+hud.Parent = owner.Character.Head
+hud.Parent = nil
+end)()
+end
+end)
