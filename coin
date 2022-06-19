@@ -1,0 +1,267 @@
+local tweenservice = game:GetService("TweenService")
+local muzzle = Instance.new("Part")
+muzzle.CanCollide = false
+muzzle.Size = Vector3.new(0.1,0.1,0.1)
+muzzle.Transparency = 0
+muzzle.Anchored = true
+muzzle.CanQuery = false
+muzzle.CanTouch = false
+local pe = Instance.new("ParticleEmitter",muzzle)
+pe.Texture = "rbxassetid://13191594"
+pe.Enabled = false
+pe.Speed = NumberRange.new(2,2.5)
+pe.Shape = "Disc"
+pe.ShapeStyle = "Surface"
+pe.ShapeInOut = "Outward"
+pe.LightEmission = 0.2
+pe.LightInfluence = 0.5
+pe.Transparency = NumberSequence.new(0.5,0.5)
+pe.Size = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.0625)}
+pe.Lifetime = NumberRange.new(0.125, 0.25)
+pe.Rate = 500
+pe.Drag = 2
+pe.LockedToPart = true
+pe.RotSpeed = NumberRange.new(-300,300)
+pe.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+pe.SpreadAngle = Vector2.new(-50, 50)
+pe.EmissionDirection = Enum.NormalId.Back
+local coins = {}
+local m = Instance.new("SpecialMesh",owner.Character["Left Arm"])
+m.MeshId = "rbxassetid://8549147351"
+m.TextureId = "rbxassetid://8550010558"
+m.Scale = Vector3.new(0.025,0.025,0.025)
+local coinwel = Instance.new("Weld",owner.Character.Torso)
+coinwel.Part0 = owner.Character["Left Arm"]
+coinwel.Part1 = coinwel.Parent
+coinwel.C1 = CFrame.new(-0.85,0.95,-0.15)
+coinwel.C0 = CFrame.new(0,1.5,0)
+coinwel.Enabled = true
+local goal = {}
+goal.C0 = CFrame.new(0,1.25,0) * CFrame.Angles(math.rad(-80),0,0)
+local info = TweenInfo.new(0.125, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+toss = tweenservice:Create(coinwel, info, goal)
+local goal = {} 
+goal.C0 = CFrame.new(0,1.25,-0.25) * CFrame.Angles(math.rad(-90),0,0)
+local info = TweenInfo.new(0.125, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+toss2 = tweenservice:Create(coinwel, info, goal) 
+local goal = {} 
+goal.C0 = CFrame.new(0,1.5,0)
+local info = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+toss3 = tweenservice:Create(coinwel, info, goal) 
+local thrown = false
+function cointim(wher)
+coinwel.Enabled = true
+toss2:Cancel()
+toss3:Cancel()
+toss:Play()
+coroutine.wrap(function()
+toss.Completed:Wait()
+wait(0.025)
+toss2:Play()
+local coin = Instance.new("Part",script)
+coin.Color = Color3.fromRGB(239, 171, 15)
+coin.Size = Vector3.new(0.025,0.4,0.4)
+coin.Shape = "Cylinder"
+local coinhit = Instance.new("Part",coin)
+coinhit.Size = Vector3.new(0.1,0.5,0.5)
+coinhit.Shape = "Cylinder"
+coinhit.Transparency = 1
+coinhit.CanCollide = false
+table.insert(coins,coin)
+local co = Instance.new("Sound",coin)
+co.Volume = 1.5
+co.SoundId = "rbxassetid://7022812395"
+co:Play()
+local w = Instance.new("Weld",coin)
+w.Part0 = coinhit
+w.Part1 = coin
+local texture = Instance.new("Decal",coin)
+texture.Face = "Left"
+texture.Texture = "rbxassetid://9918236993"
+local texture = Instance.new("Decal",coin)
+texture.Face = "Right"
+texture.Texture = "rbxassetid://9918231480"
+	local g = Vector3.new(0, -game.Workspace.Gravity, 0);
+	local x0 = wher.CFrame * Vector3.new(0, 0, -3)
+local t = 0.5
+	local v0 = ((wher.CFrame * CFrame.new(0,0,-30)).Position - x0 - 0.5*g*t*t)/t
+coin.CFrame = CFrame.new(x0) * CFrame.Angles(wher.CFrame:ToEulerAnglesXYZ()) * CFrame.Angles(0,math.rad(90),0)
+local at1 = Instance.new("Attachment",workspace.Terrain)
+at1.CFrame = CFrame.Angles(wher.CFrame:ToEulerAnglesXYZ())
+local at2 = Instance.new("Attachment",coin)
+local spin = Instance.new("Torque",coin)
+spin.Torque = Vector3.new(-0.25,0,0)
+spin.Attachment1 = at1
+spin.Attachment0 = at2
+spin.RelativeTo = "Attachment1"
+local d = nil
+d = coinhit.Touched:Connect(function()
+spin:Destroy()
+d:Disconnect()
+end)
+coin.Velocity = v0
+end)()
+end
+cointim(owner.Character.Head)
+local currentsaved = {}
+local function findNearestTorso(pos,who)
+local list = {}
+for i,v in pairs(game.Workspace:GetChildren()) do
+table.insert(list,v)
+end
+for i,v in pairs(script:GetDescendants()) do
+table.insert(list,v)
+end
+	local torso = nil
+	local dist = 500
+	local temp = nil
+	local human = nil
+	local temp2 = nil
+local coinreal = nil
+local dist2 = 500
+	for x = 1, #list do
+		temp2 = list[x]
+		if (temp2.className == "Model") and (temp2 ~= model) and temp2 ~= owner.Character then
+			temp = temp2:findFirstChild("Head")
+			human = temp2:findFirstChild("Humanoid")
+			if (temp ~= nil) and (human ~= nil) and (human.Health > 0) then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local res = workspace:Raycast(pos,CFrame.new(pos,temp.Position).lookVector * 500, params)
+				if (temp.Position - pos).magnitude < dist and res then
+					torso = temp
+					dist = (temp.Position - pos).magnitude
+				end
+			end
+elseif table.find(coins,temp2) and who ~= table.find(coins,temp2) and not table.find(currentsaved,temp2) then
+			if (temp2 ~= nil) then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local res = workspace:Raycast(pos,CFrame.new(pos,temp2.Position).lookVector * 500, params)
+				if (temp2.Position - pos).magnitude < dist2 and res then
+					coinreal = temp2
+					dist2 = (temp2.Position - pos).magnitude
+				end
+			end
+		end
+	end
+	return torso,coinreal
+end
+local number = 4
+for i = 1,4 do
+number -= 1
+if number >= 0 then
+cointim(owner.Character.Head)
+wait(0.1)
+end
+end
+wait(0.2)
+local count = 0
+function coincheck(where)
+local torso,coinn = findNearestTorso(where.Position,where)
+if torso ~= nil and coinn == nil then
+toss3:Play()
+  local attachment0 = Instance.new("Attachment")
+                attachment0.Parent = workspace.Terrain
+attachment0.WorldPosition = currentsaved[#currentsaved].Position
+local mm = muzzle:Clone()
+mm.Parent = script
+mm.CFrame = CFrame.new(torso.Position) * CFrame.Angles(CFrame.new(torso.Position,currentsaved[#currentsaved].Position):ToEulerAnglesXYZ())
+                local attachment1 = Instance.new("Attachment")
+                attachment1.Parent = mm
+local beam = Instance.new("Beam",mm)
+beam.Attachment0 = attachment0
+beam.Attachment1 = attachment1
+beam.CurveSize0 = 0
+beam.CurveSize1 = 0
+beam.FaceCamera = true
+beam.Segments = 10
+beam.Width0 = 0.125
+beam.Width1 = 0.125 
+beam.Texture = "rbxassetid://13191594"
+beam.TextureLength = 1
+beam.LightEmission = 0.2
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.5)}
+beam.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+mm:FindFirstChildWhichIsA("ParticleEmitter"):Emit(40)
+for i,v in pairs(coins) do
+v:Destroy()
+end
+print("ended at "..count.." checks")
+count = 0
+currentsaved = {}
+elseif coinn ~= nil then
+count += 1
+if count ~= 1 then
+  local attachment0 = Instance.new("Attachment")
+                attachment0.Parent = workspace.Terrain
+attachment0.WorldPosition = currentsaved[#currentsaved].Position
+local mm = muzzle:Clone()
+mm.Parent = script
+mm.CFrame = CFrame.new(coinn.Position) * CFrame.Angles(CFrame.new(coinn.Position,currentsaved[#currentsaved].Position):ToEulerAnglesXYZ())
+mm:FindFirstChildWhichIsA("ParticleEmitter"):Emit(40)
+                local attachment1 = Instance.new("Attachment")
+                attachment1.Parent = mm
+local beam = Instance.new("Beam",mm)
+beam.Attachment0 = attachment0
+beam.Attachment1 = attachment1
+beam.CurveSize0 = 0
+beam.CurveSize1 = 0
+beam.FaceCamera = true
+beam.Segments = 10
+beam.Width0 = 0.125
+beam.Width1 = 0.125 
+beam.Texture = "rbxassetid://13191594"
+beam.TextureLength = 1
+beam.LightEmission = 0.2
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.5)}
+beam.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+end
+table.insert(currentsaved,coinn)
+coincheck(coinn)
+elseif torso == nil and coinn == nil then
+local mm = muzzle:Clone()
+mm.Parent = script
+  local attachment0 = Instance.new("Attachment")
+                attachment0.Parent = workspace.Terrain
+attachment0.WorldPosition = currentsaved[#currentsaved].Position
+                local attachment1 = Instance.new("Attachment")
+                attachment1.Parent = mm
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+local m = currentsaved[#currentsaved]
+	local res = workspace:Raycast(m.Position,CFrame.new(m.Position,m.Position + Vector3.new(math.random(-10,10),math.random(-10,10),math.random(-10,10))).lookVector * 500, params)
+if not res then
+repeat 
+res = workspace:Raycast(m.Position,CFrame.new(m.Position,m.Position + Vector3.new(math.random(-10,10),math.random(-10,10),math.random(-10,10))).lookVector * 500, params)
+until res
+end
+mm.CFrame = CFrame.new(res.Position) * CFrame.Angles(CFrame.new(res.Position,currentsaved[#currentsaved].Position):ToEulerAnglesXYZ())
+mm:FindFirstChildWhichIsA("ParticleEmitter"):Emit(40)
+for i,v in pairs(coins) do
+v:Destroy()
+end
+local beam = Instance.new("Beam",mm)
+beam.Attachment0 = attachment0
+beam.Attachment1 = attachment1
+beam.CurveSize0 = 0
+beam.CurveSize1 = 0
+beam.FaceCamera = true
+beam.Segments = 10
+beam.Width0 = 0.125
+beam.Width1 = 0.125 
+beam.Texture = "rbxassetid://13191594"
+beam.TextureLength = 1
+beam.LightEmission = 0.2
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.5)}
+beam.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
+print("ended at "..count.." checks")
+count = 0
+currentsaved = {}
+toss3:Play()
+end
+end
+coincheck(owner.Character.Head)
