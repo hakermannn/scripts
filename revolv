@@ -1,0 +1,42 @@
+local tool = Instance.new("Tool",owner.Backpack)
+tool.Name = "Revolver"
+tool.Grip = CFrame.new(0.45,0.1,-1) * CFrame.Angles(math.rad(180),0,0) * CFrame.new(0,-0.2,-0.3)
+local par = Instance.new("Part",tool)
+par.Name = "Handle"
+par.Size = Vector3.new(0.3,1.1,2.4)
+local m = Instance.new("SpecialMesh",par)
+m.MeshId = "rbxassetid://7371059530"
+m.TextureId = "rbxassetid://9901256500"
+m.Scale = Vector3.new(-0.085,-0.085,-0.085)
+local tweenservice = game:GetService("TweenService")
+local goal = {}
+goal.Grip = CFrame.new(0.45,0.1,-1) * CFrame.Angles(math.rad(300),0,0) * CFrame.new(0,-0.2,-0.3)
+local info = TweenInfo.new(0.125)
+local equip = tweenservice:Create(tool, info, goal) 
+local goal = {}
+goal.Grip = CFrame.new(0.45,0.1,-1) * CFrame.Angles(math.rad(420),0,0) * CFrame.new(0,-0.2,-0.3)
+local info = TweenInfo.new(0.125)
+local equip2 = tweenservice:Create(tool, info, goal) 
+local goal = {}
+goal.Grip =  CFrame.new(0.45,0.1,-1) * CFrame.Angles(math.rad(540),0,0) * CFrame.new(0,-0.2,-0.3)
+local info = TweenInfo.new(0.125)
+local equip3 = tweenservice:Create(tool, info, goal) 
+local count = 0
+equip.Completed:Connect(function()
+equip2:Play()
+end)
+equip2.Completed:Connect(function()
+equip3:Play()
+end)
+equip3.Completed:Connect(function()
+if count <= 1 then
+equip:Play()
+count += 1 
+else
+tool.Grip = CFrame.new(0.45,0.1,-1) * CFrame.Angles(math.rad(180),0,0) * CFrame.new(0,-0.2,-0.3)
+count = 0
+end
+end)
+tool.Equipped:Connect(function()
+equip:Play()
+end)
