@@ -1,0 +1,181 @@
+tool = Instance.new("Tool",owner.Backpack)
+local part = Instance.new("Part",tool)
+part.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+part.Material = "Metal"
+part.Name = "Handle"
+local m = Instance.new("SpecialMesh",part)
+m.MeshId = "rbxassetid://3151113740"
+m.TextureId = "rbxassetid://3156558044"
+m.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local part2 = Instance.new("Part",part)
+part2.CanCollide = false
+part2.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+part2.Material = "Metal"
+local m2 = Instance.new("SpecialMesh",part2)
+m2.MeshId = "rbxassetid://3156557583"
+m2.TextureId = "rbxassetid://3156558044"
+m2.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local part3 = Instance.new("Part",part)
+part3.CanCollide = false
+part3.Size = Vector3.new(4.217,0.3654,0.25515)*1.25
+part3.Color = Color3.fromRGB(192, 0, 0)
+part3.Material = "Metal"
+local m3 = Instance.new("SpecialMesh",part3)
+m3.MeshId = "rbxassetid://3167467992"
+m3.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local part4 = Instance.new("Part",part)
+part4.CanCollide = false
+part4.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+part4.Material = "Metal"
+local m4 = Instance.new("SpecialMesh",part4)
+m4.MeshId = "rbxassetid://3151114129"
+m4.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local wel = Instance.new("Weld",part)
+wel.Part0 = part2
+wel.Part1 = part
+local c1 = CFrame.new(2.665*1.25,0.15*1.25,0)
+wel.C1 = (CFrame.new(-2.64*1.25,-0.125*1.25,-0.00375*1.25) * c1):Inverse()
+local wel2 = Instance.new("Weld",part)
+wel2.Part0 = part3
+wel2.Part1 = part
+wel2.C1 = (CFrame.new(-2.64*1.25,-0.135*1.25,-0.00375*1.25)):Inverse()
+local c1 = CFrame.new(2.8375*1.25,0.1225*1.25,0)
+local wel3 = Instance.new("Weld",part)
+wel3.Part0 = part4
+wel3.Part1 = part
+wel3.C1 = (CFrame.new(-2.64*1.25,-0.125*1.25,-0.00375*1.25) * c1):Inverse()
+wel3.C0 = CFrame.Angles(0,0,math.rad(4))
+e = Instance.new("RemoteEvent",owner.Character)
+local p = Instance.new("Part",script)
+p.CanCollide = false
+p.Size = Vector3.new(0.2,0.3,2.5)
+p:SetNetworkOwner(owner)
+local p2 = Instance.new("Part",script)
+p2.CanCollide = false
+p2.Size = Vector3.new(0.2,0.3,2.5)
+p2:SetNetworkOwner(owner)
+local p3 = Instance.new("Part",script)
+p3.CanCollide = false
+p3.Size = Vector3.new(0.2,0.3,2.5)
+p3:SetNetworkOwner(owner)
+local p4 = Instance.new("Part",script)
+p4.CanCollide = false
+p4.Size = Vector3.new(0.2,0.3,2.5)
+p4:SetNetworkOwner(owner)
+p.Color = Color3.fromRGB(70,70,70)
+p2.Color = Color3.fromRGB(60,60,60)
+p3.Color = Color3.fromRGB(10,10,10)
+p4.Color = Color3.fromRGB(10,10,10)
+local w2 = Instance.new("Weld",p)
+w2.Part0 = p3
+w2.Part1 = p
+w2.C1 = CFrame.new(0.1 * 0.75,0.285 * 0.75,4.1 * 0.75)
+local w = Instance.new("Weld",p)
+w.Part0 = p2
+w.Part1 = p
+w.C1 = CFrame.new(0.06 * 0.75,0.18 * 0.75,0.1 * 0.75)
+local w3 = Instance.new("Weld",p)
+w3.Part0 = p4
+w3.Part1 = p
+w3.C1 = CFrame.new(0,-0.6,-0.225)
+local m4 = Instance.new("SpecialMesh",p3)
+m4.MeshId = "rbxassetid://9041844198"
+m4.Scale = Vector3.new(0.15,0.15,0.15)
+local m4 = Instance.new("SpecialMesh",p4)
+m4.MeshId = "rbxassetid://9041843989"
+m4.Scale = Vector3.new(0.15,0.15,0.15)
+local m4 = Instance.new("SpecialMesh",p)
+m4.MeshId = "rbxassetid://9041842509"
+m4.Scale = Vector3.new(0.15,0.15,0.15)
+local m4 = Instance.new("SpecialMesh",p2)
+m4.MeshId = "rbxassetid://9041842309"
+m4.Scale = Vector3.new(0.15,0.15,0.15)
+local obj = Instance.new("ObjectValue",owner.PlayerGui)
+obj.Value = p
+obj.Name = "part"
+NLS([[
+e = script.Parent
+local ITERATIONS = 8
+local SPRING = {}
+function SPRING.create(self, mass, force, damping, speed)
+local spring = {
+Target = Vector3.new();
+Position = Vector3.new();
+Velocity = Vector3.new();
+Mass = mass or 5;
+Force = force or 50;
+Damping = damping or 4;
+Speed = speed  or 4;
+}
+function spring.shove(self, force)
+local x, y, z	= force.X, force.Y, force.Z
+if x ~= x or x == math.huge or x == -math.huge then
+x	= 0
+end
+if y ~= y or y == math.huge or y == -math.huge then
+y	= 0
+end
+if z ~= z or z == math.huge or z == -math.huge then
+z	= 0
+end
+self.Velocity	= self.Velocity + Vector3.new(x, y, z)
+end
+function spring.update(self, dt)
+local scaledDeltaTime = math.min(dt,1) * self.Speed / ITERATIONS	
+for i = 1, ITERATIONS do
+local iterationForce = self.Target - self.Position
+local acceleration	= (iterationForce * self.Force) / self.Mass
+acceleration = acceleration - (self.Velocity * self.Damping)
+self.Velocity = self.Velocity + (acceleration * scaledDeltaTime)
+self.Position = self.Position + (self.Velocity * scaledDeltaTime)
+end
+return self.Position
+end
+return spring
+end
+local wc = SPRING.create()
+local sway = SPRING.create()
+local bobspeed = 1
+local bobmod = .1
+local alpha = .25
+local hitcf = CFrame.new()
+local function gb(addition, speed, modifier)
+return math.sin(tick() * addition * speed) * modifier
+end
+p = owner.PlayerGui.part.Value
+local w = Instance.new("Weld",owner.Character.Torso)
+w.Part0 = p
+w.Part1 = owner.Character.Torso
+w.C1 = CFrame.new(-0.8,-1,0)
+w.C0 = CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-20),0,0)
+c1 = CFrame.new(-0.8,-1,0)
+local lastspeed = 0
+game:GetService("RunService").RenderStepped:Connect(function(dt)
+delta = game:GetService("UserInputService"):GetMouseDelta()
+local vel = owner.Character.HumanoidRootPart.Velocity
+local wcs2 = owner.Character.HumanoidRootPart.CFrame:VectorToObjectSpace(vel)
+local msway = Vector3.new(gb(10, bobspeed, bobmod), gb(5, bobspeed, bobmod), gb(5, bobspeed, bobmod))
+sway:shove(Vector3.new(delta.X / 500, delta.Y / 500))
+wc:shove((msway / 25) * dt * 60 * math.clamp(vel.Magnitude,0,30))
+local sw = sway:update(dt)
+local wcs = wc:update(dt)
+w.C1 = w.C1:Lerp(c1, alpha) * hitcf
+if owner.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+w.C1 = w.C1:Lerp(c1 * CFrame.Angles(math.rad(-wcs2.z * 0.5), 0, math.rad(-wcs2.x)), 0.25)
+lastspeed = 0
+else
+if math.abs(wcs2.y) ~= wcs2.y and -wcs2.y > lastspeed then
+lastspeed = wcs2.y
+end
+if math.abs(wcs2.y) == wcs2.y then
+local x,y,z = w.C1:ToOrientation()
+w.C1 = w.C1:Lerp((w.C1 * CFrame.Angles(x,y,z):Inverse()) * CFrame.Angles(math.clamp(math.rad(-wcs2.y * 3) + x,math.rad(-15),math.rad(15)), y, z), 0.27)
+else
+local x,y,z = w.C1:ToOrientation()
+w.C1 = w.C1:Lerp((w.C1 * CFrame.Angles(x,y,z):Inverse()) * CFrame.Angles(math.rad(-wcs2.z * 0.5) + z, y, math.rad(-wcs2.x) + math.clamp(math.rad(lastspeed) + x,math.rad(-175),math.rad(10))), 0.27)
+end
+end
+w.C1 = w.C1:Lerp(w.C1 * CFrame.new(wcs.x / 2, wcs.z / 2,wcs.z / 2), .25)
+w.C1 = w.C1:Lerp(w.C1 * CFrame.Angles(wcs.z / 2, wcs.z / 2, wcs.x / 2), .25)
+end)
+]],e)
