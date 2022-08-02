@@ -1,4 +1,5 @@
 tool = Instance.new("Tool",owner.Backpack)
+tool.Grip = CFrame.Angles(math.rad(180),0,math.rad(-80))
 local part = Instance.new("Part",tool)
 part.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
 part.Material = "Metal"
@@ -45,6 +46,67 @@ wel3.Part0 = part4
 wel3.Part1 = part
 wel3.C1 = (CFrame.new(-2.64*1.25,-0.125*1.25,-0.00375*1.25) * c1):Inverse()
 wel3.C0 = CFrame.Angles(0,0,math.rad(4))
+function katana()
+local partt = Instance.new("Part",script)
+partt.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+partt.Material = "Metal"
+partt.Name = "Handle"
+partt.CanCollide = false
+partt.Massless = true
+local m = Instance.new("SpecialMesh",partt)
+m.MeshId = "rbxassetid://3151113740"
+m.TextureId = "rbxassetid://3156558044"
+m.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local partt2 = Instance.new("Part",partt)
+partt2.CanCollide = false
+partt2.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+partt2.Material = "Metal"
+partt2.CanCollide = false
+partt2.Massless = true
+local m2 = Instance.new("SpecialMesh",partt2)
+m2.MeshId = "rbxassetid://3156557583"
+m2.TextureId = "rbxassetid://3156558044"
+m2.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local partt3 = Instance.new("Part",partt)
+partt3.CanCollide = false
+partt3.Size = Vector3.new(4.217,0.3654,0.25515)*1.25
+partt3.Color = Color3.fromRGB(192, 0, 0)
+partt3.Material = "Metal"
+partt3.CanCollide = false
+partt3.Massless = true
+local m3 = Instance.new("SpecialMesh",partt3)
+m3.MeshId = "rbxassetid://3167467992"
+m3.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local partt4 = Instance.new("Part",partt)
+partt4.CanCollide = false
+partt4.Size = Vector3.new(0.873,0.3087,0.2907)*1.25
+partt4.Material = "Metal"
+partt4.CanCollide = false
+part4.Massless = true
+local m4 = Instance.new("SpecialMesh",partt4)
+m4.MeshId = "rbxassetid://3151114129"
+m4.Scale = Vector3.new(0.5625,0.5625,0.5625)
+local wel = Instance.new("Weld",partt)
+wel.Part0 = partt2
+wel.Part1 = partt
+local c1 = CFrame.new(2.665*1.25,0.15*1.25,0)
+wel.C1 = (CFrame.new(-2.64*1.25,-0.125*1.25,-0.00375*1.25) * c1):Inverse()
+local wel2 = Instance.new("Weld",partt)
+wel2.Part0 = partt3
+wel2.Part1 = partt
+wel2.C1 = (CFrame.new(-2.64*1.25,-0.135*1.25,-0.00375*1.25)):Inverse()
+local c1 = CFrame.new(2.8375*1.25,0.1225*1.25,0)
+local wel3 = Instance.new("Weld",partt)
+wel3.Part0 = partt4
+wel3.Part1 = partt
+wel3.C1 = (CFrame.new(-2.64*1.25,-0.125*1.25,-0.00375*1.25) * c1):Inverse()
+wel3.C0 = CFrame.Angles(0,0,math.rad(4))
+partt:SetNetworkOwner(owner)
+partt2:SetNetworkOwner(owner)
+partt3:SetNetworkOwner(owner)
+partt4:SetNetworkOwner(owner)
+return partt,partt2,partt3,partt4
+end
 e = Instance.new("RemoteEvent",owner.Character)
 local p = Instance.new("Part",script)
 p.CanCollide = false
@@ -93,8 +155,121 @@ m4.Scale = Vector3.new(0.15,0.15,0.15)
 local obj = Instance.new("ObjectValue",owner.PlayerGui)
 obj.Value = p
 obj.Name = "part"
+local k1, k2, k3, k4 = katana()
+local welm = Instance.new("Weld",p)
+welm.Part0 = k1
+welm.Part1 = p
+welm.C0 = CFrame.Angles(0,math.rad(90),0)
+welm.C1 = CFrame.new(0.0825,0.35,-2.115) * CFrame.Angles(math.rad(5),0,0)
+local arm = Instance.new("Weld",owner.Character.Torso)
+arm.Part0 = owner.Character["Right Arm"]
+arm.Part1 = owner.Character.Torso
+arm.C1 = CFrame.new(1.5,0.5,-0.5) * CFrame.Angles(math.rad(90),0,0)
+local hed = Instance.new("Weld",owner.Character.Torso)
+hed.Part0 = owner.Character.Head
+hed.Part1 = owner.Character.Torso
+hed.C1 = CFrame.new(0,1,0)
+hed.C0 = CFrame.new(0,-0.5,0)
+arm.Enabled = false
+hed.Enabled = false
+local tweenService = game:GetService("TweenService")
+local timeToFade = 0.35
+local object = arm
+local tweenInfo = TweenInfo.new(timeToFade,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.C1 = CFrame.new(0.125,0,-1.5) * CFrame.Angles(math.rad(220),math.rad(-10),math.rad(-110))
+local equipts = tweenService:Create(object, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.5,0) * CFrame.Angles(math.rad(20),math.rad(-30),math.rad(0))
+local equipts2 = tweenService:Create(hed, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.5,0) * CFrame.Angles(math.rad(10),math.rad(10),math.rad(0))
+local equipts3 = tweenService:Create(hed, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.5,0) * CFrame.Angles(math.rad(5),math.rad(0),math.rad(0))
+local equipts4 = tweenService:Create(hed, tweenInfo, goal)
+goal.C1 = CFrame.new(0.5,0.25,-3) * CFrame.Angles(math.rad(113.75),math.rad(0),math.rad(-82.5))
+goal.C0 = CFrame.Angles(0,0,math.rad(-50))
+local equipt = tweenService:Create(object, tweenInfo, goal)
+local goal = {}
+goal.Grip = CFrame.Angles(math.rad(-180),math.rad(-20),math.rad(-120))
+local equipt4 = tweenService:Create(tool, TweenInfo.new(0.175,Enum.EasingStyle.Sine,Enum.EasingDirection.Out), goal)
+local goal = {}
+goal.C1 = CFrame.new(0.75,0.25,-1.5) * CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
+goal.C0 = CFrame.Angles(math.rad(10),0,math.rad(30))
+local equipt2 = tweenService:Create(object, tweenInfo, goal)
+local goal = {}
+goal.Grip = CFrame.new(0,-0.125,0.25) * CFrame.Angles(math.rad(-60),0,math.rad(-85))
+local equipt3 = tweenService:Create(tool, TweenInfo.new(0.175,Enum.EasingStyle.Sine,Enum.EasingDirection.Out), goal)
+tool.Unequipped:Connect(function()
+k1.Transparency = 0
+k2.Transparency = 0 
+k3.Transparency = 0 
+k4.Transparency = 0 
+tool.Grip = CFrame.Angles(math.rad(180),0,math.rad(-80))
+arm.C1 = CFrame.new(1.5,0.5,0.5) * CFrame.Angles(math.rad(90),0,0)
+arm.C0 = CFrame.new()
+hed.C0 = CFrame.new(0,-0.5,0)
+arm.Enabled = false
+hed.Enabled = false
+e:FireClient(owner,true,false)
+equipts:Cancel()
+equipts2:Cancel()
+equipts3:Cancel()
+equipts4:Cancel()
+equipt:Cancel()
+equipt2:Cancel()
+equipt3:Cancel()
+equipt4:Cancel()
+end)
+tool.Equipped:Connect(function()
+arm.Enabled = true
+hed.Enabled = true
+part.Transparency = 1
+part2.Transparency = 1
+part3.Transparency = 1
+part4.Transparency = 1
+e:FireClient(owner,false,true)
+equipts:Play()
+equipts2:Play()
+end)
+equipts.Completed:Connect(function()
+if equipts.PlaybackState ~= Enum.PlaybackState.Cancelled then
+equipt:Play()
+equipt4:Play()
+part.Transparency = 0
+part2.Transparency = 0
+part3.Transparency = 0
+part4.Transparency = 0
+k1.Transparency = 1 
+k2.Transparency = 1 
+k3.Transparency = 1 
+k4.Transparency = 1
+end
+end)
+equipt4.Completed:Connect(function()
+if equipt4.PlaybackState ~= Enum.PlaybackState.Cancelled then
+equipt3:Play()
+equipts3:Play()
+e:FireClient(owner,"s",false)
+end
+end)
+equipt3.Completed:Connect(function()
+if equipt3.PlaybackState ~= Enum.PlaybackState.Cancelled then
+equipt2:Play()
+equipts4:Play()
+end
+end)
 NLS([[
 e = script.Parent
+local sheathed = true
+local equipanim = false
+e.OnClientEvent:Connect(function(what,what2)
+if what ~= "s" then
+sheathed = what
+end
+equipanim = what2
+end)
 local ITERATIONS = 8
 local SPRING = {}
 function SPRING.create(self, mass, force, damping, speed)
@@ -147,10 +322,16 @@ local w = Instance.new("Weld",owner.Character.Torso)
 w.Part0 = p
 w.Part1 = owner.Character.Torso
 w.C1 = CFrame.new(-0.8,-1,0)
-w.C0 = CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-20),0,0)
+w.C0 = CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-12),0,0)
 c1 = CFrame.new(-0.8,-1,0)
 local lastspeed = 0
 game:GetService("RunService").RenderStepped:Connect(function(dt)
+if not equipanim then
+if sheathed then
+w.C0 = w.C0:Lerp(CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-17),0,0),0.25)
+else
+w.C0 = w.C0:Lerp(CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-12),0,0),0.25)
+end
 delta = game:GetService("UserInputService"):GetMouseDelta()
 local vel = owner.Character.HumanoidRootPart.Velocity
 local wcs2 = owner.Character.HumanoidRootPart.CFrame:VectorToObjectSpace(vel)
@@ -172,10 +353,14 @@ local x,y,z = w.C1:ToOrientation()
 w.C1 = w.C1:Lerp((w.C1 * CFrame.Angles(x,y,z):Inverse()) * CFrame.Angles(math.clamp(math.rad(-wcs2.y * 3) + x,math.rad(-15),math.rad(15)), y, z), 0.27)
 else
 local x,y,z = w.C1:ToOrientation()
-w.C1 = w.C1:Lerp((w.C1 * CFrame.Angles(x,y,z):Inverse()) * CFrame.Angles(math.rad(-wcs2.z * 0.5) + z, y, math.rad(-wcs2.x) + math.clamp(math.rad(lastspeed) + x,math.rad(-175),math.rad(10))), 0.27)
+w.C1 = w.C1:Lerp((w.C1 * CFrame.Angles(x,y,z):Inverse()) * CFrame.Angles(math.rad(-wcs2.z * 0.5) + z, 0, math.rad(-wcs2.x) + math.clamp(math.rad(lastspeed * 4) + x,math.rad(-175),math.rad(10))), 0.27)
 end
 end
 w.C1 = w.C1:Lerp(w.C1 * CFrame.new(wcs.x / 2, wcs.z / 2,wcs.z / 2), .25)
 w.C1 = w.C1:Lerp(w.C1 * CFrame.Angles(wcs.z / 2, wcs.z / 2, wcs.x / 2), .25)
+else
+w.C1 = w.C1:Lerp(c1, alpha) * hitcf
+w.C0 = w.C0:Lerp(CFrame.new(0.3,0.15,0) * CFrame.Angles(math.rad(-17),math.rad(15),0),0.25 * dt)
+end
 end)
 ]],e)
