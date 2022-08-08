@@ -1,0 +1,80 @@
+local fakecharacter = Instance.new("Model",script)
+local ball = Instance.new("Part",fakecharacter)
+ball:SetNetworkOwner(owner)
+ball.Shape = "Ball"
+ball.Size = Vector3.new(1.5,1.5,1.5)
+	local hed = owner.Character.Head:Clone()
+	hed.Parent = fakecharacter
+for i,v in pairs(owner.Character:GetDescendants()) do
+if v:IsA("Motor6D") and v.Parent == owner.Character.Torso and (v.Part1 == hed or v.Part0 == hed) then
+v:Destroy()
+break
+end
+end
+for i,v in pairs(owner.Character.Humanoid:GetAccessories()) do
+if v.AccessoryType == Enum.AccessoryType.Hair or v.AccessoryType == Enum.AccessoryType.Hat or v.AccessoryType == Enum.AccessoryType.Face then
+local s = v.Handle:Clone()
+s.Parent = hed
+if v.Handle:FindFirstChildWhichIsA("Weld") or v.Handle:FindFirstChildWhichIsA("Motor") or v.Handle:FindFirstChildWhichIsA("WeldConstraint") or v.Handle:FindFirstChildWhichIsA("Motor6D") then
+local what = v.Handle:FindFirstChildWhichIsA("Weld") or v.Handle:FindFirstChildWhichIsA("Motor") or v.Handle:FindFirstChildWhichIsA("WeldConstraint") or v.Handle:FindFirstChildWhichIsA("Motor6D")
+what:Destroy()
+end
+end
+end
+for i,v in pairs(hed:GetDescendants()) do
+if v:IsA("Part") then
+local weld = Instance.new("Weld",hed)
+weld.Part0 = v
+weld.Part1 = hed
+weld.C0 = (v.CFrame:Inverse() * owner.Character.Head.CFrame)
+v:SetNetworkOwner(owner)
+end
+end
+	hed.Transparency = 0
+	hed.Material = Enum.Material.SmoothPlastic
+	hed.CanCollide = false
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = hed
+object3.Name = "hedl"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = ball
+object3.Name = "part"
+NLS([[
+local hed = owner.PlayerGui.hedl.Value
+local part = owner.PlayerGui.part.Value
+hed.Transparency = 1
+for i,v in pairs(hed:GetDescendants()) do
+if v:IsA("Part") then
+v.Transparency = 1
+end
+end
+CurrentCamera = workspace.CurrentCamera
+local VRSpeed = 16
+UserInputService = game:GetService("UserInputService")
+local ball = Instance.new("BodyVelocity",part)
+ball.MaxForce = Vector3.new(math.huge,0,math.huge)
+ball.Velocity = Vector3.new()
+local rot = 0
+local rot2 = 0
+UserInputService.InputChanged:Connect(function(input, processed)
+		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+		ball.Velocity = ((CurrentCamera:GetRenderCFrame().RightVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().LookVector * (input.Position.Y * (VRSpeed/0.75))))
+end
+		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+rot2 = input.Position.X
+end
+end)
+UserInputService.InputEnded:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+ball.Velocity = Vector3.new(0,0,0)
+end
+if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+rot2 = 0
+end
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,4.5,0)) * CFrame.Angles(0,math.rad(rot),0)
+rot = rot + (-rot2 * 3)
+hed.CFrame = CurrentCamera.CFrame
+end)
+]],owner.PlayerGui)
