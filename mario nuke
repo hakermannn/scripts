@@ -1,0 +1,74 @@
+e = Instance.new("RemoteEvent",owner.Character)
+local nuke = Instance.new("Sound")
+nuke.Volume = 4
+nuke.PlayOnRemove = true
+nuke.SoundId = "rbxassetid://2796279717"
+e.OnServerEvent:Connect(function(_,hit)
+nuke.Parent = workspace
+nuke.Parent = nil
+coroutine.wrap(function()
+t = 20
+	local g = Vector3.new(0, -game.Workspace.Gravity, 0);
+	local x0 = CFrame.new(0,-10,1700) * Vector3.new(0,2,0)
+	local v0 = (hit - x0 - 0.5*g*t*t)/t;
+ 
+	local c = Instance.new("Part");
+	c.CanCollide = true;
+c.Size = Vector3.new(10.05 * 2, 10.765 * 2,11.155 * 2)
+c.Shape = "Ball"
+c.CFrame = CFrame.new(x0)
+	c.Parent = script
+c.Anchored = true
+local a = Instance.new("Sound",c) 
+a.SoundId = "http://www.roblox.com/asset/?id=2320685801" 
+a.Volume = 4
+a.Looped = true
+a:Play()
+local Mesh = Instance.new("SpecialMesh")
+Mesh.Parent = c
+Mesh.MeshId = "http://www.roblox.com/asset/?id=849882710"
+Mesh.TextureId = "http://www.roblox.com/asset/?id=849882719"
+Mesh.Scale = Vector3.new(8,10,8)
+wait()
+	local nt = 0;
+rs = game:GetService("RunService").Heartbeat
+local function x(t)
+	return 0.5*g*t*t + v0*t + x0
+end
+
+local function v(t)
+	return g*t + v0
+end
+	while (nt < t) do
+	local position = x(nt)
+	local velocity = v(nt)
+		if velocity:Dot(velocity) == 0 then -- magnitude^2 == 0
+		velocity = v(nt - rs:Wait()) * Vector3.new(1, 0, 1)
+	end
+	local cframe = CFrame.lookAt(position, position + velocity)
+		c.Position = CFrame.new(0.5*g*nt*nt + v0*nt + x0).Position
+c.CFrame = CFrame.new(c.Position) * CFrame.Angles(cframe:ToEulerAnglesXYZ()) * CFrame.Angles(math.rad(-90),math.rad(360*nt),0)
+		nt = nt + rs:Wait()
+	end
+local explosion = Instance.new("Explosion")
+explosion.BlastRadius = 11.155 * 3.5
+explosion.Position = c.Position
+explosion.DestroyJointRadiusPercent = 0
+explosion.Hit:Connect(function(what)
+if what.Name ~= "Base" then
+what:BreakJoints()
+what.Anchored = false
+end
+end)
+explosion.Parent = workspace
+task.wait()
+c:Destroy()
+end)()
+end)
+NLS([[
+e = script.Parent
+mouse = owner:GetMouse()
+mouse.Button1Down:Connect(function()
+e:FireServer(mouse.Hit.Position)
+end)
+]],e)
