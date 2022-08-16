@@ -1,0 +1,339 @@
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+v:SetNetworkOwner(owner)
+end)
+end
+local head = Instance.new("Weld",owner.Character.Torso)
+head.Part0 = owner.Character.Head
+head.Part1 = owner.Character.Torso
+head.C1 = CFrame.new(0,1,0)
+head.C0 = CFrame.new(0,0,0)
+head.Enabled = false
+local larm = Instance.new("Weld",owner.Character.Torso)
+larm.Part0 = owner.Character["Left Arm"]
+larm.Part1 = owner.Character.Torso
+larm.C1 = CFrame.new(-1.5,0,0)
+larm.Enabled = false
+local rarm = Instance.new("Weld",owner.Character.Torso)
+rarm.Part0 = owner.Character["Right Arm"]
+rarm.Part1 = owner.Character.Torso
+rarm.C1 = CFrame.new(1.5,0,0)
+rarm.Enabled = false
+local rleg = Instance.new("Weld",owner.Character.Torso)
+rleg.Part0 = owner.Character["Right Leg"]
+rleg.Part1 = owner.Character.Torso
+rleg.C1 = CFrame.new(0.5,-2,0)
+rleg.Enabled = false
+local lleg = Instance.new("Weld",owner.Character.Torso)
+lleg.Part0 = owner.Character["Left Leg"]
+lleg.Part1 = owner.Character.Torso
+lleg.C1 = CFrame.new(-0.5,-2,0)
+lleg.Enabled = false
+local torso = Instance.new("Weld",owner.Character.HumanoidRootPart)
+torso.Part0 = owner.Character.Torso
+torso.Part1 = owner.Character.HumanoidRootPart
+torso.Enabled = false
+local tweenService = game:GetService("TweenService")
+local timeToFade = 0.1
+local object = torso
+local tweenInfo = TweenInfo.new(0.125,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.C1 = CFrame.new(0,-2.35,0) * CFrame.Angles(math.rad(75),0,0)
+local tween = tweenService:Create(object,TweenInfo.new(timeToFade,Enum.EasingStyle.Sine,Enum.EasingDirection.Out), goal)
+local goal = {}
+goal.C1 = CFrame.new(0,1,-0.1) * CFrame.Angles(math.rad(-60),0,0)
+goal.C0 = CFrame.new(0,-0.65,0)
+local tween2 = tweenService:Create(head, tweenInfo, goal)
+local goal = {}
+goal.C1 = CFrame.new(-0.5,-1.7,-0.2) * CFrame.Angles(math.rad(-10),0,math.rad(2))
+local tween3 = tweenService:Create(lleg, tweenInfo, goal)
+local goal = {}
+goal.C1 = CFrame.new(0.5,-2,-0.1) * CFrame.Angles(math.rad(-3),0,math.rad(-1))
+local tween4 = tweenService:Create(rleg, tweenInfo, goal)
+local goal = {}
+goal.C1 = CFrame.new(1.35,-0.1,0) * CFrame.Angles(math.rad(20),0,math.rad(-10))
+local tween5 = tweenService:Create(rarm, tweenInfo, goal)
+local goal = {}
+goal.C1 = CFrame.new(-1.65,1.25,0.4) * CFrame.Angles(math.rad(210),0,math.rad(-15))
+local tween6 = tweenService:Create(larm, tweenInfo, goal)
+local lastrot
+local sliding = false
+function returnmot()
+coroutine.wrap(function()
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(0.125,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.C1 = lastrot["head1"]:Inverse()
+goal.C0 = CFrame.new()
+local twee = tweenService:Create(head, tweenInfo, goal)
+twee:Play()
+local goal = {}
+goal.C1 = lastrot["lleg1"]:Inverse()
+local twee = tweenService:Create(lleg, tweenInfo, goal)
+twee:Play()
+local goal = {}
+goal.C1 = lastrot["rleg1"]:Inverse()
+local twee = tweenService:Create(rleg, tweenInfo, goal)
+twee:Play()
+local goal = {}
+goal.C1 = lastrot["rarm1"]:Inverse()
+local twee = tweenService:Create(rarm, tweenInfo, goal)
+twee:Play()
+local goal = {}
+goal.C1 = lastrot["larm1"]:Inverse()
+local twee = tweenService:Create(larm, tweenInfo, goal)
+twee:Play()
+local goal = {}
+goal.C1 = CFrame.new()
+local twee = tweenService:Create(torso, tweenInfo, goal)
+twee:Play()
+sliding = false
+twee.Completed:Wait()
+head.Enabled = false
+larm.Enabled = false
+lleg.Enabled = false
+rarm.Enabled = false
+rleg.Enabled = false
+torso.Enabled = false
+end)()
+end
+local bv = Instance.new("BodyVelocity",owner.Character.Torso)
+bv.MaxForce = Vector3.new()
+local e = Instance.new("RemoteEvent",owner.Character)
+local lastjumpp = 0
+e.OnServerEvent:Connect(function(_,what)
+if what == "y" then
+lastjumpp = owner.Character.Humanoid.JumpPower
+owner.Character.Humanoid.JumpPower = 0
+neckk = owner.Character.Head.CFrame:Inverse() * owner.Character.Torso.CFrame
+llleg = owner.Character["Left Leg"].CFrame:Inverse() * owner.Character.Torso.CFrame
+rrleg = owner.Character["Right Leg"].CFrame:Inverse() * owner.Character.Torso.CFrame
+llarm = owner.Character["Left Arm"].CFrame:Inverse() * owner.Character.Torso.CFrame
+rrarm = owner.Character["Right Arm"].CFrame:Inverse() * owner.Character.Torso.CFrame
+local rotations = { 
+["head1"] = neckk;
+["lleg1"] = llleg;
+["rleg1"] = rrleg;
+["rarm1"] = rrarm;
+["larm1"] = llarm;
+}
+coroutine.wrap(function()
+head.C0 = CFrame.new()
+torso.C1 = CFrame.new()
+head.C1 = rotations["head1"]:Inverse()
+lleg.C1 = rotations["lleg1"]:Inverse()
+rleg.C1 = rotations["rleg1"]:Inverse()
+rarm.C1 = rotations["rarm1"]:Inverse()
+larm.C1 = rotations["larm1"]:Inverse()
+lastrot = rotations
+tween:Play()
+tween2:Play()
+tween3:Play()
+tween4:Play()
+tween5:Play()
+tween6:Play()
+tween6.Completed:Wait()
+sliding = true
+end)()
+head.Enabled = true
+larm.Enabled = true
+lleg.Enabled = true
+rarm.Enabled = true
+rleg.Enabled = true
+torso.Enabled = true
+bv.MaxForce = Vector3.new(500000000,0,500000000)
+local _,y,_ = owner.Character.Torso.CFrame:ToOrientation()
+bv.Velocity = CFrame.Angles(0,y,0).lookVector * 50
+elseif what == "n" then
+owner.Character.Humanoid.JumpPower = lastjumpp
+returnmot()
+bv.MaxForce = Vector3.new()
+end
+end)
+local soundpart = Instance.new("Part")
+soundpart.Anchored = true
+soundpart.CanCollide = false
+soundpart.Transparency = 1
+local SA = Instance.new("Sound",soundpart)
+SA.SoundId = "rbxasset://sounds/snap.mp3"
+SA.PlayOnRemove = true
+SA.TimePosition = 0.2
+NLS([[
+e = script.Parent
+local align = Instance.new("AlignOrientation",owner.Character)
+align.RigidityEnabled = true
+local at1 = Instance.new("Attachment",workspace.Terrain)
+local at0 = Instance.new("Attachment",owner.Character.HumanoidRootPart)
+align.Attachment1 = at1
+align.Attachment0 = at0
+align.Enabled = false
+mouse = owner:GetMouse()
+down = false
+local animationtracks = {}
+local lasttime = false
+local effectactive = false
+mouse.KeyDown:Connect(function(key)
+key = key:lower()
+if key == "q" then
+down = true
+local tweenService = game:GetService("TweenService")
+local timeToFade = 0.1
+local object = workspace.CurrentCamera
+local tweenInfo = TweenInfo.new(0.125,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.FieldOfView = 85
+local tween = tweenService:Create(object,tweenInfo, goal)
+tween:Play()
+local goal = {}
+goal.CameraOffset = Vector3.new(0,-2.75,0)
+local tween = tweenService:Create(owner.Character.Humanoid,tweenInfo, goal)
+tween:Play()
+owner.Character.Humanoid.AutoRotate = false
+if owner.Character.Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+local _,y,_ = CFrame.new(owner.Character.HumanoidRootPart.Position,owner.Character.HumanoidRootPart.Position + owner.Character.Humanoid.MoveDirection):ToOrientation()
+local x,_,z = owner.Character.HumanoidRootPart.CFrame:ToOrientation()
+owner.Character.HumanoidRootPart.CFrame = CFrame.new(owner.Character.HumanoidRootPart.Position) * CFrame.Angles(x,y,z)
+end
+e:FireServer("y")
+at1.CFrame = owner.Character.HumanoidRootPart.CFrame
+align.Enabled = true
+tween.Completed:Wait()
+effectactive = true
+end
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+if down then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {owner.Character}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = game.Workspace:Raycast(owner.Character.Torso.Position,Vector3.new(0,-3,0),params)
+if result then
+local _,y,_ = at1.CFrame:ToOrientation()
+		local currentRightVector = at1.CFrame.RightVector
+		local upVector = result.Normal
+		local newFacialVector = currentRightVector:Cross(upVector)
+                            at1.CFrame = CFrame.fromMatrix(at1.Position, currentRightVector, upVector, newFacialVector)
+end
+end
+end)
+mouse.KeyUp:Connect(function(key)
+key = key:lower()
+if key == "q" then
+align.Enabled = false
+down = false
+e:FireServer("n")
+lasttime = false
+effectactive = false
+local tweenService = game:GetService("TweenService")
+local timeToFade = 0.1
+local object = workspace.CurrentCamera
+local tweenInfo = TweenInfo.new(0.125,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.FieldOfView = 70
+local tween = tweenService:Create(object,tweenInfo, goal)
+tween:Play()
+local goal = {}
+goal.CameraOffset = Vector3.new(0,0,0)
+local tween = tweenService:Create(owner.Character.Humanoid,tweenInfo, goal)
+tween:Play()
+owner.Character.Humanoid.AutoRotate = true
+end
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+if down then
+animationtracks = {}
+for i,v in pairs(owner.Character.Humanoid:GetPlayingAnimationTracks()) do
+v:AdjustSpeed(0)
+table.insert(animationtracks,v)
+end
+else
+if not lasttime then
+lasttime = true
+for i,v in pairs(animationtracks) do
+v:AdjustSpeed(1)
+end
+end
+end
+end)
+]],e)
+local count = 0
+local maxheight = 0
+local currentspeed = 0
+local falling_height
+local dist
+local falling = false
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+local density = 1
+local friction = 1
+local elasticity = 0
+local frictionWeight = 1
+local elasticityWeight = 1000
+local physProperties = PhysicalProperties.new(density, friction, elasticity, frictionWeight, elasticityWeight)
+v.CustomPhysicalProperties = physProperties
+end)
+end
+owner.Character.Humanoid.StateChanged:Connect(function(old, new)
+    if new == Enum.HumanoidStateType.Freefall then
+        falling_height = owner.Character.HumanoidRootPart.Position.Y
+falling = true
+    elseif old == Enum.HumanoidStateType.Freefall then
+        dist = falling_height - owner.Character.HumanoidRootPart.Position.Y
+falling = false
+bv.Velocity = owner.Character.HumanoidRootPart.CFrame.lookVector * math.clamp((50 + math.abs(dist * 4)),30,120)
+    end
+end)
+coroutine.wrap(function()
+while task.wait() do
+if falling then
+bv.Velocity = bv.Velocity * 0.8
+end
+if not falling then
+bv.Velocity = owner.Character.HumanoidRootPart.CFrame.lookVector * math.clamp((bv.Velocity.Magnitude - 0.2),30,120)
+end
+end
+end)()
+while task.wait() do
+if sliding then
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+torso.C0 = CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+larm.C0 = CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+rarm.C0 = CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+lleg.C0 = CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+head.C0 = CFrame.new(0,-0.65,0) * CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+local rand = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand2 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+local rand3 = (Random.new():NextNumber(-0.01875,0.01875)*math.sin(45*tick()))
+rleg.C0 = CFrame.new(rand,rand2,rand3) * CFrame.Angles(math.rad(rand * 3),math.rad(rand2 * 3),math.rad(rand3 * 3))
+SA.PlaybackSpeed = 1.3 - (count * 0.1)
+SA.Volume = 0.5 - (count * 0.1)
+count = count+1
+if count == 4 then
+count = 0
+end
+soundpart.Position = owner.Character.Torso.Position + owner.Character.Torso.Velocity * owner:GetNetworkPing()
+soundpart.Parent = owner.Character
+soundpart.Parent = nil
+wait(math.min(1/bv.Velocity.Magnitude,0.02))
+else
+larm.C0 = CFrame.new()
+rarm.C0 = CFrame.new()
+lleg.C0 = CFrame.new()
+rleg.C0 = CFrame.new()
+torso.C0 = CFrame.new()
+end
+end
