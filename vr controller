@@ -3,51 +3,56 @@ local ball = Instance.new("Part",fakecharacter)
 ball:SetNetworkOwner(owner)
 ball.Shape = "Ball"
 ball.Size = Vector3.new(1.5,1.5,1.5)
-	local hed = owner.Character.Head:Clone()
-	hed.Parent = fakecharacter
-for i,v in pairs(owner.Character:GetDescendants()) do
-if v:IsA("Motor6D") and v.Parent == owner.Character.Torso and (v.Part1 == hed or v.Part0 == hed) then
-v:Destroy()
-break
-end
-end
-for i,v in pairs(owner.Character.Humanoid:GetAccessories()) do
-if v.AccessoryType == Enum.AccessoryType.Hair or v.AccessoryType == Enum.AccessoryType.Hat or v.AccessoryType == Enum.AccessoryType.Face then
-local s = v.Handle:Clone()
-s.Parent = hed
-if v.Handle:FindFirstChildWhichIsA("Weld") or v.Handle:FindFirstChildWhichIsA("Motor") or v.Handle:FindFirstChildWhichIsA("WeldConstraint") or v.Handle:FindFirstChildWhichIsA("Motor6D") then
-local what = v.Handle:FindFirstChildWhichIsA("Weld") or v.Handle:FindFirstChildWhichIsA("Motor") or v.Handle:FindFirstChildWhichIsA("WeldConstraint") or v.Handle:FindFirstChildWhichIsA("Motor6D")
-what:Destroy()
-end
-end
-end
-for i,v in pairs(hed:GetDescendants()) do
-if v:IsA("Part") then
-local weld = Instance.new("Weld",hed)
-weld.Part0 = v
-weld.Part1 = hed
-weld.C0 = (v.CFrame:Inverse() * owner.Character.Head.CFrame)
-v:SetNetworkOwner(owner)
-end
-end
-	hed.Transparency = 0
-	hed.Material = Enum.Material.SmoothPlastic
-	hed.CanCollide = false
-local object3 = Instance.new("ObjectValue", owner.PlayerGui)
-object3.Value = hed
-object3.Name = "hedl"
+local a = Instance.new("Part",fakecharacter)
+a.CanCollide = false
+a:SetNetworkOwner(owner)
+a.Transparency = 0.8
+a.Color = Color3.fromRGB(255,0,0)
+local a2 = Instance.new("Part",fakecharacter)
+a2.CanCollide = false
+a2:SetNetworkOwner(owner)
+a2.Transparency = 0.8
+a2.Color = Color3.fromRGB(0,0,255)
+local at1 = Instance.new("Attachment" , a)
+local at2 = Instance.new("Attachment" , a2)
+at2.CFrame = CFrame.Angles(0,0,math.rad(90))
+at1.CFrame = CFrame.Angles(0,0,math.rad(90))
+local prism = Instance.new("PrismaticConstraint" , a)
+prism.Attachment0 = at1
+prism.Attachment1 = at2
+prism.LimitsEnabled = true
+prism.LowerLimit = -3.5
+prism.UpperLimit = 3.5
+prism.Restitution = 0
+local spring = Instance.new("SpringConstraint" , a)
+spring.Attachment0 = at1
+spring.Attachment1 = at2
+spring.Stiffness = 30000
+spring.FreeLength = 2.5
+spring.Enabled = true
+spring.Damping = 600
+spring.Visible = true
+prism.Visible = true
 local object3 = Instance.new("ObjectValue", owner.PlayerGui)
 object3.Value = ball
 object3.Name = "part"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = a
+object3.Name = "part2"
+            local Socket = Instance.new("BallSocketConstraint",a)
+            local att1 = Instance.new("Attachment",a2)
+            local att2 = Instance.new("Attachment",ball)
+Socket.Attachment1 = att1
+Socket.Attachment0 = att2
+local align = Instance.new("AlignOrientation",a2)
+align.RigidityEnabled = true
+local at0 = Instance.new("Attachment",workspace.Terrain)
+local at3 = Instance.new("Attachment",a)
+align.Attachment1 = at0
+align.Attachment0 = at3
 NLS([[
-local hed = owner.PlayerGui.hedl.Value
 local part = owner.PlayerGui.part.Value
-hed.Transparency = 1
-for i,v in pairs(hed:GetDescendants()) do
-if v:IsA("Part") then
-v.Transparency = 1
-end
-end
+local part2 = owner.PlayerGui.part2.Value
 CurrentCamera = workspace.CurrentCamera
 local VRSpeed = 16
 UserInputService = game:GetService("UserInputService")
@@ -73,8 +78,7 @@ rot2 = 0
 end
 end)
 game:GetService("RunService").RenderStepped:Connect(function()
-CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,4.5,0)) * CFrame.Angles(0,math.rad(rot),0)
+CurrentCamera.CFrame = CFrame.new(part2.Position + Vector3.new(0,6,0)) * CFrame.Angles(0,math.rad(rot),0)
 rot = rot + (-rot2 * 3)
-hed.CFrame = CurrentCamera.CFrame
 end)
 ]],owner.PlayerGui)
