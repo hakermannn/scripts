@@ -1,4 +1,56 @@
-			owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+local fakecharacter = Instance.new("Model",script)
+local ball = Instance.new("Part",fakecharacter)
+ball:SetNetworkOwner(owner)
+ball.Shape = "Ball"
+ball.Size = Vector3.new(1.5,1.5,1.5)
+local a = Instance.new("Part",fakecharacter)
+a.CanCollide = false
+a:SetNetworkOwner(owner)
+a.Transparency = 0.8
+a.Color = Color3.fromRGB(255,0,0)
+local a2 = Instance.new("Part",fakecharacter)
+a2.CanCollide = false
+a2:SetNetworkOwner(owner)
+a2.Transparency = 0.8
+a2.Color = Color3.fromRGB(0,0,255)
+local at1 = Instance.new("Attachment" , a)
+local at2 = Instance.new("Attachment" , a2)
+at2.CFrame = CFrame.Angles(0,0,math.rad(90))
+at1.CFrame = CFrame.Angles(0,0,math.rad(90))
+local prism = Instance.new("PrismaticConstraint" , a)
+prism.Attachment0 = at1
+prism.Attachment1 = at2
+prism.LimitsEnabled = true
+prism.LowerLimit = -3.5
+prism.UpperLimit = 3.5
+prism.Restitution = 0
+local spring = Instance.new("SpringConstraint" , a)
+spring.Attachment0 = at1
+spring.Attachment1 = at2
+spring.Stiffness = 30000
+spring.FreeLength = 2.5
+spring.Enabled = true
+spring.Damping = 600
+spring.Visible = true
+prism.Visible = true
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = ball
+object3.Name = "part"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = a
+object3.Name = "part2"
+            local Socket = Instance.new("BallSocketConstraint",a)
+            local att1 = Instance.new("Attachment",a2)
+            local att2 = Instance.new("Attachment",ball)
+Socket.Attachment1 = att1
+Socket.Attachment0 = att2
+local align = Instance.new("AlignOrientation",a2)
+align.RigidityEnabled = true
+local at0 = Instance.new("Attachment",workspace.Terrain)
+local at3 = Instance.new("Attachment",a)
+align.Attachment1 = at0
+align.Attachment0 = at3
+owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
 character = script
 local function createHand(handType,what,arm)
 	local hand = Instance.new("Part")
@@ -267,23 +319,13 @@ v.Transparency = 1
 end
 end
 workspace.CurrentCamera.HeadScale = 1.5
-inputService.InputChanged:Connect(function(input, processed)
-		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
-		camera.CFrame = camera.CFrame+hed.CFrame.rightVector* (MoveDir.X * 0.75)+hed.CFrame.lookVector*(MoveDir.Z * 0.75)
-end
-		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
-		local MoveDir = Vector3.new(input.Position.X, 0, input.Position.Y)
-camera.CFrame = camera.CFrame * CFrame.Angles(0,math.rad(-MoveDir.X * 3),0)
-end
-end)
 vrService.UserCFrameChanged:Connect(function(part, move)
 	if part == Enum.UserCFrame.LeftHand then
-		e2:FireServer(leftHand,camera.CFrame * CFrame.new(move.Position * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
+		e2:FireServer(leftHand,camera.CFrame * CFrame.new((move.Position + part.Velocity * owner:GetNetworkPing()) * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	elseif part == Enum.UserCFrame.RightHand then
-		e2:FireServer(rightHand,camera.CFrame * CFrame.new(move.Position * 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
+		e2:FireServer(rightHand,camera.CFrame * CFrame.new((move.Position + part.Velocity * owner:GetNetworkPing())* 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	elseif part == Enum.UserCFrame.Head then
-		e2:FireServer(hed,camera.CFrame * move)
+		e2:FireServer(hed,camera.CFrame * CFrame.new((move + part.Velocity * owner:GetNetworkPing()) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	end
 end)
 local GrabbingL = nil
@@ -291,17 +333,6 @@ local GrabbingR = nil
  rayblacklist = {hed,leftHand,rightHand}
 local Gamepad = Enum.UserInputType.Gamepad1
 game:GetService("RunService").Stepped:Connect(function()
-	local params = RaycastParams.new()
-	params.FilterDescendantsInstances = {rayblacklist}
-	params.FilterType = Enum.RaycastFilterType.Blacklist
-local result = workspace:Raycast(camera.CFrame.Position, Vector3.new(0,-5.5,0), params)
-if result then
-if (camera.CFrame.Position - result.Position).Magnitude <= 4.5 then
-camera.CFrame = CFrame.new(result.Position) * CFrame.new(0,5,0) * CFrame.Angles(camera.CFrame:ToEulerAnglesXYZ())
-end
-else
-camera.CFrame = camera.CFrame * CFrame.new(0,-0.25,0)
-end
 		if inputService:IsGamepadButtonDown(Gamepad, Enum.KeyCode.ButtonL1) then
 			local GrabRayL = workspace:Raycast(leftHand.Position, leftHand.CFrame.lookVector * 250)
 			if GrabRayL then
@@ -339,4 +370,34 @@ end)
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("VRLaserPointerMode", 0)
 StarterGui:SetCore("VREnableControllerModels", false)
+local part = owner.PlayerGui.part.Value
+local part2 = owner.PlayerGui.part2.Value
+CurrentCamera = workspace.CurrentCamera
+local VRSpeed = 16
+UserInputService = game:GetService("UserInputService")
+local ball = Instance.new("BodyVelocity",part)
+ball.MaxForce = Vector3.new(math.huge,0,math.huge)
+ball.Velocity = Vector3.new()
+local rot = 0
+local rot2 = 0
+UserInputService.InputChanged:Connect(function(input, processed)
+		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+		ball.Velocity = ((CurrentCamera:GetRenderCFrame().RightVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().LookVector * (input.Position.Y * (VRSpeed/0.75))))
+end
+		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+rot2 = input.Position.X
+end
+end)
+UserInputService.InputEnded:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+ball.Velocity = Vector3.new(0,0,0)
+end
+if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+rot2 = 0
+end
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+CurrentCamera.CFrame = CFrame.new(part2.Position + Vector3.new(0,6,0)) * CFrame.Angles(0,math.rad(rot),0)
+rot = rot + (-rot2 * 3)
+end)
 ]],owner.PlayerGui)
