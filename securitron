@@ -1,0 +1,571 @@
+owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+owner.Character.Humanoid.Parent = nil
+for i,v in pairs(owner.Character:GetDescendants()) do
+pcall(function()
+v.Parent = nil
+end)
+end
+local fakecharacter = script
+local part2 = Instance.new("Part",fakecharacter)
+part2.Shape = "Cylinder"
+part2.Size = Vector3.new(0.22,0.85,0.85)
+local part3 = Instance.new("Part",fakecharacter)
+part3.Size = Vector3.new(0.18,2.2,0.8)
+local part4 = Instance.new("Part",fakecharacter)
+part4.Size = Vector3.new(2,0.2,0.8)
+part4.Material = "SmoothPlastic"
+local part9 = Instance.new("Part",fakecharacter)
+part9.Size = Vector3.new(0.8,0.55,0.55)
+part9.Shape = "Cylinder"
+part9.Material = "SmoothPlastic"
+part9.Color = Color3.fromRGB(64, 64, 64)
+local part10 = Instance.new("Part",fakecharacter)
+part10.Size = Vector3.new(0.15,0.6,0.6)
+part10.Material = "SmoothPlastic"
+part10.Shape = "Cylinder"
+part10.Color = Color3.fromRGB(64, 64, 64)
+local part11 = Instance.new("Part",fakecharacter)
+part11.Size = Vector3.new(0.2,2.15,2.15)
+part11.Material = "SmoothPlastic"
+part11.Shape = "Cylinder"
+part11.Color = Color3.fromRGB(54, 54, 54)
+local part12 = Instance.new("Part",fakecharacter)
+part12.Size = Vector3.new(0.2,2.25,2.25)
+part12.Material = "SmoothPlastic"
+part12.Shape = "Cylinder"
+part12.Color = Color3.fromRGB(59, 59, 59)
+local part13 = Instance.new("Part",fakecharacter)
+part13.Size = Vector3.new(0.5,1,1)
+part13.Material = "SmoothPlastic"
+part13.Shape = "Cylinder"
+part13.Color = Color3.fromRGB(54, 54, 54)
+local part14 = Instance.new("Part",fakecharacter)
+part14.Size = Vector3.new(0.25,1.4,1.4)
+part14.Material = "SmoothPlastic"
+part14.Shape = "Cylinder"
+part14.Color = Color3.fromRGB(54, 54, 54)
+local part15 = Instance.new("Part",fakecharacter)
+part15.Size = Vector3.new(4,3.5,2.65)
+part15.Color = Color3.fromRGB(120, 121, 135)
+local mes = Instance.new("SpecialMesh",part15)
+mes.MeshId = "rbxasset://fonts//torso.mesh"
+mes.Scale = Vector3.new(2,1.75,2.65)
+local part16 = Instance.new("Part",fakecharacter)
+part16.Size = Vector3.new(2,2.5,2.5)
+part16.Material = "SmoothPlastic"
+part16.Shape = "Cylinder"
+part16.Color = Color3.fromRGB(54, 54, 54)
+local part17 = Instance.new("Part",fakecharacter)
+part17.Size = Vector3.new(2.5,1.5,0.0625)
+part17.Color = Color3.fromRGB(50, 50, 50)
+local mes = Instance.new("SpecialMesh",part17)
+mes.MeshId = "rbxasset://fonts//torso.mesh"
+mes.Scale = Vector3.new(1.25,0.75,0.0625)
+part17.Material = "Glass"
+part17.Transparency = 0.05
+local part18 = Instance.new("Part",fakecharacter)
+part18.Size = Vector3.new(2.85,1.85,0.0325)
+part18.Color = Color3.fromRGB(105, 106, 120)
+local mes = Instance.new("SpecialMesh",part18)
+mes.MeshId = "rbxasset://fonts//torso.mesh"
+mes.Scale = Vector3.new(1.425,0.925,0.0325)
+local part19 = Instance.new("Part",fakecharacter)
+part19.Size = Vector3.new(2.5,0.25,0.01325)
+part19.Color = Color3.fromRGB(120, 119, 119)
+local mes = Instance.new("SpecialMesh",part19)
+mes.MeshId = "rbxasset://fonts//torso.mesh"
+mes.Scale = Vector3.new(1.25,0.125,0.01325)
+part19.Material = "Metal"
+local part5 = Instance.new("Part",fakecharacter)
+part5.Shape = "Cylinder"
+part5.Size = Vector3.new(0.22,0.85,0.85)
+local part6 = Instance.new("Part",fakecharacter)
+part6.Size = Vector3.new(0.18,2.2,0.8)
+local part7 = Instance.new("WedgePart",fakecharacter)
+part7.Size = Vector3.new(2,0.6,0.5)
+part7.Material = "SmoothPlastic"
+local part8 = Instance.new("WedgePart",fakecharacter)
+part8.Size = Vector3.new(2,0.6,0.5)
+part8.Material = "SmoothPlastic"
+part2.CanCollide = false
+part3.CanCollide = false
+part6.CanCollide = false
+part5.CanCollide = false
+local w = Instance.new("Weld",part4)
+w.Part0 = part2
+w.Part1 = part4
+w.C1 = CFrame.new(-0.9,-2.3,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part9
+w.Part1 = part11
+w.C1 = CFrame.new(-0.5,0,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part12
+w.Part1 = part11
+w.C1 = CFrame.new(0.1,0,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part15
+w.Part1 = part11
+w.C1 = CFrame.new(2.5,0,0)
+w.C0 = CFrame.Angles(0,0,math.rad(90))
+local w = Instance.new("Weld",part11)
+w.Part0 = part17
+w.Part1 = part11
+w.C1 = CFrame.new(2.7,0,-1.325)
+w.C0 = CFrame.Angles(0,0,math.rad(90))
+local w = Instance.new("Weld",part11)
+w.Part0 = part18
+w.Part1 = part11
+w.C1 = CFrame.new(2.7,0,-1.325)
+w.C0 = CFrame.Angles(0,0,math.rad(90))
+local w = Instance.new("Weld",part11)
+w.Part0 = part13
+w.Part1 = part11
+w.C1 = CFrame.new(-0.25,0,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part16
+w.Part1 = part11
+w.C1 = CFrame.new(1.125,0,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part19
+w.Part1 = part11
+w.C1 = CFrame.new(1.7,0,-1.325)
+w.C0 = CFrame.Angles(0,0,math.rad(90))
+local w = Instance.new("Weld",part11)
+w.Part0 = part14
+w.Part1 = part11
+w.C1 = CFrame.new(-0.125,0,0)
+local w = Instance.new("Weld",part11)
+w.Part0 = part10
+w.Part1 = part11
+w.C1 = CFrame.new(-0.9,0,0)
+local w = Instance.new("Weld",part4)
+w.Part0 = part3
+w.Part1 = part4
+w.C1 = CFrame.new(-0.9,-2.3,0)
+w.C0 = CFrame.new(0,-1.1,0)
+local w = Instance.new("Weld",part4)
+w.Part0 = part5
+w.Part1 = part4
+w.C1 = CFrame.new(0.9,-2.3,0)
+local w = Instance.new("Weld",part4)
+w.Part0 = part6
+w.Part1 = part4
+w.C1 = CFrame.new(0.9,-2.3,0)
+w.C0 = CFrame.new(0,-1.1,0)
+local w = Instance.new("Weld",part4)
+w.Part0 = part7
+w.Part1 = part4
+w.C1 = CFrame.new(0,0,0)
+w.C0 = CFrame.new(0,-0.2,0.25) * CFrame.Angles(math.rad(-180),0,0)
+local w = Instance.new("Weld",part4)
+w.Part0 = part8
+w.Part1 = part4
+w.C1 = CFrame.new(0,0,0)
+w.C0 = CFrame.new(0,-0.2,0.25) * CFrame.Angles(math.rad(180),math.rad(180),0)
+part4:SetNetworkOwner()
+part2:SetNetworkOwner()
+part3:SetNetworkOwner()
+part5:SetNetworkOwner()
+part6:SetNetworkOwner()
+part7:SetNetworkOwner()
+part8:SetNetworkOwner()
+local ball = Instance.new("Part",fakecharacter)
+ball:SetNetworkOwner(owner)
+ball.Shape = "Cylinder"
+ball.Size = Vector3.new(1,2,2)
+ball.Transparency = 0
+ball.Material = "Concrete"
+ball.Color = Color3.fromRGB(30,30,30)
+local ball2 = Instance.new("Part",fakecharacter)
+ball2:SetNetworkOwner(owner)
+ball2.Shape = "Cylinder"
+ball2.Size = Vector3.new(1.15,1.1,1.1) * 1.3
+ball2.Transparency = 0
+ball2.Material = "Metal"
+ball2.Color = Color3.fromRGB(209, 183, 10)
+ball2.CanCollide = false
+local w = Instance.new("Weld",ball)
+w.Part0 = ball2
+w.Part1 = ball
+local mesh = Instance.new("SpecialMesh",ball)
+mesh.MeshId = "rbxassetid://434291938"
+mesh.Scale = Vector3.new(1.3,1.3,1.3)
+local ball3 = Instance.new("Part",fakecharacter)
+ball3:SetNetworkOwner(owner)
+ball3.Shape = "Cylinder"
+ball3.Size = Vector3.new(1.2,0.9,0.9) * 1.3
+ball3.Transparency = 0
+ball3.Material = "Metal"
+ball3.Color = Color3.fromRGB(209 - 5, 183 - 5, 10 - 5)
+ball3.CanCollide = false
+local w = Instance.new("Weld",ball)
+w.Part0 = ball3
+w.Part1 = ball
+local density = 1
+local friction = 1.5
+local elasticity = 0
+local frictionWeight = 10000
+local elasticityWeight = 100000
+local physProperties = PhysicalProperties.new(density, friction, elasticity, frictionWeight, elasticityWeight)
+ball.CustomPhysicalProperties = physProperties
+local par = Instance.new("Part",fakecharacter)
+par.Size = Vector3.new(1,1,1)
+par.Transparency = 1
+par:SetNetworkOwner(owner)
+local light = Instance.new("SpotLight",par)
+light.Range = 10
+light.Face = "Front"
+light.Color = Color3.fromRGB(255,255,255)
+light.Brightness = 3
+light.Angle = 45
+local beam1 = Instance.new("Beam",par)
+beam1.Texture = "rbxassetid://175588117"
+beam1.TextureLength = 1
+beam1.LightEmission = 1
+beam1.CurveSize0 = 0
+beam1.CurveSize1 = 0
+beam1.FaceCamera = true
+beam1.Segments = 2
+beam1.Width0 = 1
+beam1.Width1 = 4
+beam1.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)}
+local bat1 = Instance.new("Attachment",par)
+bat1.WorldCFrame = par.CFrame
+local bat2 = Instance.new("Attachment",par)
+bat2.WorldCFrame = par.CFrame * CFrame.new(0,0,-20)
+beam1.Attachment0 = bat1
+beam1.Attachment1 = bat2
+local par2 = Instance.new("Part",fakecharacter)
+par2.Size = Vector3.new(1,1,1)
+par2:SetNetworkOwner(owner)
+local mes = Instance.new("SpecialMesh",par2)
+mes.MeshId = "rbxassetid://430096592"
+par2.Color = Color3.fromRGB(38, 38, 38)
+mes.Scale = Vector3.new(0.5,0.5,0.5)
+local w = Instance.new("Weld",par)
+w.Part0 = par2
+w.Part1 = par
+w.C0 = CFrame.Angles(math.rad(90),0,0)
+local par3 = Instance.new("Part",fakecharacter)
+par3.Size = Vector3.new(1,1,1)
+par3:SetNetworkOwner(owner)
+par3.Transparency = 0.2
+local mes = Instance.new("SpecialMesh",par3)
+mes.MeshId = "rbxassetid://430096592"
+par3.Color = Color3.fromRGB(212, 212, 212)
+mes.Scale = Vector3.new(0.45,0.45,0.45)
+local w = Instance.new("Weld",par)
+w.Part0 = par3
+w.Part1 = par
+w.C1 = CFrame.new(0,0,0.1)
+w.C0 = CFrame.Angles(math.rad(90),0,0)
+local a = Instance.new("Part",fakecharacter)
+a.CanCollide = false
+a:SetNetworkOwner(owner)
+a.Transparency = 1
+a.Color = Color3.fromRGB(255,0,0)
+local a2 = Instance.new("Part",fakecharacter)
+a2.CanCollide = false
+a2:SetNetworkOwner(owner)
+a2.Transparency = 1
+a2.Color = Color3.fromRGB(0,0,255)
+local at1 = Instance.new("Attachment" , a)
+local at2 = Instance.new("Attachment" , a2)
+at2.CFrame = CFrame.Angles(0,0,math.rad(-90))
+at1.CFrame = CFrame.Angles(0,0,math.rad(-90))
+local prism = Instance.new("PrismaticConstraint" , a)
+prism.Attachment0 = at1
+prism.Attachment1 = at2
+prism.LimitsEnabled = true
+prism.LowerLimit = -5
+prism.UpperLimit = 5
+prism.Restitution = 0
+local spring = Instance.new("SpringConstraint" , a)
+spring.Attachment0 = at1
+spring.Attachment1 = at2
+spring.Stiffness = 12000
+spring.FreeLength = 2.5
+spring.Enabled = true
+spring.Damping = 200
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = ball
+object3.Name = "part"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = a
+object3.Name = "part2"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = par
+object3.Name = "part3"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = part4
+object3.Name = "part4"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = a2
+object3.Name = "part5"
+local object3 = Instance.new("ObjectValue", owner.PlayerGui)
+object3.Value = part11
+object3.Name = "part6"
+game:GetService("RunService").Stepped:Connect(function()
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {script}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = game.Workspace:Raycast(par.Position + par.Velocity * owner:GetNetworkPing(), par.CFrame.lookVector * 20,params)
+if result then
+local dist = (par.Position - result.Position).Magnitude
+light.Brightness = 60/dist
+bat2.WorldCFrame = par.CFrame * CFrame.new(0,0,-dist)
+else
+light.Brightness = 3
+bat2.WorldCFrame = par.CFrame * CFrame.new(0,0,-20)
+end
+end)
+            local Socket = Instance.new("BallSocketConstraint",a)
+            local att1 = Instance.new("Attachment",a2)
+            local att2 = Instance.new("Attachment",ball)
+Socket.Attachment1 = att1
+Socket.Attachment0 = att2
+local jump = Instance.new("Sound")
+jump.PlayOnRemove = true
+jump.SoundId = "rbxassetid://336019973"
+local land = Instance.new("Sound")
+land.PlayOnRemove = true
+land.SoundId = "rbxassetid://6870001600"
+e = Instance.new("RemoteEvent",owner.PlayerGui)
+e.OnServerEvent:Connect(function(_,what)
+if what == "jump" then
+jump.Parent = ball
+jump.Parent = nil
+else
+land.Parent = ball
+land.Parent = nil
+end
+end)
+coroutine.wrap(function()
+for i,v in pairs(fakecharacter:GetDescendants()) do
+if v:IsA("BasePart") then
+for i,s in pairs(fakecharacter:GetDescendants()) do
+if s:IsA("BasePart") then
+local nocol = Instance.new("NoCollisionConstraint",s)
+nocol.Part0 = v
+nocol.Part1 = s
+end
+end
+v:SetNetworkOwner(owner)
+end
+end
+end)()
+NLS([[
+e = owner.PlayerGui:FindFirstChildWhichIsA("RemoteEvent")
+local part = owner.PlayerGui.part.Value
+local part2 = owner.PlayerGui.part2.Value
+local part3 = owner.PlayerGui.part3.Value
+local part4 = owner.PlayerGui.part4.Value
+local part5 = owner.PlayerGui.part5.Value
+local part6 = owner.PlayerGui.part6.Value
+coroutine.wrap(function()
+for i,v in pairs(part.Parent:GetDescendants()) do
+if v:IsA("BasePart") then
+for i,s in pairs(part.Parent:GetDescendants()) do
+if s:IsA("BasePart") then
+if s.Transparency ~= 1 then
+s.Transparency = 0.6
+s.Material = "ForceField"
+end
+local nocol = Instance.new("NoCollisionConstraint",s)
+nocol.Part0 = v
+nocol.Part1 = s
+elseif s:IsA("Beam") then
+s.Enabled = false
+end
+end
+end
+end
+end)()
+local align = Instance.new("AlignOrientation",part5)
+align.RigidityEnabled = true
+local at0 = Instance.new("Attachment",workspace.Terrain)
+local at3 = Instance.new("Attachment",part5)
+align.Attachment1 = at0
+align.Attachment0 = at3
+local density = 1
+local friction = 1.5
+local elasticity = 0
+local frictionWeight = 10000
+local elasticityWeight = 100000
+local physProperties = PhysicalProperties.new(density, friction, elasticity, frictionWeight, elasticityWeight)
+part.CustomPhysicalProperties = physProperties
+e.OnClientEvent:Connect(function(tab)
+tab[1].CanCollide = false
+tab[2].CanCollide = false
+tab[3].CanCollide = false
+tab[4].CanCollide = false
+end)
+CurrentCamera = workspace.CurrentCamera
+CurrentCamera.FieldOfView = 200
+local VRSpeed = 16
+local align2 = Instance.new("AlignOrientation",part)
+align2.RigidityEnabled = true
+local at0 = Instance.new("Attachment",workspace.Terrain)
+local at3 = Instance.new("Attachment",part)
+align2.Attachment1 = at0
+align2.Attachment0 = at3
+UserInputService = game:GetService("UserInputService")
+local ball = Instance.new("BodyVelocity",part2)
+ball.MaxForce = Vector3.new(500000,0,500000)
+ball.Velocity = Vector3.new()
+local bv2 = Instance.new("BodyVelocity",part)
+bv2.MaxForce = Vector3.new(0,0,0)
+bv2.Velocity = Vector3.new()
+local rot = 0
+local rot2 = 0
+local rot3 = 0
+local rot4 = 0
+acceleration = false
+thumb1 = {["x"] = 0;
+["y"] = 0}
+UserInputService.InputChanged:Connect(function(input, processed)
+		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+thumb1 = {["x"] = input.Position.X;
+["y"] = input.Position.Y}
+end
+		if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+if math.abs(input.Position.X) <= 0.9 then
+rot2 = input.Position.X
+acceleration = true
+elseif math.abs(input.Position.X) >= 0.2 then
+rot2 = input.Position.X
+acceleration = false
+elseif math.abs(input.Position.X) < 0.2 then
+rot2 = 0
+acceleration = false
+end
+if math.abs(input.Position.Y) >= 0.2 then
+rot4 = input.Position.Y
+elseif math.abs(input.Position.Y) < 0.2 then
+rot4 = 0
+end
+end
+end)
+db = false
+UserInputService.InputBegan:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.ButtonR2 then
+if not db then
+db = true
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {part.Parent}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = game.Workspace:Raycast(part.Position + part.Velocity * owner:GetNetworkPing(), Vector3.new(0,-2.3,0),params)
+if result then
+e:FireServer("jump")
+bv2.MaxForce = Vector3.new(0,math.huge,0)
+bv2.Velocity = Vector3.new(0,50,0)
+delay(0.05,function()
+bv2.MaxForce = Vector3.new(0,0,0)
+bv2.Velocity = Vector3.new(0,0,0)
+end)
+coroutine.wrap(function()
+wait(0.1)
+local s
+s = part.Touched:Connect(function(what)
+if what.Parent ~= part.Parent then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {part.Parent}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = game.Workspace:Raycast(part.Position + part.Velocity * owner:GetNetworkPing(), Vector3.new(0,-2.2,0),params)
+if result then
+e:FireServer()
+s:Disconnect()
+end
+end
+end)
+end)()
+end
+end
+end
+end)
+local lasty = 0
+UserInputService.InputEnded:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.ButtonR2 then
+db = false
+end
+end)
+UserInputService.InputEnded:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+thumb1 = {["x"] = 0;
+["y"] = 0}
+end
+if input.KeyCode == Enum.KeyCode.Thumbstick2 then
+rot2 = 0
+rot4 = 0
+acceleration = false
+end
+end)
+local accel = 0
+ro = 0
+local bv3 = Instance.new("BodyVelocity",part3)
+bv3.MaxForce = ball.MaxForce + Vector3.new(0,ball.MaxForce.X,0)
+bv3.Velocity = Vector3.new()
+local bv4 = Instance.new("BodyVelocity",part4)
+bv4.MaxForce = ball.MaxForce + Vector3.new(0,ball.MaxForce.X,0)
+bv4.Velocity = Vector3.new()
+local bv5 = Instance.new("BodyVelocity",part6)
+bv5.MaxForce = ball.MaxForce + Vector3.new(0,ball.MaxForce.X,0)
+bv5.Velocity = Vector3.new()
+local align3 = Instance.new("AlignOrientation",part3)
+align3.RigidityEnabled = true
+local att0 = Instance.new("Attachment",workspace.Terrain)
+local att3 = Instance.new("Attachment",part3)
+align3.Attachment1 = att0
+align3.Attachment0 = att3
+local align4 = Instance.new("AlignOrientation",part4)
+align4.RigidityEnabled = true
+local attt0 = Instance.new("Attachment",workspace.Terrain)
+local attt3 = Instance.new("Attachment",part4)
+align4.Attachment1 = attt0
+align4.Attachment0 = attt3
+local align5 = Instance.new("AlignOrientation",part6)
+align5.RigidityEnabled = true
+local atttt0 = Instance.new("Attachment",workspace.Terrain)
+local atttt3 = Instance.new("Attachment",part6)
+align5.Attachment1 = atttt0
+align5.Attachment0 = atttt3
+lastlerp = CFrame.new(CurrentCamera.CFrame.Position) * CFrame.new(1.5,0,-2)
+game:GetService("RunService").RenderStepped:Connect(function()
+CurrentCamera.CFrame = CFrame.new(part2.Position + Vector3.new(0,10,0)) * CFrame.Angles(0,math.rad(rot),0) * CFrame.Angles(math.rad(rot3),0,0)
+if acceleration then
+accel = math.clamp(accel + 0.05,0,2)
+rot = rot + (-rot2 * (5 + accel))
+else
+rot = rot + (-rot2 * 5)
+accel = 0
+end
+local _,y,_ = CurrentCamera:GetRenderCFrame():ToOrientation()
+		ball.Velocity = ((CFrame.Angles(0,y,0).RightVector * (thumb1.x * (VRSpeed/1.25))) + (CFrame.Angles(0,y,0).LookVector * (thumb1.y * (VRSpeed))))
+bv4.Velocity = ((CFrame.Angles(0,y,0).RightVector * (thumb1.x * (VRSpeed/1.25))) + (CFrame.Angles(0,y,0).LookVector * (thumb1.y * (VRSpeed)))) + bv2.Velocity
+bv3.Velocity = ((CFrame.Angles(0,y,0).RightVector * (thumb1.x * (VRSpeed/1.25))) + (CFrame.Angles(0,y,0).LookVector * (thumb1.y * (VRSpeed)))) + bv2.Velocity
+bv5.Velocity = ((CFrame.Angles(0,y,0).RightVector * (thumb1.x * (VRSpeed/1.25))) + (CFrame.Angles(0,y,0).LookVector * (thumb1.y * (VRSpeed)))) + bv2.Velocity
+if ball.Velocity.Magnitude > 0 then
+local _,y,_ = CFrame.new(Vector3.new(),ball.Velocity):ToOrientation()
+lasty = y
+end
+rot3 = math.clamp(rot3 + (rot4 * 3.5),-90,90)
+local x1,y1,z1 = CurrentCamera.CFrame:ToOrientation()
+local x2,y2,z2 = CurrentCamera.CFrame:ToEulerAnglesXYZ()
+part3.CFrame = CFrame.new((CFrame.new(CurrentCamera.CFrame.Position) * CFrame.Angles(0,y1,0) * CFrame.new(1.5,0,-2)).Position) * CFrame.Angles(x2,y2,z2)
+at0.CFrame = at0.CFrame:Lerp(CFrame.Angles(0,lasty,0),0.5)
+att0.CFrame = part3.CFrame
+attt0.CFrame = at0.CFrame
+local x,_,z = at0.CFrame:ToOrientation()
+local _,y,_ = CurrentCamera.CFrame:ToOrientation()
+atttt0.CFrame = CFrame.Angles(x,y,z) * CFrame.Angles(0,0,math.rad(90))
+part4.CFrame = CFrame.new(CurrentCamera.CFrame.Position + Vector3.new(0,-5.2,0)) * CFrame.Angles(at0.CFrame:ToOrientation())
+at3.CFrame = CFrame.Angles(math.rad(ro),0,0)
+part6.CFrame = CFrame.new((part4.CFrame * CFrame.new(0,1,0)).Position) * CFrame.Angles(x,y,z) * CFrame.Angles(0,0,math.rad(90))
+if ball.Velocity.Magnitude > 0 then
+ro = ro + (ball.Velocity.Magnitude/2)
+end
+end)
+]],owner.PlayerGui)
+local tab = {part2,part3,part5,part6}
+e:FireClient(owner,tab)
