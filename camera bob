@@ -1,0 +1,76 @@
+owner.Character.Humanoid.RequiresNeck = false
+owner.Character.Torso.Neck:Destroy()
+owner.Character.HumanoidRootPart:SetNetworkOwner(owner)
+local nocollide = Instance.new("NoCollisionConstraint",owner.Character.Torso)
+nocollide.Part1 = owner.Character.Head
+nocollide.Part0 = nocollide.Parent
+NLS([[
+local part = Instance.new("Part", owner.Character.Head)
+part.Size = Vector3.new(0.1,0.1,0.1)
+part.Transparency = 1
+part.CanCollide = false
+part.Name = "camera"
+part:BreakJoints()
+local wl = Instance.new("Weld", part)
+wl.Part0 = owner.Character.Head
+wl.Part1 = part
+wl.C0 = CFrame.new(0,0.25,-0.0625)
+       workspace.CurrentCamera.CameraSubject = part
+local align = Instance.new("AlignOrientation",owner.Character.Torso)
+align.RigidityEnabled = true
+local at0 = Instance.new("Attachment",owner.Character.Torso)
+local at3 = Instance.new("Attachment",owner.Character.Head)
+align.Attachment1 = at0
+align.Attachment0 = at3
+at3.CFrame = CFrame.new(0,-0.5,0)
+at0.CFrame = CFrame.new(0,1,0)
+local align2 = Instance.new("AlignPosition",owner.Character.Torso)
+align2.RigidityEnabled = true
+align2.Attachment1 = at0
+align2.Attachment0 = at3
+        workspace.CurrentCamera.FieldOfView = 100
+for i,v in pairs(owner.Character:GetDescendants()) do
+if v:IsA("Part") and v.Name == "Head" then
+v.Transparency = 1
+elseif v:IsA("Accessory") then
+                v.Handle.Transparency = 1
+            end
+end
+owner.Character.Torso.Transparency = 1
+local bg = Instance.new("BodyGyro",owner.Character.HumanoidRootPart)
+bg.MaxTorque = Vector3.new(0,5000000000000000000,0)
+bg.P = 500000
+function the()
+local x,y,z = CFrame.new(owner.Character.Head.Position,(CFrame.new(owner.Character.Head.Position) * CFrame.Angles(workspace.CurrentCamera.CFrame:ToEulerAnglesXYZ()) * CFrame.new(0,0,-1)).Position):toObjectSpace(owner.Character.Torso.CFrame):ToEulerAnglesXYZ()
+at3.CFrame = CFrame.new(0,-0.5,0) * CFrame.Angles(x,y,0)
+bg.CFrame = workspace.CurrentCamera.CFrame
+end
+game:GetService("RunService").RenderStepped:Connect(the)
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+local sin = math.sin
+local cos = math.cos
+local abs = math.abs
+
+local effectIntensity = 10 * 1.5
+local xDampening = 0.2
+local yDampening = 0.3
+humanoid = owner.Character.Humanoid
+local function updateSway()
+	if humanoid and humanoid.Health > 0 and humanoid.MoveDirection.Magnitude > 0 then
+effectIntensity = (humanoid.WalkSpeed * 0.7) * 1.5
+		local swayX = cos(tick() * effectIntensity) * xDampening
+		local swayY = abs(sin(tick() * effectIntensity)) * yDampening
+		
+		wl.C1 = wl.C1:lerp(CFrame.new(Vector3.new(swayX, swayY, 0)), 0.4)
+workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame * CFrame.Angles(0,math.rad(swayX * 0.5),math.rad(swayY * 2))
+	elseif humanoid and humanoid.Health > 0 then
+		TweenService:Create(wl, TweenInfo.new(0.2), {
+			C1 = CFrame.new(Vector3.new(0, 0, 0))
+		}):Play()
+	end 
+end
+owner.Character.Humanoid.WalkSpeed = 10
+RunService.RenderStepped:Connect(updateSway)
+]],owner.PlayerGui)
