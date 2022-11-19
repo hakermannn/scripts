@@ -1,11 +1,11 @@
-local camcf = CFrame.new()
-local seated = false
-local active = false
+camcf = CFrame.new()
+seated = false
+active = false
 owner.Character.Humanoid.AutoJumpEnabled = false
 local sound = Instance.new("Sound")
 sound.PlayOnRemove = true
-local tweenservice = game:GetService("TweenService")
-local active = false
+tweenservice = game:GetService("TweenService")
+active = false
 owner.Character.Humanoid:RemoveAccessories()
 local m = Instance.new("SpecialMesh",owner.Character["Right Arm"])
 m.MeshId = "rbxassetid://8549146366"
@@ -797,188 +797,593 @@ dash.SoundId = "rbxassetid://6870001262"
 local o = Instance.new("ObjectValue",owner.PlayerGui)
 o.Name = "Dash"
 o.Value = dash
-local revolverwel = Instance.new("Weld",p2)
-revolverwel.Part0 = owner.Character["Right Arm"]
-revolverwel.Part1 = revolverwel.Parent
-revolverwel.C1 = CFrame.new(0,0,0.15)
-revolverwel.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
-revolverwel.Enabled = false
-local tool = Instance.new("Tool",owner.Backpack)
-tool.Name = "Marksman"
-tool.Grip = CFrame.new(0,0.2,-1.1) * CFrame.Angles(math.rad(160),0,0)
-local par = Instance.new("Part",tool)
-par.Name = "Handle"
-par.Size = Vector3.new(0.3,1.1,2.4)
-local muzzle = Instance.new("Part")
-muzzle.CanCollide = false
-muzzle.Size = Vector3.new(0.1,0.1,0.1)
-muzzle.Transparency = 1
-muzzle.Anchored = true
-muzzle.CanQuery = false
-muzzle.CanTouch = false
-local m = Instance.new("SpecialMesh",par)
-m.MeshId = "rbxassetid://7371059530"
-m.TextureId = "rbxassetid://9901256500"
-m.Scale = Vector3.new(-0.075,-0.075,-0.075)
-local tweenservice = game:GetService("TweenService")
-local info = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.In)
-local goal = {}
-goal.C0 = CFrame.new(0,1.55,0) * CFrame.Angles(math.rad(-69),0,0)
-revolveridle = tweenservice:Create(revolverwel, info, goal) 
-local info = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-local goal = {}
-goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
-revolveridle2 = tweenservice:Create(revolverwel, info, goal) 
-local info = TweenInfo.new(0.125, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-local goal = {}
-goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-75),0,0)
-goal.C1 = CFrame.new(0,0,0.3)
-shoot = tweenservice:Create(revolverwel, info, goal) 
-local goal = {}
-goal.Grip = CFrame.new(0,0.3,-1) * CFrame.Angles(math.rad(150),0,0)
-shoot2 = tweenservice:Create(tool, info, goal) 
-local info = TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
-local goal = {}
-goal.Grip = CFrame.new(0,0.2,-1.1) * CFrame.Angles(math.rad(160),0,0)
-shoot3 = tweenservice:Create(tool, info, goal) 
-local goal = {}
-goal.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-70),0,0)
-goal.C1 = CFrame.new(0,0,0.15)
-shoot4 = tweenservice:Create(revolverwel, info, goal) 
-local shot = Instance.new("Sound",par)
-shot.Volume = 1
-shot.SoundId = "rbxassetid://6828928602"
-local pe = Instance.new("ParticleEmitter",muzzle)
-pe.Texture = "rbxassetid://13191594"
-pe.Enabled = false
-pe.Speed = NumberRange.new(2,2.5)
-pe.Shape = "Disc"
-pe.ShapeStyle = "Surface"
-pe.ShapeInOut = "Outward"
-pe.LightEmission = 0.2
-pe.LightInfluence = 0.5
-pe.Transparency = NumberSequence.new(0.5,0.5)
-pe.Size = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.0625)}
-pe.Lifetime = NumberRange.new(0.125, 0.25)
-pe.Rate = 500
-pe.Drag = 2
-pe.LockedToPart = true
-pe.RotSpeed = NumberRange.new(-300,300)
-pe.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
-pe.SpreadAngle = Vector2.new(-50, 50)
-pe.EmissionDirection = Enum.NormalId.Back
-tool.Equipped:Connect(function()
-revolverwel.Enabled = true
-toolwel.Enabled = false
-weld3.Enabled = false
-end)
-tool.Unequipped:Connect(function()
-revolverwel.Enabled = false
-toolwel.Enabled = false
-weld3.Enabled = true
-end)
-rayblacklist = {}
-for i,v in pairs(owner:GetDescendants()) do
-table.insert(rayblacklist,v)
-end
 local pwel = Instance.new("Weld",owner.Character.Torso)
 pwel.Part0 = p2
 pwel.Part1 = pwel.Parent
 pwel.C1 = CFrame.new(0.85,0.95,0)
 local e2 = Instance.new("RemoteEvent",owner.Character)
 e2.Name = "the"
-e2.OnServerEvent:Connect(function(_,cf)
-if active then
-camcf = cf
-        local lookvector = owner.Character.Torso.CFrame:toObjectSpace(cf).lookVector.unit
-pwel.C0 = CFrame.Angles(-lookvector.y,0,0) * CFrame.Angles(0,lookvector.x,0)
-p2wel.C0 = CFrame.Angles(-lookvector.y,0,0) * CFrame.Angles(0,lookvector.x,0)
+    local billboard = Instance.new("ScreenGui", owner.PlayerGui)
+local cloakmeter = Instance.new("Frame",billboard)
+cloakmeter.BackgroundColor3 = Color3.fromRGB(130, 130, 130)
+cloakmeter.Size = UDim2.new(0.25,0,0.1,0)
+cloakmeter.AnchorPoint = Vector2.new(0.15, 0.95)
+cloakmeter.Position = UDim2.new(0.15, 0, 0.95, 0)
+cloakmeter.Active = true
+cloakmeter.Transparency = 0.4
+local cloakmeter2 = Instance.new("Frame",cloakmeter)
+cloakmeter2.Size = UDim2.new(1,0,1,0)
+cloakmeter2.BackgroundColor3 = Color3.fromRGB(10,240,10)
+cloakmeter2.Transparency = 0.3
+local cloakmeter3 = Instance.new("Frame",cloakmeter)
+cloakmeter3.Size = UDim2.new(0,0,1,0)
+cloakmeter3.BackgroundColor3 = Color3.fromRGB(50,50,50)
+cloakmeter3.AnchorPoint = Vector2.new(1, 0)
+cloakmeter3.Position = UDim2.new(1, 0, 0, 0)
+cloakmeter3.Transparency = 0.3
+local round = Instance.new("UICorner",cloakmeter)
+round.CornerRadius = UDim.new(0.1)
+local round = Instance.new("UICorner",cloakmeter2)
+round.CornerRadius = UDim.new(0.1)
+local round = Instance.new("UICorner",cloakmeter3)
+round.CornerRadius = UDim.new(0.1)
+local old = owner.Character.Humanoid.Health
+local harddamage = 0
+local time = 10
+coroutine.wrap(function()
+while task.wait() do
+pcall(function()
+cloakmeter3.Size = UDim2.new(math.clamp(harddamage,0.1,99)/100,0,1,0)
+cloakmeter2.Size = UDim2.new(owner.Character.Humanoid.Health/owner.Character.Humanoid.MaxHealth,0,1,0)
+end)
+end
+end)()
+coroutine.wrap(function()
+pcall(function()
+while owner.Character.Humanoid.Health > 0 do
+repeat
+wait(0.1)
+time -= 0.1
+until time <= 0
+harddamage = math.clamp(harddamage - (5),0,99)
+time = time + 0.1
 end
 end)
-local firing = false
+end)()
+owner.Character.Humanoid.HealthChanged:Connect(function(newhealth)
+pcall(function()
+if newhealth < old then
+time = 10
+harddamage = math.clamp((owner.Character.Humanoid.MaxHealth - newhealth) * 0.8,0,99)
+old = newhealth
+elseif newhealth > old then
+old = newhealth
+end
+end)
+end)
+if owner.Character:FindFirstChild("Health") then
+owner.Character:FindFirstChild("Health"):Destroy()
+end
+local rayblacklist = {}
+local p = Instance.new("SpawnLocation")
+p.Enabled = false
+p.Transparency = 1
+p.Size = Vector3.new(0.25,0.25,0.25)
+p.Name = "bloodyhujijahuyugtfvfyh"
+local attachment0 = Instance.new("Attachment",p)
+local attachment1 = Instance.new("Attachment",p)
+attachment1.CFrame = CFrame.new(0,0.125,0)
+attachment0.CFrame = CFrame.new(0,-0.125,0)
+local trail = Instance.new("Trail",p)
+trail.Attachment0 = attachment0
+trail.Attachment1 = attachment1
+trail.Lifetime = .5
+trail.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)}
+trail.WidthScale = NumberSequence.new{NumberSequenceKeypoint.new(0, 1),NumberSequenceKeypoint.new(1, 0)}
+trail.MaxLength = 0
+trail.MinLength = 0.1
+trail.LightEmission = 0
+trail.LightInfluence = 1
+trail.TextureLength = 1
+trail.TextureMode = "Stretch"
+trail.Color = ColorSequence.new(Color3.fromRGB(85, 0, 0))
+local min = -15
+local max = 15
+function splat(whatpart,times)
+for i = 1,(2 * times) do
+wait()
+coroutine.wrap(function()
+local b = p:Clone()
+b.Parent = script
+b.Position = whatpart.Position
+b.Velocity = Vector3.new(Random.new():NextNumber(min,max),Random.new():NextNumber(min,max) + 30,Random.new():NextNumber(min,max))
+table.insert(rayblacklist,b)
+b.Touched:Connect(function(what)
+if not (what:FindFirstAncestorWhichIsA("Model") and what:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid")) and not table.find(rayblacklist,what) and what.CanCollide then
+	local params = RaycastParams.new()
+	params.FilterDescendantsInstances = {rayblacklist,whatpart:FindFirstAncestorWhichIsA("Model"):GetDescendants()}
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = workspace:Raycast(b.Position,b.Velocity + Vector3.new(0,-3,0), params)
+if result then
+    local bloodpartfloor = Instance.new("SpawnLocation", workspace)
+bloodpartfloor.Enabled = false
+bloodpartfloor.CanCollide = false
+bloodpartfloor.Anchored = true
+table.insert(rayblacklist,bloodpartfloor)
+                            bloodpartfloor.Size = Vector3.new(0.05,0.005,0.005)
+                            bloodpartfloor.CanCollide = false
+                            bloodpartfloor.Material = "Glass"
+                            bloodpartfloor.Transparency = 0
+local s = Instance.new("SpecialMesh",bloodpartfloor)
+s.MeshType = "Sphere"
+b:Destroy()
+bloodpartfloor.Position = result.Position
+local whathit = result.Instance
+		local currentRightVector = whathit.CFrame.RightVector
+		local upVector = result.Normal
+		local newFacialVector = currentRightVector:Cross(upVector)
+                            bloodpartfloor.CFrame = CFrame.fromMatrix(bloodpartfloor.Position, currentRightVector, upVector, newFacialVector) * CFrame.Angles(0,0,math.rad(90))
+                                bloodpartfloor.BrickColor = BrickColor.new("Maroon")
+game:GetService("Debris"):AddItem(bloodpartfloor,25)
+local random = Random.new():NextNumber(0.25,3)
+local tweenService = game:GetService("TweenService")
+local timeToFade = random/3
+local object = bloodpartfloor
+local tweenInfo = TweenInfo.new(timeToFade)
+local goal = {}
+goal.Size = Vector3.new(math.clamp(random,0.75,3)/5,random,random)
+goal.Transparency = 0.2
+local groww = tweenService:Create(object, tweenInfo, goal)
+groww:Play()
+end
+end
+end)
+end)()
+end
+end
+local pppp = Instance.new("Part",script)
+pppp.CanQuery = false
+pppp.Anchored = true
+pppp.CanCollide = false
+pppp.Size = Vector3.new()
+pppp.Transparency = 1
+local s = Instance.new("Sound")
+s.PlayOnRemove = true
+s.Volume = 1.6
+s.SoundId = "rbxassetid://6828928602"
+e = Instance.new("RemoteEvent",owner.Character)
+local hed = Instance.new("Weld",owner.Character.Torso)
+hed.Part0 = owner.Character.Head
+hed.Part1 = hed.Parent
+hed.C0 = CFrame.new(0,-0.5,0)
+hed.C1 = CFrame.new(0,1,0)
+hed.Enabled = false
+local tool = Instance.new("Tool",owner.Backpack)
+tool.RequiresHandle = false
+tool.Name = "i have an obsession with ultrakill weapons please help im begging you"
+tool.ToolTip = "i have an obsession with ultrakill weapons please help im begging you save me from this i beg i need help please help im begging you please"
+tool.TextureId = "rbxassetid://11541198228"
+tool.Grip = CFrame.Angles(math.rad(180),0,0) * CFrame.new(0,-0.5,0.5)
+local part = Instance.new("Part",tool)
+part.CanCollide = false
+part.Size = Vector3.new(4.282, 15.101, 31.717) * 0.075
+part.Massless = true
+local weld = Instance.new("Weld",owner.Character["Right Arm"])
+weld.Part0 = part
+weld.Part1 = owner.Character["Right Arm"]
+weld.C1 = CFrame.Angles(math.rad(180 + -90),0,0) * CFrame.new(0,-0.25 * 0.75,1.5 * 0.75) * CFrame.Angles(math.rad(17),math.rad(-2),0)
+local armw = Instance.new("Weld",owner.Character.Torso)
+armw.Part0 = owner.Character["Right Arm"]
+armw.Part1 = owner.Character.Torso
+armw.C1 = CFrame.new(0.85,0.95,-0.15) * CFrame.Angles(math.rad(-15),0,0)
+armw.Enabled = false
+armw.C0 = CFrame.new(0,1.5,0) * CFrame.Angles(math.rad(-90),0,0)
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+local goal = {}
+goal.C0 = CFrame.Angles(math.rad(-120),0,0)
+local tween = tweenService:Create(weld, tweenInfo, goal)
+local goal4 = {}
+goal4.C1 = CFrame.Angles(math.rad(180 + -90),0,0) * CFrame.new(0,-0.75 * 0.75,1.5 * 0.75) * CFrame.Angles(math.rad(17),math.rad(-2),0) 
+local tween4 = tweenService:Create(weld, tweenInfo, goal4)
+local tweenInfo = TweenInfo.new(0.15,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+local goal2 = {}
+goal2.C0 = CFrame.Angles(math.rad(-240),0,0)
+local tween2 = tweenService:Create(weld, tweenInfo, goal2)
+local goal5 = {}
+goal5.C1 = CFrame.Angles(math.rad(180 + -90),0,0) * CFrame.new(0,-1.25 * 0.75,1.25 * 0.75) * CFrame.Angles(math.rad(17),math.rad(-2),0)
+local tween5 = tweenService:Create(weld, tweenInfo, goal5)
+local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Quad,Enum.EasingDirection.In)
+local goal3 = {}
+goal3.C0 = CFrame.Angles(math.rad(-360),0,0)
+local tween3 = tweenService:Create(weld, tweenInfo, goal3)
+local goal6 = {}
+goal6.C1 = CFrame.Angles(math.rad(180 + -90),0,0) * CFrame.new(0,-0.25 * 0.75,1.5 * 0.75) * CFrame.Angles(math.rad(17),math.rad(-2),0) 
+local tween6 = tweenService:Create(weld, tweenInfo, goal6)
+local m = Instance.new("SpecialMesh",part)
+m.MeshId = "rbxassetid://7371059530"
+m.TextureId = "rbxassetid://10522947294"
+m.Scale = Vector3.new(1,1,1) * -0.075
+m.Offset = Vector3.new(0,0,0.5)
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+local tweenInfo = TweenInfo.new(0.15,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Quad,Enum.EasingDirection.In)
+local tweenInfo = TweenInfo.new(0.2,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,true)
+local goal = {}
+goal.C0 = CFrame.new(0,1.5,0.2) * CFrame.Angles(math.rad(-100),0,0)
+local twee = tweenService:Create(armw, tweenInfo, goal)
+local tweenInfo = TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,true)
+local goal = {}
+goal.C0 = CFrame.new(0,0.9,0.2) * CFrame.Angles(math.rad(-110),0,0)
+local tweee = tweenService:Create(armw, tweenInfo, goal)
+local goal = {}
+goal.C1 = CFrame.Angles(math.rad(180 + -90),0,0) * CFrame.new(0,-0.5 * 0.75,1.25 * 0.75) * CFrame.Angles(math.rad(14 + 17),math.rad(-2),0)
+local tweeee = tweenService:Create(weld, tweenInfo, goal)
+local welll = Instance.new("Weld",owner.Character.HumanoidRootPart)
+welll.Part0 = owner.Character.Torso
+welll.Part1 = owner.Character.HumanoidRootPart
+welll.Enabled = false
+local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,true)
+local goa = {}
+goa.C1 = welll.C1 * CFrame.Angles(math.rad(5),0,0)
+local tweee3 = tweenService:Create(welll, tweenInfo, goa)
+local equip = Instance.new("Sound")
+equip.PlayOnRemove = true
+equip.Volume = 1
+local mu = Instance.new("Sound",part)
+mu.Volume = 0.7
+mu.SoundId = "rbxassetid://1838457617"
+mu.Looped = true
+local shotcount = 24
+equip.SoundId = "rbxassetid://6870002623"
+local reload = false
+tween.Completed:Connect(function()
+tween2:Play()
+tween5:Play()
+end)
+tween2.Completed:Connect(function()
+tween3:Play()
+tween6:Play()
+end)
+tween6.Completed:Connect(function()
+wait(0.05)
+reload = false
+shotcount = 0
+end)
+tool.Equipped:Connect(function()
+equip.Parent = part
+equip.Parent = nil
+mu:Play()
+end)
+tool.Equipped:Connect(function()
+reload = true
+armw.Enabled = true
+hed.Enabled = true
+tween:Play()
+tween4:Play()
+twee:Play()
+welll.Enabled = true
+end)
+tool.Unequipped:Connect(function()
+armw.Enabled = false
+hed.Enabled = false
+welll.Enabled = false
+shotcount = 24
+mu:Pause()
+end)
+thepew = false
 tool.Activated:Connect(function()
-if not firing then
-shot:Play()
-local m = muzzle:Clone()
-m.Parent = script
-m.CFrame = par.CFrame * CFrame.new(0,-0.35,0.9)
-m.Position = m.Position + owner.Character.Torso.Velocity * owner:GetNetworkPing()
-m:FindFirstChildWhichIsA("ParticleEmitter"):Emit(20)
-game:GetService("Debris"):AddItem(m,0.25)
+if not reload then
+thepew = true
+end
+end)
+tool.Deactivated:Connect(function()
+thepew = false
+end)
+e.OnServerEvent:Connect(function(_,cam,c1,alpha,hitcf,sw,wcs,shift)
+       local lookvector = owner.Character.HumanoidRootPart.CFrame:toObjectSpace(cam).lookVector.unit
+local y = lookvector.y
+local x = lookvector.x
+        hed.C0 = hed.C0:Lerp(CFrame.new(0,-0.5,0) * CFrame.Angles(-y,x * 0.25,0),0.5)
+hed.C0 = hed.C0 * CFrame.Angles(sw.y + math.rad(5),0,0)
+if shift then
+if y > 0 then
+        armw.C1 = armw.C1:Lerp(CFrame.new(0.85,0.95,-0.15) * CFrame.Angles(y + sw.y,-(x * 0.25) + sw.x,0) * CFrame.new(0,-0.5 * (y * 0.75),-0.5 * (y * 0.75)),0.5)
+armw.C1 = armw.C1:Lerp(armw.C1 * CFrame.new(wcs.y / 3, wcs.x / 3,0),0.25) * CFrame.Angles(math.rad(-15),0,0)
+else
+        armw.C1 = armw.C1:Lerp(CFrame.new(0.85,0.95,-0.15) * CFrame.Angles((y) + sw.y,-(x * 0.25) + sw.x,0) * CFrame.new(0,0.5 * (y * 0.75),-0.5 * (y * 0.75)),0.5)
+armw.C1 = armw.C1:Lerp(armw.C1 * CFrame.new(wcs.y / 3, wcs.x / 3,0),0.25) * CFrame.Angles(math.rad(-15),0,0)
+end
+else
+if y > 0 then
+        armw.C1 = armw.C1:Lerp(CFrame.new(0.85,0.95,-0.15) * CFrame.Angles((y) + sw.y,-(x * 0.25) + sw.x,0) * CFrame.new(0,-0.5 * (y * 0.75),-0.5 * (y * 0.75)),0.5)
+armw.C1 = armw.C1:Lerp(armw.C1 * CFrame.new(wcs.y / 3, wcs.x / 3,0),0.25) * CFrame.Angles(math.rad(-15),0,0)
+else
+        armw.C1 = armw.C1:Lerp(CFrame.new(0.85,0.95,-0.15) * CFrame.Angles((y) + sw.y,-(x * 0.25) + sw.x,0) * CFrame.new(0,0.5 * (y * 0.75),-0.5 * (y * 0.75)),0.5)
+armw.C1 = armw.C1:Lerp(armw.C1 * CFrame.new(wcs.y / 3, wcs.x / 3,0),0.25) * CFrame.Angles(math.rad(-15),0,0)
+end
+end
+end)
+NLS([[
+e = script.Parent
+local tool = owner.Backpack:WaitForChild("i have an obsession with ultrakill weapons please help im begging you")
+local ITERATIONS = 8
+local SPRING = {}
+function SPRING.create(self, mass, force, damping, speed)
+local spring = {
+Target = Vector3.new();
+Position = Vector3.new();
+Velocity = Vector3.new();
+Mass = mass or 5;
+Force = force or 50;
+Damping = damping or 4;
+Speed = speed  or 4;
+}
+function spring.shove(self, force)
+local x, y, z	= force.X, force.Y, force.Z
+if x ~= x or x == math.huge or x == -math.huge then
+x	= 0
+end
+if y ~= y or y == math.huge or y == -math.huge then
+y	= 0
+end
+if z ~= z or z == math.huge or z == -math.huge then
+z	= 0
+end
+self.Velocity	= self.Velocity + Vector3.new(x, y, z)
+end
+function spring.update(self, dt)
+local scaledDeltaTime = math.min(dt,1) * self.Speed / ITERATIONS	
+for i = 1, ITERATIONS do
+local iterationForce = self.Target - self.Position
+local acceleration	= (iterationForce * self.Force) / self.Mass
+acceleration = acceleration - (self.Velocity * self.Damping)
+self.Velocity = self.Velocity + (acceleration * scaledDeltaTime)
+self.Position = self.Position + (self.Velocity * scaledDeltaTime)
+end
+return self.Position
+end
+return spring
+end
+local wc = SPRING.create()
+local sway = SPRING.create()
+local bobspeed = 1
+local bobmod = .1
+local alpha = .25
+local hitcf = CFrame.new()
+local function gb(addition, speed, modifier)
+return math.sin(tick() * addition * speed) * modifier
+end
+c1 = CFrame.new(0,0,0)
+c2 = CFrame.new(0,0,0)
+local UIS = game:GetService("UserInputService")
+shift = false
+UIS:GetPropertyChangedSignal("MouseBehavior"):Connect(function()
+    if UIS.MouseBehavior == Enum.MouseBehavior.LockCenter then
+shift = true
+elseif UIS.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+shift = false
+end
+end)
+local mouse = owner:GetMouse()
+local part = Instance.new("Part",owner.Character.Head)
+part.Size = Vector3.new()
+part.CanCollide = false
+part.Transparency = 1
+local weld = Instance.new("Weld", owner.Character.Head)
+weld.Part0 = part
+weld.Part1 = owner.Character.Head
+weld.C0 = CFrame.new(0,-0.5,0.5)
+game:GetService("RunService").RenderStepped:Connect(function(dt)
+delta = game:GetService("UserInputService"):GetMouseDelta()
+local vel = owner.Character.HumanoidRootPart.Velocity
+local msway = Vector3.new(gb(10, bobspeed, bobmod), gb(5, bobspeed, bobmod), gb(5, bobspeed, bobmod))
+sway:shove(Vector3.new(delta.X / 500, delta.Y / 500))
+wc:shove((msway / 25) * dt * 60 * math.clamp(vel.Magnitude,0,30))
+local sw = sway:update(dt)
+local wcs = wc:update(dt)
+if shift == true and (owner.Character.Head.CFrame.Position - workspace.CurrentCamera.CFrame.Position).Magnitude < 1.5 then
+local x,_,z = owner.Character.HumanoidRootPart.CFrame:ToOrientation()
+local _,y,_ = workspace.CurrentCamera.CFrame:ToOrientation()
+owner.Character.HumanoidRootPart.CFrame = CFrame.new(owner.Character.HumanoidRootPart.Position) * CFrame.Angles(x,y,z)
+        workspace.CurrentCamera.FieldOfView = 100
+        for i,v in pairs(owner.Character:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("MeshPart") and v.Name ~= "Head" then
+                v.LocalTransparencyModifier = 0
+            end
+            if v:IsA("Accessory") and (v.AccessoryType == Enum.AccessoryType.Hat or v.AccessoryType == Enum.AccessoryType.Hair or v.AccessoryType == Enum.AccessoryType.Face or v.AccessoryType == Enum.AccessoryType.Neck) and v.Handle ~= nil then
+                v.Handle.Transparency = 1
+            end
+        end
+        if owner.Character.Head.face ~= nil then
+            owner.Character.Head.face.Transparency = 1
+        end
+        owner.Character.Head.Transparency = 1
+        workspace.CurrentCamera.CameraSubject = part
+else
+        workspace.CurrentCamera.FieldOfView = 70
+        workspace.CurrentCamera.CameraSubject = owner.Character
+        owner.Character.Head.Transparency = 0
+        for i,v in pairs(owner.Character:GetDescendants()) do
+            if v:FindFirstChildWhichIsA("SpecialMesh") then
+                v.Transparency = 0
+            end
+end
+        if owner.Character.Head.face ~= nil then
+            owner.Character.Head.face.Transparency = 0
+        end
+end
+e:FireServer(workspace.CurrentCamera.CFrame,c1,alpha,hitcf,sw,wcs,shift)
+end)
+]],e)
+coroutine.wrap(function()
+while game:GetService("RunService").Stepped:Wait() do
+if thepew and shotcount ~= 24 then
+shotcount += 1
+local muzzle = Instance.new("Part",script)
+muzzle.CanCollide = false
+muzzle.CanQuery = false
+muzzle.Anchored = true
+s.Parent = muzzle
+s.Parent = nil
+if shotcount >= 22 then
+s.PlaybackSpeed = Random.new():NextNumber(0.95,1.05) + (0.15 * (shotcount - 21))
+else
+s.PlaybackSpeed = Random.new():NextNumber(0.95,1.05)
+end
+tweee3:Play()
+muzzle.CFrame = part.CFrame * CFrame.new(0,-0.35,1.9)
+muzzle.Position = muzzle.Position + part.Velocity * owner:GetNetworkPing()
+tweee:Play()
+tweeee:Play()
+muzzle.Transparency = 1
   local attachment0 = Instance.new("Attachment")
-                attachment0.Parent = m
-attachment0.CFrame = CFrame.new(0,0,0.25)
+                attachment0.Parent = muzzle
                 local attachment1 = Instance.new("Attachment")
-                attachment1.Parent = m
-local beam = Instance.new("Beam",m)
+                attachment1.Parent = workspace.Terrain
+attachment1.WorldCFrame = attachment0.WorldCFrame
+            local params = RaycastParams.new()
+            params.FilterDescendantsInstances = {owner.Character,script}
+            params.FilterType = Enum.RaycastFilterType.Blacklist
+                local res = workspace:Raycast(owner.Character.Head.Position + owner.Character.Head.Velocity * owner:GetNetworkPing(),(owner.Character.Head.CFrame * CFrame.Angles(math.rad(5),0,0)).lookVector * 5000, params)
+local muzzle2 = Instance.new("Part",script)
+muzzle2.CanQuery = false
+muzzle2.CanCollide = false
+muzzle2.Size = Vector3.new(0.1,0.1,0.1)
+muzzle2.Anchored = true
+muzzle2.Transparency = 1
+local pe = Instance.new("ParticleEmitter",muzzle2)
+pe.Texture = "rbxassetid://13191594"
+pe.Enabled = false
+pe.Speed = NumberRange.new(5,10)
+pe.Shape = "Cylinder"
+pe.ShapeStyle = "Volume"
+pe.ShapeInOut = "Outward"
+pe.LightEmission = 0.2
+pe.LightInfluence = 0.5
+pe.Size = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.0625)}
+pe.Lifetime = NumberRange.new(0.5, 0.75)
+pe.Rate = 500
+pe.Drag = 2
+pe.LockedToPart = true
+pe.RotSpeed = NumberRange.new(0,0)
+pe.Color = ColorSequence.new(Color3.fromRGB(242, 191, 24))
+pe.SpreadAngle = Vector2.new(-20, 20)
+pe.EmissionDirection = Enum.NormalId.Back
+pe.Acceleration = Vector3.new(0,-50,0)
+game:GetService("Debris"):AddItem(muzzle2,1)
+local beam = Instance.new("Beam")
+beam.Width0 = 0.25
+beam.Width1 = 0.2
+local p = nil
+if res then
+p = CFrame.new(res.Position)
+if res.Instance:FindFirstAncestorWhichIsA("Model") and res.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChild("Humanoid") then
+coroutine.wrap(function()
+local he = res.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChild("Humanoid").Health
+local he2 = (res.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChild("Humanoid").Health) - 15 * 2.5
+for h = 1, 20 do
+if (owner.Character.Head.Position - res.Instance.Position).Magnitude <= 14 then
+owner.Character.Humanoid.Health = math.clamp((owner.Character.Humanoid.Health + (he - he2)/20),0,(owner.Character.Humanoid.MaxHealth - harddamage))
+end
+wait(0.025)
+end
+end)()
+res.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChild("Humanoid").Health -= 15 * 2.5
+coroutine.wrap(function()
+splat(res.Instance,math.random(2,3))
+end)()
+muzzle2.CFrame = CFrame.new(res.Position) * CFrame.Angles(CFrame.new(muzzle.Position,res.Position):ToEulerAnglesXYZ()) * CFrame.Angles(0,math.rad(90),0)
+pe.Color = ColorSequence.new(Color3.fromRGB(222, 10, 7))
+else
+muzzle2.CFrame = CFrame.new(res.Position) * CFrame.Angles(CFrame.new(muzzle.Position,res.Position):ToEulerAnglesXYZ()) * CFrame.Angles(0,math.rad(90),0)
+pe.Color = ColorSequence.new(Color3.fromRGB(242, 191, 24))
+end
+else
+p = owner.Character.Head.CFrame * CFrame.new(0,0,-7000)
+muzzle2:Destroy()
+beam.Width1 = 0.125
+end
 beam.Attachment0 = attachment0
 beam.Attachment1 = attachment1
 beam.CurveSize0 = 0
 beam.CurveSize1 = 0
 beam.FaceCamera = true
+beam.LightInfluence = 0
 beam.Segments = 10
-beam.Width0 = 0.125
-beam.Width1 = 0.125 
-beam.Texture = "rbxassetid://13191594"
-beam.TextureLength = 1
-beam.LightEmission = 0.2
-beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.125),NumberSequenceKeypoint.new(1, 0.5)}
-beam.Color = ColorSequence.new(Color3.fromRGB(201, 147, 30))
-	local params = RaycastParams.new()
-local rayblacklist = {}
-for i,v in pairs(owner.Character:GetDescendants()) do
-table.insert(rayblacklist,v)
-end
-	params.FilterDescendantsInstances = {rayblacklist}
-	params.FilterType = Enum.RaycastFilterType.Blacklist
-	local result = game.Workspace:Raycast(owner.Character.Head.Position + owner.Character.Torso.Velocity * owner:GetNetworkPing(), camcf.lookVector * 200,params)
-if result then
-local hit = muzzle:Clone()
-hit.Parent = script
-attachment1.WorldPosition = result.Position
-		local currentRightVector = result.Instance.CFrame.RightVector
-		local upVector = result.Normal
-		local newFacialVector = currentRightVector:Cross(upVector)
-hit.Position = result.Position + CFrame.new(m.Position,hit.Position).lookVector * -0.25
-local _,y,_ = m.CFrame:ToWorldSpace():ToEulerAnglesXYZ()
-                            hit.CFrame = CFrame.fromMatrix(hit.Position, currentRightVector, upVector, newFacialVector) * CFrame.Angles(0,y,0)  * CFrame.Angles(math.rad(-90),0,0)
-hit:FindFirstChildWhichIsA("ParticleEmitter"):Emit(20)
-game:GetService("Debris"):AddItem(hit,0.25)
-if result.Instance:FindFirstAncestorWhichIsA("Model") and result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid") then
-local he = result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health
-result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health -= math.random(20,30)
+beam.LightEmission = 1
+beam.Brightness = 0.8
+beam.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(242, 191, 24)),ColorSequenceKeypoint.new(1, Color3.fromRGB(252, 227, 0))}
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.9),NumberSequenceKeypoint.new(1, 0.9)}
+local billboard = Instance.new("BillboardGui", muzzle) 
+billboard.Size = UDim2.new(2.5,0,2.5,0) 
+local frame = Instance.new("ImageLabel", billboard) 
+frame.BackgroundTransparency = 1 
+frame.ImageTransparency = 0
+frame.Image = "http://www.roblox.com/asset/?id=11467328624" 
+frame.Size = UDim2.new(1,0,1,0) 
+local gg = {}
+gg.WorldCFrame = p
+local tweenInfoo = TweenInfo.new(0.13,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local tttt = tweenService:Create(attachment1, tweenInfoo, gg)
+tttt:Play()
 coroutine.wrap(function()
-for h = 1, 20 do
-if (owner.Character.Head.Position - result.Instance.Position).Magnitude <= 14 then
-wait(0.085)
-owner.Character.Humanoid.Health += (he - result.Instance:FindFirstAncestorWhichIsA("Model"):FindFirstChildWhichIsA("Humanoid").Health)/10
+tttt.Completed:Wait()
+if pe ~= nil then
+pe:Emit(20)
+end
+end)()
+local gg = {}
+gg.Rotation = math.random(-50,50)
+gg.ImageTransparency = 1
+local tweenInfoo = TweenInfo.new(0.3,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local ttttt = tweenService:Create(frame, tweenInfoo, gg)
+ttttt:Play()
+local g = {}
+g.Width0 = 0.1
+g.Width1 = 0.1
+g.Brightness = 0.2
+local tweenInfo = TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local t = tweenService:Create(beam, tweenInfo, g)
+coroutine.wrap(function()
+for i = -1,100,1 do
+wait(0.001)
+beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, (0.072 * i)),NumberSequenceKeypoint.new(1, (0.072 * i))}
+end
+end)()
+beam.Parent = muzzle
+coroutine.wrap(function()
+local gg = {}
+gg.CFrame = CFrame.new()
+local waittt = TweenInfo.new(0.3 * 1.75,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local waitt = tweenService:Create(pppp, waittt, gg)
+waitt:Play()
+waitt.Completed:Wait()
+lr = not lr
+end)()
+local gg = {}
+gg.CFrame = CFrame.new()
+local waittt = TweenInfo.new(0.15 * 1.75,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local waitt = tweenService:Create(pppp, waittt, gg)
+waitt:Play()
+waitt.Completed:Wait()
+t:Play()
+local gg = {}
+gg.CFrame = CFrame.new()
+local waittt = TweenInfo.new(0.15 * 1.75,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local waitt = tweenService:Create(pppp, waittt, gg)
+waitt:Play()
+waitt.Completed:Wait()
+game:GetService("Debris"):AddItem(muzzle,0.3)
+elseif thepew and shotcount == 24 and not reload then
+reload = true
+tween:Play()
+tween4:Play()
+twee:Play()
 end
 end
 end)()
-splat(result.Instance,math.random(2,3))
-end
-else
-attachment1.WorldCFrame = owner.Character.Head.CFrame * CFrame.new(0,0,-200)
-end
-firing = true
-revolveridle:Cancel()
-revolveridle2:Cancel()
-wait(0.0625)
-shoot:Play()
-shoot2:Play()
-shoot2.Completed:Wait()
-shoot3:Play()
-shoot4:Play()
-shoot4.Completed:Wait()
-firing = false
-end
-end)
-revolveridle2.Completed:Connect(function()
-revolveridle:Play()
-end)
-revolveridle.Completed:Connect(function()
-revolveridle2:Play()
-end)
 NLS([[
 e = owner.Character:FindFirstChildWhichIsA("RemoteEvent")
 mouse = owner:GetMouse()
@@ -1209,7 +1614,9 @@ owner.Character.Humanoid.JumpPower = 65
 active = true
 for i,v in pairs(owner.Character:GetDescendants()) do
 pcall(function()
+if not v:IsA("Tool") then
 v.TextureId = "rbxassetid://8550010558"
+end
 end)
 end
 local jump = Instance.new("Sound",owner.Character.Head)
