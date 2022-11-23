@@ -1,0 +1,565 @@
+local rootp = Instance.new("Part",script)
+rootp.Anchored = true
+rootp.CanCollide = false
+rootp.Size = Vector3.new(0,0,0)
+rootp.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-1,0)
+local part = Instance.new("Part",script)
+part.CFrame = owner.Character.Head.CFrame * CFrame.new(0,0.5,0)
+part.Size = Vector3.new(1.85,1.25,1)
+local part2 = Instance.new("Part",script)
+part2.CFrame = owner.Character.Head.CFrame * CFrame.new(0,1.75,0)
+part2.Size = Vector3.new(1.35,1.35,1.35)
+local part3 = Instance.new("Part",script)
+part3.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-0.5,0)
+part3.Size = Vector3.new(1.5,1.25,0.75)
+local part4 = Instance.new("Part",script)
+part4.CFrame = owner.Character.Head.CFrame * CFrame.new(0.4,-1.5,0)
+part4.Size = Vector3.new(0.81,1.25,0.81)
+local part5 = Instance.new("Part",script)
+part5.CFrame = owner.Character.Head.CFrame * CFrame.new(-0.4,-1.5,0)
+part5.Size = Vector3.new(0.81,1.25,0.81)
+local part6 = Instance.new("Part",script)
+part6.CFrame = owner.Character.Head.CFrame * CFrame.new(-0.4,-1.25 * 2,0)
+part6.Size = Vector3.new(0.8,1.5,0.8)
+local part7 = Instance.new("Part",script)
+part7.CFrame = owner.Character.Head.CFrame * CFrame.new(0.4,-1.25 * 2,0)
+part7.Size = Vector3.new(0.8,1.5,0.8)
+local rootweld = Instance.new("Weld",rootp)
+rootweld.Part0 = part3
+rootweld.Part1 = rootp
+local weld = Instance.new("Weld",part3)
+weld.Part0 = part
+weld.Part1 = part3
+weld.C1 = CFrame.new(0,0.65,-0.0125)
+weld.C0 = CFrame.new(0,-0.65,0)
+local weld2 = Instance.new("Weld",part)
+weld2.Part0 = part2
+weld2.Part1 = part
+weld2.C1 = CFrame.new(0,0.75,0)
+weld2.C0 = CFrame.new(0,-0.65,0)
+local lleg1 = Instance.new("Weld",part3)
+lleg1.Part0 = part4
+lleg1.Part1 = part3
+lleg1.C1 = CFrame.new(0.45,-0.65,0)
+lleg1.C0 = CFrame.new(0,0.65,0)
+local rleg1 = Instance.new("Weld",part3)
+rleg1.Part0 = part5
+rleg1.Part1 = part3
+rleg1.C1 = CFrame.new(-0.45,-0.65,0)
+rleg1.C0 = CFrame.new(0,0.65,0)
+local lleg2 = Instance.new("Weld",part4)
+lleg2.Part0 = part7
+lleg2.Part1 = part4
+lleg2.C1 = CFrame.new(0,-0.65,0)
+lleg2.C0 = CFrame.new(0,0.65,0)
+local rleg2 = Instance.new("Weld",part5)
+rleg2.Part0 = part6
+rleg2.Part1 = part5
+rleg2.C1 = CFrame.new(0,-0.65,0)
+rleg2.C0 = CFrame.new(0,0.65,0)
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(1.5,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.625,0) * CFrame.Angles(math.rad(3),0,0)
+local tween = tweenService:Create(weld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.625,0) * CFrame.Angles(math.rad(2.75),0,0)
+local tween2 = tweenService:Create(weld2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.65,0) * CFrame.Angles(math.rad(2),0,0)
+local tween3 = tweenService:Create(weld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.625,0) * CFrame.Angles(math.rad(2.25),0,0)
+local tween4 = tweenService:Create(weld2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(11),0)
+local tween5 = tweenService:Create(lleg1, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(9),0)
+local tween6 = tweenService:Create(lleg1, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(21),0,0)
+local tween7 = tweenService:Create(lleg2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(20),0,0)
+local tween8 = tweenService:Create(lleg2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(-12),0)
+local tween9 = tweenService:Create(rleg1, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(-10),0)
+local tween10 = tweenService:Create(rleg1, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(21),0,0)
+local tween11 = tweenService:Create(rleg2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(20),0,0)
+local tween12 = tweenService:Create(rleg2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.025,0) * CFrame.Angles(math.rad(1),0,0)
+local rtween = tweenService:Create(rootweld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new()
+local rtween2 = tweenService:Create(rootweld, tweenInfo, goal)
+local tweenInfo = TweenInfo.new(0.35,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+local goal = {}
+goal.C0 = CFrame.new(0,0.1,0) * CFrame.Angles(0,math.rad(5),0)
+local rtweenr = tweenService:Create(rootweld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0,0)
+local rtween2r = tweenService:Create(rootweld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.1,0) * CFrame.Angles(0,math.rad(-5),0)
+local rtween3r = tweenService:Create(rootweld, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,0.675,0) * CFrame.Angles(math.rad(-30),math.rad(11),0)
+tween.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween3:Play()
+tween4:Play()
+end
+end)
+tween3.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween:Play()
+tween2:Play()
+end
+end)
+tween5.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween6:Play()
+tween8:Play()
+end
+end)
+tween6.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween5:Play()
+tween7:Play()
+end
+end)
+tween9.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween10:Play()
+tween12:Play()
+end
+end)
+tween10.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween9:Play()
+tween11:Play()
+end
+end)
+tweenr.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween2r:Play()
+tween4r:Play()
+end
+end)
+tween2r.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+tween3r:Play()
+tweenr:Play()
+end
+end)
+rtween.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+rtween2:Play()
+end
+end)
+rtween2.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+rtween:Play()
+end
+end)
+local lastt = "rt"
+rtweenr.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+rtween2r:Play()
+end
+end)
+rtween2r.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then 
+if lastt == "rt" then
+rtween3r:Play()
+lastt = "lt"
+elseif lastt == "lt" then
+rtweenr:Play()
+lastt = "rt"
+end
+end
+end)
+rtween3r.Completed:Connect(function(state) 
+if state == Enum.PlaybackState.Completed then
+rtween2r:Play()
+end
+end)
+idle = false
+function animate(what)
+if what == "idle" then
+if not idle then
+idle = true
+rtweenr:Cancel()
+rtween2r:Cancel()
+rtween:Play()
+tween5:Play()
+tween7:Play()
+tween9:Play()
+tween11:Play()
+tween:Play()
+tween2:Play()
+end
+else
+if idle then
+idle = false
+rtween:Cancel()
+tween5:Cancel()
+tween7:Cancel()
+tween9:Cancel()
+tween11:Cancel()
+tween:Cancel()
+tween2:Cancel()
+rtween2:Cancel()
+tween6:Cancel()
+tween8:Cancel()
+tween10:Cancel()
+tween12:Cancel()
+tween3:Cancel()
+tween4:Cancel()
+rtweenr:Play()
+end
+end
+end
+local IK_HANDLER = {}
+IK_HANDLER.__index = IK_HANDLER
+ 
+local Pi = math.pi -- We are using radian-based angles (rather than degree), so we use Pi! Pi radians = 180 degrees
+local HalfPi = Pi/2 -- Pi/2 radians = 90 degrees.
+local Tau = 2*Pi -- 2pi radians = 360 degrees. And yes, Tau is a word! Represented by symbol 't'
+ 
+local ForwardVector = Vector3.new(0,0,-1) -- Get a forward-directional Vector3
+local YAxisExclusion = Vector3.new(1,0,1) -- This will be used later; Vector3*YAxisExclusion will remove the middle value, or the y-value.
+ 
+local RightHipCFrame = CFrame.new(0.55, -0.4, 0) -- The self.RightRotationAngle-hip reference CFrame, relative to the RightUpperLeg position
+local LeftHipCFrame = CFrame.new(-0.55, -0.4, 0) -- The self.LeftRotationAngle-hip reference CFrame, relative to the LeftUpperLeg position
+local RightHipCFrame2 = CFrame.new(0.55,-2.7,0)
+local LeftHipCFrame2 = CFrame.new(-0.55,-2.7,0)
+ 
+local RightIdleCFrame = CFrame.new(0.28,-1.9,0.03) -- Idle CFrame of Motor6D joint
+local LeftIdleCFrame = CFrame.new(-0.28,-1.9,-0.03) -- Idle CFrame of Motor6D joint
+ 
+ 
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--||	
+--**--**--**--**--**--||	PRIVATE FUNCTIONS
+--**--**--**--**--**--||	
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+ 
+local function SolveLegIK(o,t,l0,l1) -- Does the major math calculations for IK
+	-- Make the position local relative to the origin
+	local l = o:pointToObjectSpace(t) -- World space to local space
+	local lu = l.Unit -- Get normalized unit for future math
+ 
+	local m = l.Magnitude -- Get the length from the position to the target
+ 
+	-- Make a CFrame pointing from the shoulder position directing to the second position
+	local x = ForwardVector:Cross(-lu) -- Cross the forward vector with the negative of the normalized unit
+	local g = math.acos(-lu.Z) -- Get the arc-cosine of the negative normalized unit
+	local p = o*CFrame.fromAxisAngle(x,g):Inverse() -- Get the IK plane
+ 
+	-- In a self.RightRotationAngle-triangle, we have the hypotenuse and the two shorter legs.
+	-- In a self.RightRotationAngle triangle, the hypotenuse is side "c," and the legs are a and b.
+	-- This information will be helpful later on.
+ 
+	if m < math.max(l1,l0)-math.min(l1,l0) then
+		-- If c is between the lengths of a and b then return an offsetted plane so that one of the lengths reaches the goal,
+		-- but the other length is folded so it looks natural
+		-- This cacluation is done when a position comes before the end of the leg, and may look a bit... odd
+ 
+		return p*CFrame.new(0,0,math.max(l1,l0)-math.min(l1,l0)-m),-HalfPi,Pi
+	elseif m > l0+l1 then
+		-- If c > a + b then return flat angles and an offsetted plane which reaches its target
+		-- Basically, this makes the leg flat if there is nothing to place it on
+ 
+		return p,HalfPi,0
+	else
+		-- Otherwise, use the law of cosines
+		-- This is going to be all cases where the leg actually bends
+ 
+		local a1 = -math.acos((-(l1*l1)+(l0*l0)+(m*m))/(2*l0*m))
+		local a2 = math.acos(((l1*l1)-(l0*l0)+(m*m))/(2*l1*m))
+		return p,HalfPi-a1,-(a2-a1)
+	end
+end
+ 
+local function lerpNumber(a,b,t)return (a+(b-a)*t)end  -- Get a number between a and b, given the alpha (t, which can be a number anywhere between 0-1).
+ 
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--||	
+--**--**--**--**--**--||	CLASS CONSTRUCTOR, VARIABLES, AND METHODS
+--**--**--**--**--**--||	
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+local RaycastParameters = RaycastParams.new()
+RaycastParameters.IgnoreWater = true
+RaycastParameters.FilterType = Enum.RaycastFilterType.Blacklist
+ 
+local ParamBlacklist = {}
+ 
+IK_HANDLER.ActiveInstances = {}
+ 
+function IK_HANDLER.New(Player, Stride, CycleSpeed, MaxRenderDistance, RaycastOffset)
+	local Character = Player and Player.Character
+ 
+	if not Player then
+		error("Attempted to pass player, got nil")
+	elseif not Character then
+		error("Attempted to get Character from " .. Player .. ", got nil")
+	end
+ 
+	local Stride = Stride or 2.6
+	local CycleSpeed = CycleSpeed or 10
+	local MaxRenderDistance = MaxRenderDistance or 150
+	local RaycastOffset = RaycastOffset or 0.3
+	local self = {}
+ 
+	self.Character = Character
+	self.Humanoid = Character:WaitForChild("Humanoid")
+	self.HumanoidRootPart = owner.Character.HumanoidRootPart
+	self.TargetBaseBart	= Character:WaitForChild("LowerTorso")
+	self.WaistJoint = Character:WaitForChild("UpperTorso"):WaitForChild("Waist")
+	self.RootJoint = self.TargetBaseBart:WaitForChild("Root")
+	self.WaistCFrame1 = self.WaistJoint.C1
+	self.RightHip = Character:WaitForChild("RightUpperLeg"):WaitForChild("RightHip")
+	self.RightKnee = Character:WaitForChild("RightLowerLeg"):WaitForChild("RightKnee")
+	self.LeftHip = Character:WaitForChild("LeftUpperLeg"):WaitForChild("LeftHip")
+	self.LeftKnee = Character:WaitForChild("LeftLowerLeg"):WaitForChild("LeftKnee")
+	self.RightHipCFrame0 = self.RightHip.C0
+	self.RightKneeCFrame0 = self.RightKnee.C0
+	self.LeftHipCFrame0 = self.LeftHip.C0
+	self.LeftKneeCFrame0 = self.LeftKnee.C0
+	self.LeftRotationAngle = 0
+	self.RightRotationAngle	= Pi
+	self.Direction = YAxisExclusion -- This will be changed
+	self.CycleSpeed = CycleSpeed -- How fast the leg-movement cycle is. Change this to suit your needs!
+	self.StrideCFrame = CFrame.new(0,0,-Stride/2) -- Turn the Stride number into a CFrame we can use for animation
+	self.PreviousTick = tick()
+	self.Enabled = true
+	self.MaxRenderDistance = MaxRenderDistance
+	self.RaycastOffset = RaycastOffset
+ 
+	IK_HANDLER.ActiveInstances[self] = true
+ 
+	IK_HANDLER.UpdateRaycastBlacklist()
+ 
+	return setmetatable(self, IK_HANDLER) -- We have made an I N S T A N C E (*laughs in programming*)
+end
+ 
+function IK_HANDLER.UpdateRaycastBlacklist(Blacklist)
+	if Blacklist then
+		ParamBlacklist = Blacklist
+	end
+ 
+	local Mod = {}
+	for self,_ in pairs(IK_HANDLER.ActiveInstances) do
+		if self.Character then
+			table.insert(Mod, self.Character)
+		end
+	end
+ 
+	RaycastParameters.FilterDescendantsInstances = {unpack(Mod),unpack(ParamBlacklist)}
+end
+ 
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--||	
+--**--**--**--**--**--||	INSTANCE METHODS
+--**--**--**--**--**--||	
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
+ 
+function IK_HANDLER:IsActive()
+	if not IK_HANDLER.ActiveInstances[self] then
+		return false
+	end
+ 
+	if not self.Character or not self.Character.Parent then
+		IK_HANDLER.ActiveInstances[self] = nil
+		IK_HANDLER.UpdateRaycastBlacklist()
+		return false
+	end
+ 
+	return true
+end
+ 
+function IK_HANDLER:Destroy()
+	if IK_HANDLER.ActiveInstances[self] then
+		IK_HANDLER.ActiveInstances[self] = nil
+	end
+ 
+	for Index, _ in pairs(self) do
+		self[Index] = nil
+	end
+ 
+	self = nil
+ 
+	IK_HANDLER.UpdateRaycastBlacklist()
+end
+ 
+function IK_HANDLER:Enable()
+	self.Enabled = true
+end
+ 
+function IK_HANDLER:Disable()
+	self.Enabled = false
+end
+ 
+function IK_HANDLER:Update()
+pcall(function()
+	if not self.Enabled then
+		return
+	end
+ 
+	if not self.Character or not self.Character.Parent then
+		IK_HANDLER.ActiveInstances[self] = nil
+		IK_HANDLER.UpdateRaycastBlacklist()
+		return
+	end
+ 
+	local CurrentTick = tick()
+	local Delta = math.clamp(CurrentTick - self.PreviousTick,0.00001,0.5)
+	local Delta10 = math.min(Delta*10,1) -- Modify Delta for our needs
+ 
+	local lowercf = self.TargetBaseBart.CFrame -- Our position
+	local rootcf = self.HumanoidRootPart.CFrame -- Another position
+	local rootvel0 = self.HumanoidRootPart.Velocity -- Our movement velocity
+	local rootvel,rootvelm
+	local climbing	= self.Humanoid:GetState() == Enum.HumanoidStateType.Climbing -- Are we climbing?
+ 
+	local RootPosition = rootcf.Position
+ 
+ 
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+ 
+	self.PreviousTick = CurrentTick
+ 
+	if climbing then -- Don't animate if we are climbing, it looks weird
+		rootvel = rootvel0
+		rootvelm = rootvel.Magnitude
+		self.Direction = rootcf.lookVector
+owner.Character.Humanoid.HipHeight = -1
+	else
+		rootvel		=rootvel0*YAxisExclusion
+		rootvelm	=rootvel.Magnitude
+owner.Character.Humanoid.HipHeight = 0
+		if rootvelm > 0.1 then
+			self.Direction = self.Direction:Lerp(rootvel.Unit, Delta10)
+		end
+	end
+ 
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+ 
+	local up =rootvelm/18
+	local cycle =up * Delta * self.CycleSpeed
+ 
+	self.RightRotationAngle = (self.RightRotationAngle+cycle)%Tau
+	self.LeftRotationAngle = (self.LeftRotationAngle+cycle)%Tau
+ 
+	-- By using modulus and Tau (Tau is a full circle roation), we keep rotations within our imaginary circle. Without this we get really weird joint movement.
+ 
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+	--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+ 
+	if rootvelm > 0.1 then --// When moving
+		local relv0 = lowercf:vectorToObjectSpace(rootvel)-- Object space is nice yes?
+		local relv1 = relv0*0.2
+		local relvx = relv0.X/rootvel.Magnitude
+ 
+		self.WaistJoint.C1 = self.WaistJoint.C1:Lerp(self.WaistCFrame1*CFrame.Angles(math.rad(relv1.Z),0.1*math.cos(self.RightRotationAngle)-2*math.rad(relv1.X),math.rad(-relv1.X)):Inverse(),Delta10) -- Upper Torso Anim
+ 
+		local hpmod = HalfPi/20
+		local kneeRot = 2
+		local hipAlpha = Delta10*1.5
+		local kneeAlpha = Delta10*1.5
+ 
+		do -- Right Leg
+			local hip = (rootcf*RightHipCFrame).Position
+			local ground = (rootcf*RightHipCFrame2).Position
+			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(-self.RightRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(0.1,0,0)).Position
+			local offset = (desiredPos-hip)
+			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+0.6),RaycastParameters)
+			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
+ 
+			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 0.55,1.15) -- 0.55,1.15
+			self.RightHip.C0 = self.RightHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,-hpmod,0),hipAlpha)
+			self.RightKnee.C0 = self.RightKnee.C0:Lerp(self.RightKneeCFrame0*CFrame.Angles(th2*kneeRot,0,0),kneeAlpha)
+		end
+ 
+		do-- Left Leg
+			local hip = (rootcf*LeftHipCFrame).Position
+			local ground =(rootcf*LeftHipCFrame2).Position
+			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(-self.LeftRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(-0.1,0,0)).Position
+			local offset = (desiredPos-hip)
+			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+0.6),RaycastParameters)
+			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
+ 
+			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 0.55,1.15)
+			self.LeftHip.C0 = self.LeftHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,hpmod,0),hipAlpha)
+			self.LeftKnee.C0 = self.LeftKnee.C0:Lerp(self.LeftKneeCFrame0*CFrame.Angles(th2*kneeRot,0,0),kneeAlpha)
+		end
+	else --// When not moving
+		-- Upper Torso
+		self.WaistJoint.C1	=self.WaistJoint.C1:Lerp(self.WaistCFrame1, Delta10)
+ 
+		local lowercf = lowercf
+ 
+		do -- Right Leg
+			local hipcf=(rootcf*RightHipCFrame)
+			local hip =hipcf.Position
+			local desiredPos =(hipcf*RightIdleCFrame).Position
+			local offset =(desiredPos-hip)
+			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+1),RaycastParameters)
+			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
+ 
+			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 0.55,1.15)
+			self.RightHip.C0 = self.RightHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,0,-HalfPi/8),Delta10)
+			self.RightKnee.C0 = self.RightKnee.C0:Lerp(self.RightKneeCFrame0*CFrame.Angles(th2,0,0),Delta10)
+		end
+ 
+		do -- Left Leg
+			local hipcf = (rootcf*LeftHipCFrame)
+			local hip = hipcf.Position
+			local desiredPos = (hipcf*LeftIdleCFrame).Position
+			local offset = (desiredPos-hip)
+			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+1),RaycastParameters)
+			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
+ 
+			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 0.55,1.15)
+			self.LeftHip.C0 = self.LeftHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,0,HalfPi/8),Delta10)
+			self.LeftKnee.C0 = self.LeftKnee.C0:Lerp(self.LeftKneeCFrame0*CFrame.Angles(th2,0,0),Delta10)
+		end
+	end
+end)
+end
+local IKProfile = IK_HANDLER.New(owner,1.5,10,0,0.5)
+wait()
+coroutine.wrap(function()
+while task.wait() do
+if IKProfile:IsActive() then
+			IKProfile:Update()
+end
+end
+end)()
+while wait() do
+if owner.Character.Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+animate("s")
+IKProfile:Enable()
+else
+animate("idle")
+IKProfile:Disable()
+end
+end
