@@ -1,32 +1,74 @@
-local rootp = Instance.new("Part",script)
-rootp.Anchored = true
+owner.Chatted:Connect(function(msg)
+if msg == "-dummy" then
+coroutine.wrap(function()
+local char = Instance.new("Model" , script)
+char.Name = "thing"
+local rootp = Instance.new("Part",char)
 rootp.CanCollide = false
-rootp.Size = Vector3.new(0,0,0)
-rootp.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-1,0)
-local part = Instance.new("Part",script)
+rootp.Anchored = true
+rootp.Size = Vector3.new(2,2,1)
+rootp.Transparency = 1
+rootp.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-2,-6)
+rootp.Massless = true
+char.PrimaryPart = rootp
+local part = Instance.new("Part",char)
 part.CFrame = owner.Character.Head.CFrame * CFrame.new(0,0.5,0)
 part.Size = Vector3.new(1.85,1.25,1)
-local part2 = Instance.new("Part",script)
+local part2 = Instance.new("Part",char)
 part2.CFrame = owner.Character.Head.CFrame * CFrame.new(0,1.75,0)
-part2.Size = Vector3.new(1.35,1.35,1.35)
-local part3 = Instance.new("Part",script)
+part2.Size = Vector3.new(1.25,1.25,1.25)
+local s = Instance.new("SpecialMesh",part2)
+s.MeshType = "Head"
+local part3 = Instance.new("Part",char)
 part3.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-0.5,0)
 part3.Size = Vector3.new(1.5,1.25,0.75)
-local part4 = Instance.new("Part",script)
+part3.Name = "Torso"
+local s = Instance.new("SpecialMesh",part3)
+s.MeshType = "Brick"
+s.Scale = Vector3.new(1.125,1.125,1.125)
+local part4 = Instance.new("Part",char)
 part4.CFrame = owner.Character.Head.CFrame * CFrame.new(0.4,-1.5,0)
 part4.Size = Vector3.new(0.81,1.25,0.81)
-local part5 = Instance.new("Part",script)
+part4.CanCollide = false
+local s = Instance.new("SpecialMesh",part4)
+s.MeshType = "Head"
+s.Scale = Vector3.new(0.75,1,0.75)
+local part5 = Instance.new("Part",char)
 part5.CFrame = owner.Character.Head.CFrame * CFrame.new(-0.4,-1.5,0)
 part5.Size = Vector3.new(0.81,1.25,0.81)
-local part6 = Instance.new("Part",script)
+part5.CanCollide = false
+local s = Instance.new("SpecialMesh",part5)
+s.MeshType = "Head"
+s.Scale = Vector3.new(0.75,1,0.75)
+local part6 = Instance.new("Part",char)
 part6.CFrame = owner.Character.Head.CFrame * CFrame.new(-0.4,-1.25 * 2,0)
 part6.Size = Vector3.new(0.8,1.5,0.8)
-local part7 = Instance.new("Part",script)
+part6.CanCollide = false
+local s = Instance.new("SpecialMesh",part6)
+s.MeshType = "Head"
+s.Scale = Vector3.new(0.75,1,0.75)
+local part7 = Instance.new("Part",char)
 part7.CFrame = owner.Character.Head.CFrame * CFrame.new(0.4,-1.25 * 2,0)
 part7.Size = Vector3.new(0.8,1.5,0.8)
+part7.CanCollide = false
+local s = Instance.new("SpecialMesh",part7)
+s.MeshType = "Head"
+s.Scale = Vector3.new(0.75,1,0.75)
+local hum = Instance.new("Humanoid")
+hum.Parent = char
+hum.Name = "Humanoid"
+hum.RequiresNeck = false
+hum.DisplayName = "thing"
+hum.MaxHealth = 300
+hum.Health = 300
+hum.BreakJointsOnDeath = false
+hum.AutoJumpEnabled = true
+hum.HipHeight = 2.75
 local rootweld = Instance.new("Weld",rootp)
 rootweld.Part0 = part3
 rootweld.Part1 = rootp
+rootweld.C1 = CFrame.new(0,-0.25,-0.01)
+rootweld.Name = "Root Joint"
 local weld = Instance.new("Weld",part3)
 weld.Part0 = part
 weld.Part1 = part3
@@ -35,17 +77,17 @@ weld.C0 = CFrame.new(0,-0.65,0)
 local weld2 = Instance.new("Weld",part)
 weld2.Part0 = part2
 weld2.Part1 = part
-weld2.C1 = CFrame.new(0,0.75,0)
+weld2.C1 = CFrame.new(0,0.65,0)
 weld2.C0 = CFrame.new(0,-0.65,0)
 local lleg1 = Instance.new("Weld",part3)
 lleg1.Part0 = part4
 lleg1.Part1 = part3
-lleg1.C1 = CFrame.new(0.45,-0.65,0)
+lleg1.C1 = CFrame.new(-0.45,-0.65,0)
 lleg1.C0 = CFrame.new(0,0.65,0)
 local rleg1 = Instance.new("Weld",part3)
 rleg1.Part0 = part5
 rleg1.Part1 = part3
-rleg1.C1 = CFrame.new(-0.45,-0.65,0)
+rleg1.C1 = CFrame.new(0.45,-0.65,0)
 rleg1.C0 = CFrame.new(0,0.65,0)
 local lleg2 = Instance.new("Weld",part4)
 lleg2.Part0 = part7
@@ -72,10 +114,10 @@ local goal = {}
 goal.C0 = CFrame.new(0,-0.625,0) * CFrame.Angles(math.rad(2.25),0,0)
 local tween4 = tweenService:Create(weld2, tweenInfo, goal)
 local goal = {}
-goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(11),0)
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(-11),0)
 local tween5 = tweenService:Create(lleg1, tweenInfo, goal)
 local goal = {}
-goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(9),0)
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(-9),0)
 local tween6 = tweenService:Create(lleg1, tweenInfo, goal)
 local goal = {}
 goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(21),0,0)
@@ -84,10 +126,10 @@ local goal = {}
 goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(20),0,0)
 local tween8 = tweenService:Create(lleg2, tweenInfo, goal)
 local goal = {}
-goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(-12),0)
+goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(-11),math.rad(12),0)
 local tween9 = tweenService:Create(rleg1, tweenInfo, goal)
 local goal = {}
-goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(-10),0)
+goal.C0 = CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(10),0)
 local tween10 = tweenService:Create(rleg1, tweenInfo, goal)
 local goal = {}
 goal.C0 = CFrame.new(0,0.65,0) * CFrame.Angles(math.rad(21),0,0)
@@ -101,7 +143,7 @@ local rtween = tweenService:Create(rootweld, tweenInfo, goal)
 local goal = {}
 goal.C0 = CFrame.new()
 local rtween2 = tweenService:Create(rootweld, tweenInfo, goal)
-local tweenInfo = TweenInfo.new(0.35,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+local tweenInfo = TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 local goal = {}
 goal.C0 = CFrame.new(0,0.1,0) * CFrame.Angles(0,math.rad(5),0)
 local rtweenr = tweenService:Create(rootweld, tweenInfo, goal)
@@ -111,8 +153,16 @@ local rtween2r = tweenService:Create(rootweld, tweenInfo, goal)
 local goal = {}
 goal.C0 = CFrame.new(0,0.1,0) * CFrame.Angles(0,math.rad(-5),0)
 local rtween3r = tweenService:Create(rootweld, tweenInfo, goal)
+
 local goal = {}
-goal.C0 = CFrame.new(0,0.675,0) * CFrame.Angles(math.rad(-30),math.rad(11),0)
+goal.C0 = CFrame.new(0,-0.6,0) * CFrame.Angles(math.rad(5),0,0)
+local rtweenr2 = tweenService:Create(weld2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.65,0) * CFrame.Angles(math.rad(2.5),0,0)
+local rtween2r2 = tweenService:Create(weld2, tweenInfo, goal)
+local goal = {}
+goal.C0 = CFrame.new(0,-0.6,0) * CFrame.Angles(math.rad(5),0,0)
+local rtween3r2 = tweenService:Create(weld2, tweenInfo, goal)
 tween.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then 
 tween3:Play()
@@ -149,18 +199,6 @@ tween9:Play()
 tween11:Play()
 end
 end)
-tweenr.Completed:Connect(function(state) 
-if state == Enum.PlaybackState.Completed then 
-tween2r:Play()
-tween4r:Play()
-end
-end)
-tween2r.Completed:Connect(function(state) 
-if state == Enum.PlaybackState.Completed then 
-tween3r:Play()
-tweenr:Play()
-end
-end)
 rtween.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then 
 rtween2:Play()
@@ -169,21 +207,25 @@ end)
 rtween2.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then 
 rtween:Play()
+rtween2:Play()
 end
 end)
 local lastt = "rt"
 rtweenr.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then 
 rtween2r:Play()
+rtween2r2:Play()
 end
 end)
 rtween2r.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then 
 if lastt == "rt" then
 rtween3r:Play()
+rtween3r2:Play()
 lastt = "lt"
 elseif lastt == "lt" then
 rtweenr:Play()
+rtweenr2:Play()
 lastt = "rt"
 end
 end
@@ -191,6 +233,7 @@ end)
 rtween3r.Completed:Connect(function(state) 
 if state == Enum.PlaybackState.Completed then
 rtween2r:Play()
+rtween2r2:Play()
 end
 end)
 idle = false
@@ -198,8 +241,20 @@ function animate(what)
 if what == "idle" then
 if not idle then
 idle = true
+coroutine.wrap(function()
 rtweenr:Cancel()
 rtween2r:Cancel()
+rtweenr2:Cancel()
+rtween2r2:Cancel()
+rtween3r2:Cancel()
+rtween3r:Cancel()
+for i = 1,2 do
+lleg1.C0 = lleg1.C0:Lerp(CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(-9),0),0.5)
+rleg1.C0 = rleg1.C0:Lerp(CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(-10),math.rad(9),0),0.5)
+lleg2.C0 = lleg2.C0:Lerp(CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(20),0,0),0.5)
+rleg2.C0 = rleg2.C0:Lerp(CFrame.new(0,0.625,0) * CFrame.Angles(math.rad(20),0,0),0.5)
+task.wait()
+end
 rtween:Play()
 tween5:Play()
 tween7:Play()
@@ -207,6 +262,7 @@ tween9:Play()
 tween11:Play()
 tween:Play()
 tween2:Play()
+end)()
 end
 else
 if idle then
@@ -226,9 +282,11 @@ tween12:Cancel()
 tween3:Cancel()
 tween4:Cancel()
 rtweenr:Play()
+rtweenr2:Play()
 end
 end
 end
+local noweld = Instance.new("Weld")
 local IK_HANDLER = {}
 IK_HANDLER.__index = IK_HANDLER
  
@@ -239,13 +297,13 @@ local Tau = 2*Pi -- 2pi radians = 360 degrees. And yes, Tau is a word! Represent
 local ForwardVector = Vector3.new(0,0,-1) -- Get a forward-directional Vector3
 local YAxisExclusion = Vector3.new(1,0,1) -- This will be used later; Vector3*YAxisExclusion will remove the middle value, or the y-value.
  
-local RightHipCFrame = CFrame.new(0.55, -0.4, 0) -- The self.RightRotationAngle-hip reference CFrame, relative to the RightUpperLeg position
-local LeftHipCFrame = CFrame.new(-0.55, -0.4, 0) -- The self.LeftRotationAngle-hip reference CFrame, relative to the LeftUpperLeg position
-local RightHipCFrame2 = CFrame.new(0.55,-2.7,0)
-local LeftHipCFrame2 = CFrame.new(-0.55,-2.7,0)
+local RightHipCFrame = rleg1.C1 -- The self.RightRotationAngle-hip reference CFrame, relative to the RightUpperLeg position
+local LeftHipCFrame = lleg1.C1 -- The self.LeftRotationAngle-hip reference CFrame, relative to the LeftUpperLeg position
+local RightHipCFrame2 = (rleg1.C1 * CFrame.new(0,-1.7,0))
+local LeftHipCFrame2 = (lleg1.C1 * CFrame.new(0,-1.7,0))
  
-local RightIdleCFrame = CFrame.new(0.28,-1.9,0.03) -- Idle CFrame of Motor6D joint
-local LeftIdleCFrame = CFrame.new(-0.28,-1.9,-0.03) -- Idle CFrame of Motor6D joint
+local RightIdleCFrame = rleg1.C1 * CFrame.new(0.15,0.25,-0.125) -- Idle CFrame of Motor6D joint
+local LeftIdleCFrame = lleg1.C1 * CFrame.new(-0.15,0.25,-0.125) -- Idle CFrame of Motor6D joint
  
  
 --**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--**--
@@ -311,7 +369,7 @@ local ParamBlacklist = {}
 IK_HANDLER.ActiveInstances = {}
  
 function IK_HANDLER.New(Player, Stride, CycleSpeed, MaxRenderDistance, RaycastOffset)
-	local Character = Player and Player.Character
+	local Character = Player
  
 	if not Player then
 		error("Attempted to pass player, got nil")
@@ -326,25 +384,25 @@ function IK_HANDLER.New(Player, Stride, CycleSpeed, MaxRenderDistance, RaycastOf
 	local self = {}
  
 	self.Character = Character
-	self.Humanoid = Character:WaitForChild("Humanoid")
-	self.HumanoidRootPart = owner.Character.HumanoidRootPart
-	self.TargetBaseBart	= Character:WaitForChild("LowerTorso")
-	self.WaistJoint = Character:WaitForChild("UpperTorso"):WaitForChild("Waist")
-	self.RootJoint = self.TargetBaseBart:WaitForChild("Root")
-	self.WaistCFrame1 = self.WaistJoint.C1
-	self.RightHip = Character:WaitForChild("RightUpperLeg"):WaitForChild("RightHip")
-	self.RightKnee = Character:WaitForChild("RightLowerLeg"):WaitForChild("RightKnee")
-	self.LeftHip = Character:WaitForChild("LeftUpperLeg"):WaitForChild("LeftHip")
-	self.LeftKnee = Character:WaitForChild("LeftLowerLeg"):WaitForChild("LeftKnee")
-	self.RightHipCFrame0 = self.RightHip.C0
-	self.RightKneeCFrame0 = self.RightKnee.C0
-	self.LeftHipCFrame0 = self.LeftHip.C0
-	self.LeftKneeCFrame0 = self.LeftKnee.C0
+	self.Humanoid = self.Character.Humanoid
+	self.HumanoidRootPart = rootp
+	self.TargetBaseBart	= part
+	self.WaistJoint = weld
+	self.RootJoint = rootweld
+	self.WaistCFrame1 = weld.C1
+	self.RightHip = rleg1
+	self.RightKnee = rleg2
+	self.LeftHip = lleg1
+	self.LeftKnee = lleg2
+	self.RightHipCFrame0 = rleg1.C0
+	self.RightKneeCFrame0 = rleg2.C0
+	self.LeftHipCFrame0 = lleg1.C0
+	self.LeftKneeCFrame0 = lleg2.C0
 	self.LeftRotationAngle = 0
 	self.RightRotationAngle	= Pi
 	self.Direction = YAxisExclusion -- This will be changed
 	self.CycleSpeed = CycleSpeed -- How fast the leg-movement cycle is. Change this to suit your needs!
-	self.StrideCFrame = CFrame.new(0,0,-Stride/2) -- Turn the Stride number into a CFrame we can use for animation
+	self.StrideCFrame = CFrame.new(0,0,Stride/2) -- Turn the Stride number into a CFrame we can use for animation
 	self.PreviousTick = tick()
 	self.Enabled = true
 	self.MaxRenderDistance = MaxRenderDistance
@@ -450,11 +508,9 @@ pcall(function()
 		rootvel = rootvel0
 		rootvelm = rootvel.Magnitude
 		self.Direction = rootcf.lookVector
-owner.Character.Humanoid.HipHeight = -1
 	else
 		rootvel		=rootvel0*YAxisExclusion
 		rootvelm	=rootvel.Magnitude
-owner.Character.Humanoid.HipHeight = 0
 		if rootvelm > 0.1 then
 			self.Direction = self.Direction:Lerp(rootvel.Unit, Delta10)
 		end
@@ -482,33 +538,33 @@ owner.Character.Humanoid.HipHeight = 0
 		self.WaistJoint.C1 = self.WaistJoint.C1:Lerp(self.WaistCFrame1*CFrame.Angles(math.rad(relv1.Z),0.1*math.cos(self.RightRotationAngle)-2*math.rad(relv1.X),math.rad(-relv1.X)):Inverse(),Delta10) -- Upper Torso Anim
  
 		local hpmod = HalfPi/20
-		local kneeRot = 2
+		local kneeRot = -2
 		local hipAlpha = Delta10*1.5
 		local kneeAlpha = Delta10*1.5
  
 		do -- Right Leg
 			local hip = (rootcf*RightHipCFrame).Position
 			local ground = (rootcf*RightHipCFrame2).Position
-			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(-self.RightRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(0.1,0,0)).Position
+			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(self.RightRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(-0.1,0,0)).Position
 			local offset = (desiredPos-hip)
 			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+0.6),RaycastParameters)
 			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
  
-			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 0.55,1.15) -- 0.55,1.15
-			self.RightHip.C0 = self.RightHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,-hpmod,0),hipAlpha)
+			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 1.4,3) -- 0.55,1.15
+			self.RightHip.C0 = self.RightHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(-th1 + math.rad(180),hpmod,0),hipAlpha)
 			self.RightKnee.C0 = self.RightKnee.C0:Lerp(self.RightKneeCFrame0*CFrame.Angles(th2*kneeRot,0,0),kneeAlpha)
 		end
  
 		do-- Left Leg
 			local hip = (rootcf*LeftHipCFrame).Position
 			local ground =(rootcf*LeftHipCFrame2).Position
-			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(-self.LeftRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(-0.1,0,0)).Position
+			local desiredPos = (CFrame.new(ground, ground+self.Direction)*CFrame.Angles(self.LeftRotationAngle, 0, 0)*self.StrideCFrame*CFrame.new(0.1,0,0)).Position
 			local offset = (desiredPos-hip)
 			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+0.6),RaycastParameters)
 			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
  
-			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 0.55,1.15)
-			self.LeftHip.C0 = self.LeftHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,hpmod,0),hipAlpha)
+			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 1.4,3)
+			self.LeftHip.C0 = self.LeftHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(-th1 + math.rad(180),hpmod,0),hipAlpha)
 			self.LeftKnee.C0 = self.LeftKnee.C0:Lerp(self.LeftKneeCFrame0*CFrame.Angles(th2*kneeRot,0,0),kneeAlpha)
 		end
 	else --// When not moving
@@ -525,7 +581,7 @@ owner.Character.Humanoid.HipHeight = 0
 			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+1),RaycastParameters)
 			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
  
-			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 0.55,1.15)
+			local plane,th1,th2 = SolveLegIK(lowercf*self.RightHipCFrame0,footPos, 0.55,2)
 			self.RightHip.C0 = self.RightHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,0,-HalfPi/8),Delta10)
 			self.RightKnee.C0 = self.RightKnee.C0:Lerp(self.RightKneeCFrame0*CFrame.Angles(th2,0,0),Delta10)
 		end
@@ -538,14 +594,14 @@ owner.Character.Humanoid.HipHeight = 0
 			local raycastResult = workspace:Raycast(hip,offset.Unit*(offset.magnitude+1),RaycastParameters)
 			local footPos = raycastResult and raycastResult.Position or (hip + offset.Unit*(offset.magnitude+self.RaycastOffset))
  
-			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 0.55,1.15)
+			local plane,th1,th2 = SolveLegIK(lowercf*self.LeftHipCFrame0,footPos, 0.55,2)
 			self.LeftHip.C0 = self.LeftHip.C0:Lerp(lowercf:toObjectSpace(plane)*CFrame.Angles(th1,0,HalfPi/8),Delta10)
 			self.LeftKnee.C0 = self.LeftKnee.C0:Lerp(self.LeftKneeCFrame0*CFrame.Angles(th2,0,0),Delta10)
 		end
 	end
 end)
 end
-local IKProfile = IK_HANDLER.New(owner,1.5,10,0,0.5)
+local IKProfile = IK_HANDLER.New(char,2.85,10,0,0.5)
 wait()
 coroutine.wrap(function()
 while task.wait() do
@@ -554,12 +610,60 @@ if IKProfile:IsActive() then
 end
 end
 end)()
+local dead = false
+hum.HealthChanged:Connect(function(health)
+if health == 0 and not dead then
+dead = true
+part4.CanCollide = true
+part5.CanCollide = true
+part6.CanCollide = true
+part7.CanCollide = true
+    for i,v in pairs(char:GetDescendants()) do
+        if v:IsA("Weld") then
+            local Socket = Instance.new("BallSocketConstraint")
+            local a1 = Instance.new("Attachment")
+            local a2 = Instance.new("Attachment")
+            a1.Parent = v.Part0
+            a2.Parent = v.Part1
+            Socket.Parent = v.Parent
+            Socket.Attachment0 = a1
+            Socket.Attachment1 = a2
+            a1.CFrame = v.C0
+            a2.CFrame = v.C1
+            Socket.LimitsEnabled = true
+            Socket.TwistLimitsEnabled = true
+            v:Destroy()
+    end
+end
+for i,v in pairs(char:GetDescendants()) do
+if v:IsA("Part") then
+    local bone = Instance.new("Part", v)
+    bone:BreakJoints()
+    local bonew = Instance.new("Weld", bone)
+    bonew.Part0 = v
+    bonew.Part1 = bone
+    bonew.C0 = CFrame.fromEulerAnglesXYZ(0,0,math.pi/2) * CFrame.new(-v.Size.y/4.5,0,0)
+        bone.Size = Vector3.new(v.Size.y/3,v.Size.z,v.Size.x)
+    bone.Transparency = 1
+    bone.Shape = "Cylinder"
+end
+end
+end
+end)
+rootp.Anchored = false
 while wait() do
-if owner.Character.Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
-animate("s")
+if rootp.Velocity.Magnitude > 0.1 then
+if idle then
 IKProfile:Enable()
+end
+animate("s")
 else
-animate("idle")
+if not idle then
 IKProfile:Disable()
 end
+animate("idle")
 end
+end
+end)()
+end
+end)
