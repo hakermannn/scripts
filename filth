@@ -1,6 +1,7 @@
 owner.Chatted:Connect(function(msg)
 if msg == "-dummy" then
 coroutine.wrap(function()
+for i = 1, 10 do
 local char = Instance.new("Model" , script)
 char.Name = "thing"
 local rootp = Instance.new("Part",char)
@@ -8,7 +9,7 @@ rootp.CanCollide = false
 rootp.Anchored = true
 rootp.Size = Vector3.new(2,2,1)
 rootp.Transparency = 1
-rootp.CFrame = owner.Character.Head.CFrame * CFrame.new(0,-2,-6)
+rootp.CFrame = owner.Character.Head.CFrame * CFrame.new(i,-2,-6)
 rootp.Massless = true
 char.PrimaryPart = rootp
 local part = Instance.new("Part",char)
@@ -662,6 +663,7 @@ if not idle then
 IKProfile:Disable()
 end
 animate("idle")
+end
 end
 end
 end)()
