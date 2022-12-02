@@ -1,7 +1,7 @@
 owner.Chatted:Connect(function(msg)
 if msg == "-dummy" then
-coroutine.wrap(function()
 for i = 1, 10 do
+coroutine.wrap(function()
 local char = Instance.new("Model" , script)
 char.Name = "thing"
 local rootp = Instance.new("Part",char)
@@ -665,7 +665,7 @@ end
 animate("idle")
 end
 end
-end
 end)()
+end
 end
 end)
