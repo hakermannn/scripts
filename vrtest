@@ -368,7 +368,7 @@ params.FilterDescendantsInstances = {part,des:GetDescendants()}
 params.FilterType = Enum.RaycastFilterType.Blacklist
 	local result = workspace:Raycast(part.CFrame:ToWorldSpace(CFrame.new(part.Position)).Position,-part.CFrame.UpVector * (max + rad), params)
 if result then
-	local dist = (part.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position - result.Position).Magnitude
+	local dist = (part.CFrame:ToWorldSpace(CFrame.new(part.Position)).Position - result.Position).Magnitude
 	local lengthh = math.clamp(dist - rad,0,max)
 	local mult = 3.5
 	part:ApplyImpulseAtPosition(Vector3.new(0,1,0) * ((stiff * (max - lengthh)) + (damp * ((length - lengthh) / dt))), result.Position)
