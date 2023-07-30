@@ -365,7 +365,7 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 rot = rot + (-rot2 * 3)
 local params = RaycastParams.new()
-params.FilterDescendantsInstances = {part,ok:GetDescendants()}
+params.FilterDescendantsInstances = {part,des:GetDescendants()}
 params.FilterType = Enum.RaycastFilterType.Blacklist
 	local result = workspace:Raycast(par.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position,-par.CFrame.UpVector * (max + rad), params)
 if result then
