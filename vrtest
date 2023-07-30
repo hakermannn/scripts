@@ -3,53 +3,10 @@ local ball = Instance.new("Part",fakecharacter)
 ball:SetNetworkOwner(owner)
 ball.Shape = "Ball"
 ball.Size = Vector3.new(1.5,1.5,1.5)
-local a = Instance.new("Part",fakecharacter)
-a.CanCollide = false
-a:SetNetworkOwner(owner)
-a.Transparency = 0.8
-a.Color = Color3.fromRGB(255,0,0)
-local a2 = Instance.new("Part",fakecharacter)
-a2.CanCollide = false
-a2:SetNetworkOwner(owner)
-a2.Transparency = 0.8
-a2.Color = Color3.fromRGB(0,0,255)
-local at1 = Instance.new("Attachment" , a)
-local at2 = Instance.new("Attachment" , a2)
-at1.Visible = true
-at2.Visible = true
-at2.CFrame = CFrame.Angles(0,0,math.rad(-90))
-at1.CFrame = CFrame.Angles(0,0,math.rad(-90))
-local prism = Instance.new("PrismaticConstraint" , a)
-prism.Attachment0 = at1
-prism.Attachment1 = at2
-prism.LimitsEnabled = true
-prism.LowerLimit = -5
-prism.UpperLimit = 5
-prism.Restitution = 0
-local spring = Instance.new("SpringConstraint" , a)
-spring.Attachment0 = at1
-spring.Attachment1 = at2
-spring.Stiffness = 12000
-spring.FreeLength = 2.5
-spring.Enabled = true
-spring.Damping = 200
+ball.Transparency = 1
 local object3 = Instance.new("ObjectValue", owner.PlayerGui)
 object3.Value = ball
 object3.Name = "part"
-local object3 = Instance.new("ObjectValue", owner.PlayerGui)
-object3.Value = a
-object3.Name = "part2"
-           local Socket = Instance.new("BallSocketConstraint",a)
-            local att1 = Instance.new("Attachment",a2)
-            local att2 = Instance.new("Attachment",ball)
-Socket.Attachment1 = att1
-Socket.Attachment0 = att2
-local align = Instance.new("AlignOrientation",a2)
-align.RigidityEnabled = true
-local at0 = Instance.new("Attachment",workspace.Terrain)
-local at3 = Instance.new("Attachment",a2)
-align.Attachment1 = at0
-align.Attachment0 = at3
 owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
 character = script
 local function createHand(handType,what,arm)
@@ -307,7 +264,6 @@ local leftHand = owner.PlayerGui.hand.Value
 local rightHand = owner.PlayerGui.hand2.Value
 local hed = owner.PlayerGui.hedl.Value
 local part = owner.PlayerGui.part.Value
-local part2 = owner.PlayerGui.part2.Value
 e = hed:FindFirstChildWhichIsA("RemoteEvent")
 e2 = leftHand:FindFirstChildWhichIsA("RemoteEvent")
 local inputService = game:GetService("UserInputService")
@@ -396,8 +352,26 @@ if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 rot2 = 0
 end
 end)
-game:GetService("RunService").RenderStepped:Connect(function()
-CurrentCamera.CFrame = CFrame.new(part2.Position + Vector3.new(0,6,0)) * CFrame.Angles(0,math.rad(rot),0)
+local max = 5
+local rad = 3.5
+local stiff = 100
+local damp = 5
+length = 0.5
+game:GetService("RunService").RenderStepped:Connect(function(dt)
+CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 rot = rot + (-rot2 * 3)
+local params = RaycastParams.new()
+params.FilterDescendantsInstances = {par,par:GetDescendants()}
+params.FilterType = Enum.RaycastFilterType.Blacklist
+	local result = workspace:Raycast(par.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position,-par.CFrame.UpVector * (max + rad), params)
+if result then
+	local dist = (part.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position - result.Position).Magnitude
+	local lengthh = math.clamp(dist - rad,0,max)
+	local mult = 3.5
+	part:ApplyImpulseAtPosition(Vector3.new(0,1,0) * ((stiff * (max - lengthh)) + (damp * ((length - lengthh) / dt))), result.Position)
+		length = math.clamp(dist - rad,0,max)
+	else
+		length = math.clamp(length +dt,0,max)
+	end
 end)
 ]],owner.PlayerGui)
