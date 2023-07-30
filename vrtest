@@ -356,9 +356,9 @@ if input.KeyCode == Enum.KeyCode.Thumbstick2 then
 rot2 = 0
 end
 end)
-local max = 5
-local rad = 3.5
-local stiff = 100
+local max = 3
+local rad = 1.5
+local stiff = 20
 local damp = 5
 length = 0.5
 game:GetService("RunService").RenderStepped:Connect(function(dt)
@@ -366,9 +366,9 @@ rot = rot + (-rot2 * 3)
 local params = RaycastParams.new()
 params.FilterDescendantsInstances = {part,des:GetDescendants()}
 params.FilterType = Enum.RaycastFilterType.Blacklist
-	local result = workspace:Raycast(part.CFrame:ToWorldSpace(CFrame.new(part.Position)).Position,-part.CFrame.UpVector * (max + rad), params)
+	local result = workspace:Raycast(part.Position,Vector3.new(0,-1 * (max + rad),0), params)
 if result then
-	local dist = (part.CFrame:ToWorldSpace(CFrame.new(part.Position)).Position - result.Position).Magnitude
+	local dist = (part.Position - result.Position).Magnitude
 	local lengthh = math.clamp(dist - rad,0,max)
 	local mult = 3.5
 	part:ApplyImpulseAtPosition(Vector3.new(0,1,0) * ((stiff * (max - lengthh)) + (damp * ((length - lengthh) / dt))), result.Position)
@@ -376,6 +376,6 @@ if result then
 	else
 		length = math.clamp(length +dt,0,max)
 	end
-CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
+CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,3.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 end)
 ]],owner.PlayerGui)
