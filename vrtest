@@ -287,7 +287,7 @@ vrService.UserCFrameChanged:Connect(function(partt, move)
 	elseif partt == Enum.UserCFrame.RightHand then
 		e2:FireServer(rightHand,camera.CFrame * CFrame.new((move.Position + part.Velocity * owner:GetNetworkPing())* 1.5) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	elseif partt == Enum.UserCFrame.Head then
-		e2:FireServer(hed,camera.CFrame * CFrame.new((move + part.Velocity * owner:GetNetworkPing())) * CFrame.Angles(move:ToEulerAnglesXYZ()))
+		e2:FireServer(hed,camera.CFrame * CFrame.new((move.Position + part.Velocity * owner:GetNetworkPing())) * CFrame.Angles(move:ToEulerAnglesXYZ()))
 	end
 end)
 local GrabbingL = nil
@@ -362,12 +362,11 @@ local stiff = 100
 local damp = 5
 length = 0.5
 game:GetService("RunService").RenderStepped:Connect(function(dt)
-CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 rot = rot + (-rot2 * 3)
 local params = RaycastParams.new()
 params.FilterDescendantsInstances = {part,des:GetDescendants()}
 params.FilterType = Enum.RaycastFilterType.Blacklist
-	local result = workspace:Raycast(par.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position,-par.CFrame.UpVector * (max + rad), params)
+	local result = workspace:Raycast(part.CFrame:ToWorldSpace(CFrame.new(part.Position)).Position,-part.CFrame.UpVector * (max + rad), params)
 if result then
 	local dist = (part.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position - result.Position).Magnitude
 	local lengthh = math.clamp(dist - rad,0,max)
@@ -377,5 +376,6 @@ if result then
 	else
 		length = math.clamp(length +dt,0,max)
 	end
+CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 end)
 ]],owner.PlayerGui)
