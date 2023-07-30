@@ -7,6 +7,9 @@ ball.Transparency = 1
 local object3 = Instance.new("ObjectValue", owner.PlayerGui)
 object3.Value = ball
 object3.Name = "part"
+local object2 = Instance.new("ObjectValue", owner.PlayerGui)
+object2.Value = fakecharacter
+object2.Name = "ok"
 owner.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
 character = script
 local function createHand(handType,what,arm)
@@ -264,6 +267,7 @@ local leftHand = owner.PlayerGui.hand.Value
 local rightHand = owner.PlayerGui.hand2.Value
 local hed = owner.PlayerGui.hedl.Value
 local part = owner.PlayerGui.part.Value
+local des = owner.PlayerGui.ok.Value
 e = hed:FindFirstChildWhichIsA("RemoteEvent")
 e2 = leftHand:FindFirstChildWhichIsA("RemoteEvent")
 local inputService = game:GetService("UserInputService")
@@ -361,7 +365,7 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 CurrentCamera.CFrame = CFrame.new(part.Position + Vector3.new(0,1.5,0)) * CFrame.Angles(0,math.rad(rot),0)
 rot = rot + (-rot2 * 3)
 local params = RaycastParams.new()
-params.FilterDescendantsInstances = {par,par:GetDescendants()}
+params.FilterDescendantsInstances = {part,ok:GetDescendants()}
 params.FilterType = Enum.RaycastFilterType.Blacklist
 	local result = workspace:Raycast(par.CFrame:ToWorldSpace(CFrame.new(par.Position)).Position,-par.CFrame.UpVector * (max + rad), params)
 if result then
