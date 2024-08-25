@@ -51,6 +51,10 @@ Socket.Attachment1 = FenderJoint
 
 phantom.PrimaryPart = origin
 
+phantom.MoveTo(Vector3.new(0,5,0))
+
+ball.Position = FenderJoint.WorldPosition
+
 CurrentCamera = workspace.CurrentCamera
 local VRSpeed = 16
 local offset = Vector3.new(0,0,0)
