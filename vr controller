@@ -20,6 +20,9 @@ local origin = Instance.new("Part",phantom)
 origin.CanCollide = false
 origin.Size = Vector3.new(0.1,0.1,0.1)
 
+local physProperties = PhysicalProperties.new(15, 0, 0, 100, 100)
+origin.CustomPhysicalProperties = physProperties
+
 local locomotion = Instance.new("Part",phantom)
 locomotion.CanCollide = false
 locomotion.Size = Vector3.new(0.1,0.1,0.1)
@@ -114,15 +117,15 @@ input = Vector3.new(0,0,0)
 	--	if inputType == Enum.UserCFrame.Head then
 	--	end
 	--end)
-game:GetService("RunService").RenderStepped:Connect(function()
+game:GetService("RunService").RenderStepped:Connect(function(dt)
 	offset = (game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position - Vector3.new(0,game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position.Y,0)) * CurrentCamera.HeadScale
 	locoweld.C1 = CFrame.new(offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
-	local angle = Vector3.new(0,0,0)
-	if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
-	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
-	end
-	offsetUpdate = offsetUpdate + pid(1,offset,offsetUpdate)
+	--local angle = Vector3.new(0,0,0)
+	--if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
+	--local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
+	--end
+	offsetUpdate = offsetUpdate + (pid(1,offset,offsetUpdate) / ball.GetMass()) * dt)
 	local bm = 0
 	local am = 0
 		if movement then
@@ -141,7 +144,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	--if am > bm then
 		--AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,(angle.X*16)),0,HighestXYZ(MoveDir.Z,(angle.Z*16)))
 		--AngularVel.Torque = MoveDir
-		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + (MoveDir + (angle*16))*0.2
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + ((MoveDir / ball.GetMass()) * dt)
+		origin:ApplyImpulse(offset - offsetUpdate)
 	--else
 	--	AngularVel.Torque = MoveDir
 	--end
