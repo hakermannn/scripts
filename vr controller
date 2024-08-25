@@ -76,15 +76,15 @@ local movement = false
 local MoveDir = Vector3.new(0,0,0)
 local input = Vector2.new(0,0)
 
-	UserInputService.InputChanged:Connect(function(in, processed)
-		if in.KeyCode == Enum.KeyCode.Thumbstick1 then
-		input = in
+	UserInputService.InputChanged:Connect(function(inp, processed)
+		if inp.KeyCode == Enum.KeyCode.Thumbstick1 then
+		input = inp
 		movement = true
 		end
 	end)
-	UserInputService.InputEnded:Connect(function(in)
-		if in.KeyCode == Enum.KeyCode.Thumbstick1 then
-		input = in
+	UserInputService.InputEnded:Connect(function(inp)
+		if inp.KeyCode == Enum.KeyCode.Thumbstick1 then
+		input = inp
 		movement = false
 		end
 	end)
