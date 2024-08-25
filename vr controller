@@ -125,14 +125,14 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 	--if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
 	--local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
 	--end
-	offsetUpdate = offsetUpdate + ((pid(1,offset,offsetUpdate) / ball:GetMass()) * dt)
+	offsetUpdate = offsetUpdate + ((pid(8,offset,offsetUpdate) / ball:GetMass()) * dt)
 	local bm = 0
 	local am = 0
 		if movement then
-			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Y * VRSpeed)),ball.AssemblyAngularVelocity)
+			local ang = pid(8,(CurrentCamera:GetRenderCFrame().LookVector * (input.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Y * VRSpeed)),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		else
-			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
+			local ang = pid(8,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		end
 	--if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
