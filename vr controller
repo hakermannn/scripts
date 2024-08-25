@@ -102,14 +102,14 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	locoweld.C1 = CFrame.new(offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
 	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
-	offsetUpdate = offsetUpdate + pid(VRSpeed,offset,offsetUpdate)
+	offsetUpdate = offsetUpdate + pid(16,VRSpeed,offset,offsetUpdate)
 	local bm = 0
 	local am = 0
 		if movement then
-			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
+			local ang = pid(16,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		else
-			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
+			local ang = pid(16,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		end
 	if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
