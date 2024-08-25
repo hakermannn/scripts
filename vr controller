@@ -125,7 +125,7 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 	--if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
 	--local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
 	--end
-	offsetUpdate = offsetUpdate + (pid(1,offset,offsetUpdate) / ball.GetMass()) * dt)
+	offsetUpdate = offsetUpdate + ((pid(1,offset,offsetUpdate) / ball.GetMass()) * dt)
 	local bm = 0
 	local am = 0
 		if movement then
