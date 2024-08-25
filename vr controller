@@ -141,7 +141,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	--if am > bm then
 		--AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,(angle.X*16)),0,HighestXYZ(MoveDir.Z,(angle.Z*16)))
 		--AngularVel.Torque = MoveDir
-		ball.AssemblyAngularVelocity = MoveDir + angle
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + (MoveDir + (angle*16))*0.2
 	--else
 	--	AngularVel.Torque = MoveDir
 	--end
