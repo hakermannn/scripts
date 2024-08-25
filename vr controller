@@ -108,7 +108,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	bm = (ball.AssemblyAngularVelocity + MoveDir).magnitude
 	end
 	if angle ~= Vector3.new(0,0,0) then
-	am = ang.magnitude
+	am = angle.magnitude
 	end
 	if am > bm then
 		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + offsetUpdate
