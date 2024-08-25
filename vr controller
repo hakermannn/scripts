@@ -31,7 +31,7 @@ locoweld.Part0 = locomotion
 local fenderbender = Instance.new("Weld",origin)
 fenderbender.Part1 = origin
 fenderbender.Part0 = fender
-fenderbender.C1 = CFrame.new(0,0.75,0)
+fenderbender.C1 = CFrame.new(0,-1.15,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
@@ -58,8 +58,8 @@ origin.Position = Vector3.new(0,5,0)
 
 CurrentCamera = workspace.CurrentCamera
 local VRSpeed = 16
-local offset = Vector3.new()
-local offsetUpdate = Vector3.new()
+local offset = Vector3.new(0,0,0)
+local offsetUpdate = Vector3.new(0,0,0)
 
 UserInputService = game:GetService("UserInputService")
 function pid(force,want,current)
@@ -72,16 +72,17 @@ if (v.magnitude == 0) then return Vector3.new(0,0,0) end
 return v.Unit * math.min(v.Magnitude, max)
 end
 
+local movement = false
+local MoveDir = Vector3.new(0,0,0)
+
 	UserInputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		local ang = pid(1,((CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed))),ball.AssemblyAngularVelocity)
-		ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
+		movement = true
 		end
 	end)
 	UserInputService.InputEnded:Connect(function(input)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		local ang = pid(1,Vector3.new(),ball.AssemblyAngularVelocity)
-		ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
+		movement = false
 		end
 	end)
 	--VRService.UserCFrameChanged:Connect(function(input,val)
@@ -90,11 +91,29 @@ end
 	--end)
 game:GetService("RunService").RenderStepped:Connect(function()
 	offset = (game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position - Vector3.new(0,game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position.Y,0)) * CurrentCamera.HeadScale
-	offsetUpdate = pid(1,offset,offsetUpdate)
+	offsetUpdate = offsetUpdate + pid(1,offset,offsetUpdate) 
 	locoweld.C1 = CFrame.new(-offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
 	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace(offsetUpdate)
-	local ang = pid(1,angle,ball.AssemblyAngularVelocity)
-	ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
+	local bm = 0
+	local am = 0
+		if movement then
+			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
+			MoveDir = ang
+		else
+			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
+			MoveDir = ang
+		end
+	if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
+	bm = (ball.AssemblyAngularVelocity + MoveDir).magnitude
+	end
+	if angle ~= Vector3.new(0,0,0) then
+	am = ang.magnitude
+	end
+	if am > bm then
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + offsetUpdate
+	else
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + MoveDir
+	end
 end)
 ]],owner.PlayerGui)
