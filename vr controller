@@ -64,17 +64,23 @@ local offsetUpdate = Vector3.new()
 UserInputService = game:GetService("UserInputService")
 function pid(force,want,current)
 e = want - current
-f = force * e
-return f*(math.pi)
+return force * e
 end
+
+function clampVector(v, max)
+return v.Unit * math.min(v.Magnitude, max)
+end
+
 	UserInputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		ball.AssemblyAngularVelocity = pid(1,((CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * (VRSpeed/0.75)))),ball.AssemblyAngularVelocity)
+		local ang = pid(1,((CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed))),ball.AssemblyAngularVelocity)
+		ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
 		end
 	end)
 	UserInputService.InputEnded:Connect(function(input)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		ball.AssemblyAngularVelocity = pid(1,Vector3.new(),ball.AssemblyAngularVelocity)
+		local ang = pid(1,Vector3.new(),ball.AssemblyAngularVelocity)
+		ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
 		end
 	end)
 	--VRService.UserCFrameChanged:Connect(function(input,val)
@@ -86,7 +92,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	offsetUpdate = pid(1,offset,offsetUpdate)
 	locoweld.C1 = CFrame.new(-offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
-	local angle = Vector3.new(offsetUpdate.Z,0,offsetUpdate.X)
-	ball.AssemblyAngularVelocity = pid(1,offsetUpdate,ball.AssemblyAngularVelocity)
+	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace(offsetUpdate)
+	local ang = pid(1,angle,ball.AssemblyAngularVelocity)
+	ball.AssemblyAngularVelocity = clampVector(ball.AssemblyAngularVelocity + ang,16)
 end)
 ]],owner.PlayerGui)
