@@ -25,20 +25,20 @@ locomotion.CanCollide = false
 locomotion.Size = Vector3.new(0.1,0.1,0.1)
 
 local locoweld = Instance.new("Weld",origin)
-locoweld.Part1 = origin
-locoweld.Part0 = locomotion
+locoweld.Part1 = locomotion
+locoweld.Part0 = origin
 
 local fenderbender = Instance.new("Weld",origin)
 fenderbender.Part1 = origin
 fenderbender.Part0 = fender
-fenderbender.C1 = CFrame.new(0,0.75,0)
+fenderbender.C1 = CFrame.new(0,-0.75,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
 local AngularVel = Instance.new("AngularVelocity",ball)
 AngularVel.Attachment0 = MoveJoint
 AngularVel.RelativeTo = "World"
-AngularVel.MaxTorque = 100
+AngularVel.MaxTorque = 1000
 Torque = AngularVel.AngularVelocity
 
 local FenderJoint = Instance.new("Attachment",fender)
