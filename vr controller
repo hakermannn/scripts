@@ -39,7 +39,6 @@ local AngularVel = Instance.new("AngularVelocity",ball)
 AngularVel.Attachment0 = MoveJoint
 AngularVel.RelativeTo = "World"
 AngularVel.MaxTorque = 10000
-Torque = AngularVel.AngularVelocity
 
 local FenderJoint = Instance.new("Attachment",fender)
 FenderJoint.CFrame = CFrame.new(0,-0.4,0)
@@ -140,9 +139,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	am = angle.magnitude
 	end
 	if am > bm then
-		Torque = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
+		AngularVel.AngularVelocity = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
 	else
-		Torque = MoveDir
+		AngularVel.AngularVelocity = MoveDir
 	end
 end)
 ]],owner.PlayerGui)
