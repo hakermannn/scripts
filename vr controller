@@ -74,14 +74,17 @@ end
 
 local movement = false
 local MoveDir = Vector3.new(0,0,0)
+local input = Vector2.new(0,0)
 
-	UserInputService.InputChanged:Connect(function(input, processed)
-		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+	UserInputService.InputChanged:Connect(function(in, processed)
+		if in.KeyCode == Enum.KeyCode.Thumbstick1 then
+		input = in
 		movement = true
 		end
 	end)
-	UserInputService.InputEnded:Connect(function(input)
-		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
+	UserInputService.InputEnded:Connect(function(in)
+		if in.KeyCode == Enum.KeyCode.Thumbstick1 then
+		input = in
 		movement = false
 		end
 	end)
@@ -91,10 +94,10 @@ local MoveDir = Vector3.new(0,0,0)
 	--end)
 game:GetService("RunService").RenderStepped:Connect(function()
 	offset = (game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position - Vector3.new(0,game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position.Y,0)) * CurrentCamera.HeadScale
-	offsetUpdate = offsetUpdate + pid(1,offset,offsetUpdate) 
-	locoweld.C1 = CFrame.new(-offset)
+	locoweld.C1 = CFrame.new(offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
-	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace(offsetUpdate)
+	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace(offsetUpdate - offset)
+	offsetUpdate = offsetUpdate + pid(1,offset,offsetUpdate)
 	local bm = 0
 	local am = 0
 		if movement then
@@ -111,7 +114,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	am = angle.magnitude
 	end
 	if am > bm then
-		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + offsetUpdate
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + angle
 	else
 		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + MoveDir
 	end
