@@ -51,7 +51,7 @@ Socket.Attachment1 = FenderJoint
 
 phantom.PrimaryPart = origin
 
-phantom.MoveTo(Vector3.new(0,5,0))
+phantom:MoveTo(Vector3.new(0,5,0))
 
 ball.Position = FenderJoint.WorldPosition
 
