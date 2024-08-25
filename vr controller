@@ -68,6 +68,7 @@ return force * e
 end
 
 function clampVector(v, max)
+if (v.magnitude == 0) then return Vector3.new(0,0,0) end
 return v.Unit * math.min(v.Magnitude, max)
 end
 
