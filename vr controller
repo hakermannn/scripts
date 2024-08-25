@@ -76,10 +76,10 @@ end
 		ball.AssemblyAngularVelocity = pid(0.2,Vector3.new(),ball.AssemblyAngularVelocity)
 		end
 	end)
-	VRService.UserCFrameChanged:Connect(function(input,val)
-		if inputType == Enum.UserCFrame.Head then
-		end
-	end)
+	--VRService.UserCFrameChanged:Connect(function(input,val)
+	--	if inputType == Enum.UserCFrame.Head then
+	--	end
+	--end)
 game:GetService("RunService").RenderStepped:Connect(function()
 	offset = (game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position - Vector3.new(0,game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position.Y,0)) * CurrentCamera.HeadScale
 	offsetUpdate = pid(0.2,offset,offsetUpdate)
