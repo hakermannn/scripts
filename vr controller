@@ -35,9 +35,9 @@ fenderbender.C1 = CFrame.new(0,-1.15,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
-local AngularVel = Instance.new("Torque",ball)
-AngularVel.Attachment0 = MoveJoint
-AngularVel.RelativeTo = "World"
+--local AngularVel = Instance.new("Torque",ball)
+--AngularVel.Attachment0 = MoveJoint
+--AngularVel.RelativeTo = "World"
 --AngularVel.MaxTorque = 10000
 
 local FenderJoint = Instance.new("Attachment",fender)
@@ -132,16 +132,18 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		end
-	if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
-	bm = math.max((ball.AssemblyAngularVelocity + MoveDir).magnitude,0.2)
-	end
-	if angle ~= Vector3.new(0,0,0) then
-	am = angle.magnitude
-	end
-	if am > bm then
-		AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
-	else
-		AngularVel.Torque = MoveDir
-	end
+	--if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
+	--bm = math.max((ball.AssemblyAngularVelocity + MoveDir).magnitude,0.01)
+	--end
+	--if angle ~= Vector3.new(0,0,0) then
+	--am = angle.magnitude
+	--end
+	--if am > bm then
+		--AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,(angle.X*16)),0,HighestXYZ(MoveDir.Z,(angle.Z*16)))
+		--AngularVel.Torque = MoveDir
+		ball.AssemblyAngularVelocity = MoveDir + angle
+	--else
+	--	AngularVel.Torque = MoveDir
+	--end
 end)
 ]],owner.PlayerGui)
