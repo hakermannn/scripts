@@ -29,16 +29,16 @@ locoweld.Part1 = locomotion
 locoweld.Part0 = origin
 
 local fenderbender = Instance.new("Weld",origin)
-fenderbender.Part1 = origin
-fenderbender.Part0 = fender
-fenderbender.C1 = CFrame.new(0,-0.75,0)
+fenderbender.Part1 = fender
+fenderbender.Part0 = origin
+fenderbender.C1 = CFrame.new(0,-1.15,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
-local AngularVel = Instance.new("AngularVelocity",ball)
+local AngularVel = Instance.new("Torque",ball)
 AngularVel.Attachment0 = MoveJoint
 AngularVel.RelativeTo = "World"
-AngularVel.MaxTorque = 10000
+--AngularVel.MaxTorque = 10000
 
 local FenderJoint = Instance.new("Attachment",fender)
 FenderJoint.CFrame = CFrame.new(0,-0.4,0)
@@ -139,9 +139,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	am = angle.magnitude
 	end
 	if am > bm then
-		AngularVel.AngularVelocity = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
+		AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
 	else
-		AngularVel.AngularVelocity = MoveDir
+		AngularVel.Torque = MoveDir
 	end
 end)
 ]],owner.PlayerGui)
