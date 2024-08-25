@@ -119,9 +119,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	am = angle.magnitude
 	end
 	if am > bm then
-		Torque = angle + (MoveDir * (bm/am)
+		Torque = angle + (MoveDir * (bm/am))
 	else
-		Torque = MoveDir + (angle * (am/bm)
+		Torque = MoveDir + (angle * (am/bm))
 	end
 end)
 ]],owner.PlayerGui)
