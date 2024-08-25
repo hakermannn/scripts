@@ -1,5 +1,5 @@
 NLS([[
-local phantom = Instance.new("Model",script)
+local phantom = Instance.new("Model",workspace)
 
 local ball = Instance.new("Part",phantom)
 ball.Shape = "Ball"
