@@ -31,7 +31,7 @@ locoweld.Part0 = locomotion
 local fenderbender = Instance.new("Weld",origin)
 fenderbender.Part1 = origin
 fenderbender.Part0 = fender
-fenderbender.C1 = CFrame.new(0,-1.15,0)
+fenderbender.C1 = CFrame.new(0,0.75,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
@@ -78,6 +78,21 @@ if (v.magnitude == 0) then return Vector3.new(0,0,0) end
 return v.Unit * math.min(v.Magnitude, max)
 end
 
+function HighestXYZ(a,b)
+local highest = math.max(math.abs(a),math.abs(b))
+if highest == math.abs(a) then
+	if a > 0 then
+	return highest
+	elseif a < 0 then
+	return highest * -1
+elseif highest == math.abs(b) then
+	if b > 0 then
+	return highest
+	elseif b < 0 then
+	return highest * -1
+end
+end
+
 local movement = false
 local MoveDir = Vector3.new(0,0,0)
 local input = Vector2.new(0,0)
@@ -106,10 +121,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	local bm = 0
 	local am = 0
 		if movement then
-			local ang = pid(16,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
+			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		else
-			local ang = pid(16,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
+			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		end
 	if (ball.AssemblyAngularVelocity + MoveDir) ~= Vector3.new(0,0,0) then
@@ -119,9 +134,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	am = angle.magnitude
 	end
 	if am > bm then
-		Torque = angle + (MoveDir * (bm/am))
+		Torque = Vector3.new(HighestXYZ(MoveDir.X,angle.X),0,HighestXYZ(MoveDir.Z,angle.Z))
 	else
-		Torque = MoveDir + (angle * (am/bm))
+		Torque = MoveDir
 	end
 end)
 ]],owner.PlayerGui)
