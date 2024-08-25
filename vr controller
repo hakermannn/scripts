@@ -35,10 +35,11 @@ fenderbender.C1 = CFrame.new(0,0.75,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
-local AngularVel = Instance.new("Torque",ball)
+local AngularVel = Instance.new("AngularVelocity",ball)
 AngularVel.Attachment0 = MoveJoint
 AngularVel.RelativeTo = "World"
-Torque = AngularVel.Torque
+AngularVel.MaxTorque = 10000
+Torque = AngularVel.AngularVelocity
 
 local FenderJoint = Instance.new("Attachment",fender)
 FenderJoint.CFrame = CFrame.new(0,-0.4,0)
@@ -85,11 +86,13 @@ if highest == math.abs(a) then
 	return highest
 	elseif a < 0 then
 	return highest * -1
+	end
 elseif highest == math.abs(b) then
 	if b > 0 then
 	return highest
 	elseif b < 0 then
 	return highest * -1
+	end
 end
 end
 
