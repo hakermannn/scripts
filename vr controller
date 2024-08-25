@@ -34,7 +34,7 @@ locoweld.Part0 = origin
 local fenderbender = Instance.new("Weld",origin)
 fenderbender.Part1 = fender
 fenderbender.Part0 = origin
-fenderbender.C1 = CFrame.new(0,-1.15,0)
+fenderbender.C1 = CFrame.new(0,1.15,0)
 
 local MoveJoint = Instance.new("Attachment",ball)
 
