@@ -57,12 +57,12 @@ return force * e
 end
 	UserInputService.InputChanged:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		ball.Assembly.AngularVelocity = pid(3,((CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().RightVector * (input.Position.Y * (VRSpeed/0.75)))),ball.AssemblyAngularVelocity)
+		ball.AssemblyAngularVelocity = pid(3,((CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * (VRSpeed))) + (CurrentCamera:GetRenderCFrame().RightVector * (input.Position.Y * (VRSpeed/0.75)))),ball.AssemblyAngularVelocity)
 		end
 	end)
 	UserInputService.InputEnded:Connect(function(input)
 		if input.KeyCode == Enum.KeyCode.Thumbstick1 then
-		ball.Assembly.AngularVelocity = pid(3,Vector3.new(),ball.Assembly.AngularVelocity)
+		ball.AssemblyAngularVelocity = pid(3,Vector3.new(),ball.AssemblyAngularVelocity)
 		end
 	end)
 game:GetService("RunService").RenderStepped:Connect(function()
