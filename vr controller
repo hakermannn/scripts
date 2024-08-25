@@ -125,7 +125,7 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 	--if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
 	--local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
 	--end
-	offsetUpdate = offsetUpdate + ((pid(1,offset,offsetUpdate) / ball.GetMass()) * dt)
+	offsetUpdate = offsetUpdate + ((pid(1,offset,offsetUpdate) / ball:GetMass()) * dt)
 	local bm = 0
 	local am = 0
 		if movement then
@@ -144,7 +144,7 @@ game:GetService("RunService").RenderStepped:Connect(function(dt)
 	--if am > bm then
 		--AngularVel.Torque = Vector3.new(HighestXYZ(MoveDir.X,(angle.X*16)),0,HighestXYZ(MoveDir.Z,(angle.Z*16)))
 		--AngularVel.Torque = MoveDir
-		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + ((MoveDir / ball.GetMass()) * dt)
+		ball.AssemblyAngularVelocity = ball.AssemblyAngularVelocity + ((MoveDir / ball:GetMass()) * dt)
 		origin:ApplyImpulse(offset - offsetUpdate)
 	--else
 	--	AngularVel.Torque = MoveDir
