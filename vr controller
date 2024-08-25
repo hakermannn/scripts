@@ -38,7 +38,7 @@ local MoveJoint = Instance.new("Attachment",ball)
 local AngularVel = Instance.new("AngularVelocity",ball)
 AngularVel.Attachment0 = MoveJoint
 AngularVel.RelativeTo = "World"
-AngularVel.MaxTorque = 10000
+AngularVel.MaxTorque = 100
 Torque = AngularVel.AngularVelocity
 
 local FenderJoint = Instance.new("Attachment",fender)
@@ -102,7 +102,7 @@ local input = Vector2.new(0,0)
 
 	UserInputService.InputChanged:Connect(function(inp, processed)
 		if inp.KeyCode == Enum.KeyCode.Thumbstick1 then
-		input = inp
+		input = inp.Position
 		movement = true
 		end
 	end)
@@ -119,12 +119,15 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	offset = (game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position - Vector3.new(0,game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head).Position.Y,0)) * CurrentCamera.HeadScale
 	locoweld.C1 = CFrame.new(offset)
 	CurrentCamera.CFrame = CFrame.new(locomotion.Position + Vector3.new(0,4.25,0))
+	local angle = Vector3.new(0,0,0)
+	if (offset - offsetUpdate) ~= Vector3.new(0,0,0) then
 	local angle = CFrame.fromAxisAngle(Vector3.new(0,1,0), 90):VectorToWorldSpace((offset - offsetUpdate))
-	offsetUpdate = offsetUpdate + pid(16,offset,offsetUpdate)
+	end
+	offsetUpdate = offsetUpdate + pid(1,offset,offsetUpdate)
 	local bm = 0
 	local am = 0
 		if movement then
-			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.Position.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Position.Y * VRSpeed)),ball.AssemblyAngularVelocity)
+			local ang = pid(1,(CurrentCamera:GetRenderCFrame().LookVector * (input.X * VRSpeed)) + (CurrentCamera:GetRenderCFrame().RightVector * -(input.Y * VRSpeed)),ball.AssemblyAngularVelocity)
 			MoveDir = ang
 		else
 			local ang = pid(1,Vector3.new(0,0,0),ball.AssemblyAngularVelocity)
